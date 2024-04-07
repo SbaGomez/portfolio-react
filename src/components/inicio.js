@@ -37,7 +37,7 @@ function Inicio() {
                     <div className="col-md-3">
                         <div className="text-center">
                             <img src="./img/juegos/warzone.webp" alt="warzone" style={{ maxWidth: '100%', height: 'auto' }} width="300px" height="200px" />
-                            <h3>Warzone</h3>
+                            <h3>Warzone 2.0</h3>
                             <p>En Call of Duty: Warzone, un popular videojuego de battle royale, los jugadores se sumergen
                                 en intensos enfrentamientos en un vasto mapa abierto ambientado en la ficticia ciudad de
                                 Verdansk.</p>

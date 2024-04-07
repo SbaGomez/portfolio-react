@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+  color: aliceblue;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.instagram {
+  color: #833ab4;
+  /* Color primario de Instagram */
+}
+
+.instagramFooter {
+  color: #833ab4;
+  font-size: 24px;
+  /* Color primario de Instagram */
+}
+
+.facebook {
+  color: #3b5998;
+  /* Color primario de Facebook */
+}
+
+.facebookFooter {
+  color: #3b5998;
+  font-size: 24px;
+  /* Color primario de Facebook */
+}
+
+.whatsapp {
+  color: #25d366;
+  /* Color primario de WhatsApp */
+}
+
+.gmail {
+  color: #fff;
+  /* Color primario de Gmail */
+}
+
+.github {
+  color: #6e5494;
+  /* Violeta característico de GitHub */
+}
+
+.pdf {
+  color: #ff5733;
+  /* Color aproximado para PDF */
+}
+
+.linkedin {
+  color: #0077B5;
+  /* Color primario de LinkedIn */
+}
+
+.whatsappFooter {
+  color: #25d366;
+  font-size: 24px;
+  /* Color primario de WhatsApp */
+}
+
+.twitter {
+  color: #1da1f2;
+  /* Color primario de Twitter */
+}
+
+.twitterFooter {
+  color: #1da1f2;
+  font-size: 24px;
+  /* Color primario de Twitter */
+}
+
+hr {
+  height: 2px;
+  background-color: #1a55d3;
+  border: none;
+  padding: 0;
+  border-top: 1px solid #0e3790;
+  margin: 15px 0;
+}
+
+.nav-pills .nav-link {
+  padding: 10px;
+  color: #fff;
+}
+
+.active {
+  /*color: #1A9FFF !important;*/
+  font-weight: 500;
+}
+
+.activeFooter{
+  color: #1A9FFF !important;
+  font-weight: 500;
+}
+
+.disabled {
+  color: #696667 !important;
+  font-size: 11pt;
+  font-weight: 800;
+  pointer-events: none;
+}
+
+.offcanvas {
+  max-width: 300px;
+  text-align: left;
+  font-size: 14pt;
+}
+
+/* Estilo boton Scroll Top */
+.floating-button {
+  border-radius: 10px;
+  border: 0;
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #B14143;
+  color: black;
+}
+
+.floating-button:hover {
+  background-color: #1A9FFF;
+  color: black;
+}
+
+.floating-button i {
+  font-size: 25px;
+}
+
+/* Eliminar estilo de Links */
+a {
+  color: none;
+  text-decoration: none;
+}
+
+a:hover {
+  color: none;
+  text-decoration: none;
+}
+
+a:link {
+  color: none;
+  text-decoration: none;
+}
+
+a:active {
+  color: none;
+  text-decoration: none;
+}
+
+a:visited {
+  color: none;
+  text-decoration: none;
+}
+
+.colorContainer {
+  display: flex;
+  align-items: center;
+}
+
+.coloresUsados {
+  margin-right: 10px;
+}
+
+.colorAzulOscuro {
+  background-color: #146F9E;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorAzul {
+  background-color: #1A9FFF;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorRojo {
+  background-color: #B14143;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorCeleste {
+  background-color: #91C2E5;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorDorado {
+  background-color: #E4BD82;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorNaranja {
+  background-color: #E6A543;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorGris {
+  background-color: #31373B;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorGrisOscuro {
+  background-color: #1D1F21;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border: 1px solid #31373B;
+}
+
+.colorBeige {
+  background-color: #E9E4DD;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}

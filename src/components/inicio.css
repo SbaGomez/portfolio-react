@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'Minecraft';
+    src: url('../fonts/Minecraft.ttf');
+}
+
+/* Inicio */
+#home {
+    background-color: rgb(22, 22, 22);
+    width: 100%;
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+
+#home i{
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#home h3 {
+    padding-bottom: 20px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 26pt;
+}
+
+#home p {
+    text-align: center;
+    font-size: 19px;
+    color: #ccc;
+    padding: 0 40px;
+}
+
+#home p strong {
+    color: #fff;
+}
+
+#home img {
+    width: 250px;
+    height: 400px;
+    padding-bottom: 40px;
+    padding-top: 20px;
+    transition: transform 0.3s ease;
+}
+
+#home img:hover {
+    transform: scale(1.1);
+}
+
+#home h2 {
+    display: flex;
+    align-items: center;
+    font-size: 35pt;
+    margin-bottom: 50px;
+    font-family: 'Minecraft', serif;
+    font-weight: lighter;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(80, 79, 79, 0.2);
+    animation: changeColor 5s infinite alternate;
+    position: relative;
+}
+
+#home h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #1A9FFF;
+    height: 3px;
+    box-sizing: border-box;
+    width: 250px;
+}
+
+#home .verificado {
+    height: 95px;
+    width: 40px;
+    margin-top: 15px;
+    margin-left: 15px;
+}

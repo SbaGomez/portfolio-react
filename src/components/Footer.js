@@ -3,8 +3,13 @@ import './Footer.css'; // Estilo CSS aquí
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa el componente FontAwesomeIcon
 import { faFacebook, faInstagram, faWhatsapp, faTwitter } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
 
-const Footer = () => {
+const Footer = ({ onPageChange, currentPage }) => {
     const [footerPosition, setFooterPosition] = useState('relative');
+
+    const handleNavLinkClick = (pageId) => {
+        onPageChange(pageId);
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
+    };
 
     useEffect(() => {
         const handleResize = () => {
@@ -47,24 +52,46 @@ const Footer = () => {
                             <div className="col">
                                 <ul>
                                     <li className="nav-item">
-                                        <a className="nav-link activeFooter" href="inicio.html" id="inicioFooter">
-                                            <i className="fas fa-home"></i> HOME</a>
+                                        <button
+                                            className={`nav-link ${currentPage === 'inicio' ? 'activeFooter' : ''}`}
+                                            href="#inicio"
+                                            id="inicio"
+                                            onClick={() => handleNavLinkClick('inicio')}
+                                        >
+                                            <i className="fas fa-home"></i> HOME
+                                        </button>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="somos.html" id="somosFooter">
-                                            <i className="fas fa-users"></i> SOBRE MI</a>
+                                        <button
+                                            className={`nav-link ${currentPage === 'somos' ? 'activeFooter' : ''}`}
+                                            href="#somos"
+                                            id="somos"
+                                            onClick={() => handleNavLinkClick('somos')}
+                                        >
+                                            <i className="fas fa-users"></i> SOBRE MI
+                                        </button>
                                     </li>
                                 </ul>
                             </div>
                             <div className="col">
                                 <ul>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="juegos.html" id="juegosFooter">
-                                            <i className="fas fa-gamepad"></i> JUEGOS</a>
+                                        <button
+                                            className={`nav-link ${currentPage === 'Proyectos' ? 'activeFooter' : ''}`}
+                                            id="Proyectos"
+                                            onClick={() => handleNavLinkClick('Proyectos')}
+                                        >
+                                            <i className="fas fa-gamepad"></i> PROYECTOS
+                                        </button>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="contacto.html" id="contactoFooter">
-                                            <i className="fas fa-envelope"></i> CONTACTO</a>
+                                        <button
+                                            className={`nav-link ${currentPage === 'contacto' ? 'activeFooter' : ''}`}
+                                            id="contacto"
+                                            onClick={() => handleNavLinkClick('contacto')}
+                                        >
+                                            <i className="fas fa-envelope"></i> CONTACTO
+                                        </button>
                                     </li>
                                 </ul>
                             </div>

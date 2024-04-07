@@ -1,12 +1,12 @@
 import './Inicio.css';
 
-function Inicio() {
+function Proyectos() {
     return (
         <section id="home">
             <div className="container">
                 <div className="row">
                     <div className="col-md-9">
-                        <h2>Sebastian Gomez <img className="verificado" src="/verificado.png" alt="Verificado" /></h2>
+                        <h2>asdasd Gomez <img className="verificado" src="/verificado.png" alt="Verificado" /></h2>
                         <div className="bg-dark text-secondary px-4 py-5 text-center">
                             <p className="lead">
                                 <strong>Desarrollador web Fullstack</strong> con habilidades en el
@@ -48,4 +48,4 @@ function Inicio() {
     );
 }
 
-export default Inicio;
+export default Proyectos;

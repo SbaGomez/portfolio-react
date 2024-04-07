@@ -92,26 +92,13 @@ hr {
 }
 
 .active {
-  /*color: #1A9FFF !important;*/
-  font-weight: 500;
+  width: 100%;
+  text-align: left;
 }
 
 .activeFooter{
   color: #1A9FFF !important;
   font-weight: 500;
-}
-
-.disabled {
-  color: #696667 !important;
-  font-size: 11pt;
-  font-weight: 800;
-  pointer-events: none;
-}
-
-.offcanvas {
-  max-width: 300px;
-  text-align: left;
-  font-size: 14pt;
 }
 
 /* Estilo boton Scroll Top */

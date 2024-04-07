@@ -1,63 +1,88 @@
-
+import React, { useState } from 'react';
 import './Navbar.css';
 
-function Navbar() {
+function Navbar({ onPageChange, currentPage }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleNavLinkClick = (pageId) => {
+    onPageChange(pageId);
+    setIsMenuOpen(false); // Cierra el menú cuando se hace clic en un enlace
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header>
       <nav className="navbar navbar-dark bg-dark fixed-top">
         <div className="container-fluid justify-content-end">
-          {/* <a className="navbar-brand" href="#">SbaGomez</a> */}
-          <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
+          <button
+            className="navbar-toggler"
+            type="button"
+            onClick={toggleMenu}
+          >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="offcanvas offcanvas-end text-bg-dark" tabIndex="-1" id="offcanvasDarkNavbar"
-            aria-labelledby="offcanvasDarkNavbarLabel">
+          <div
+            className={`offcanvas offcanvas-end text-bg-dark ${isMenuOpen ? 'show' : ''}`}
+            tabIndex="-1"
+            style={{ maxWidth: isMenuOpen ? '300px' : 'none' }}
+            id="offcanvasDarkNavbar"
+            aria-labelledby="offcanvasDarkNavbarLabel"
+          >
             <div className="offcanvas-header">
-              <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">menu</h5>
-              <button type="button" className="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
+              <h5 className="offcanvas-title" id="offcanvasDarkNavbarLabel">
+                menu
+              </h5>
+              <button
+                type="button"
+                className="btn-close btn-close-white"
+                onClick={toggleMenu}
+                aria-label="Close"
+              ></button>
             </div>
             <div className="offcanvas-body" id="navbarNav">
               <ul className="navbar-nav nav-pills justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#contenido" id="inicio">
-                    <i className="fas fa-home"></i> Home</a>
+                  <button
+                    className={`nav-link ${currentPage === 'inicio' ? 'active' : ''}`}
+                    aria-current="page"
+                    id="inicio"
+                    onClick={() => handleNavLinkClick('inicio')}
+                  >
+                    <i className="fas fa-home"></i> Home
+                  </button>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#contenido" id="somos">
-                    <i className="fas fa-users"></i> Sobre mi</a>
+                  <button
+                    className={`nav-link ${currentPage === 'somos' ? 'active' : ''}`}
+                    id="somos"
+                    onClick={() => handleNavLinkClick('somos')}
+                  >
+                    <i className="fas fa-users"></i> Sobre mi
+                  </button>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#contenido" id="juegos">
-                    <i className="fas fa-gamepad"></i> Proyectos</a>
+                  <button
+                    className={`nav-link ${currentPage === 'Proyectos' ? 'active' : ''}`}
+                    id="Proyectos"
+                    onClick={() => handleNavLinkClick('Proyectos')}
+                  >
+                    <i className="fas fa-gamepad"></i> Proyectos
+                  </button>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#contenido" id="contacto">
-                    <i className="fas fa-envelope"></i> Contacto</a>
+                  <button
+                    className={`nav-link ${currentPage === 'contacto' ? 'active' : ''}`}
+                    id="contacto"
+                    onClick={() => handleNavLinkClick('contacto')}
+                  >
+                    <i className="fas fa-envelope"></i> Contacto
+                  </button>
                 </li>
-                {/* <li className="nav-item">
-                    <a className="nav-link" href="#">Link</a>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Dropdown
-                    </a>
-                    <ul className="dropdown-menu dropdown-menu-dark">
-                      <li><a className="dropdown-item" href="#">Action</a></li>
-                      <li><a className="dropdown-item" href="#">Another action</a></li>
-                      <li>
-                        <hr className="dropdown-divider">
-                      </li>
-                      <li><a className="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </li> */}
               </ul>
-              {/* <form className="d-flex mt-3" role="search">
-                  <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                  <button className="btn btn-success" type="submit">Search</button>
-                </form> */}
             </div>
           </div>
         </div>

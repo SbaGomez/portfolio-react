@@ -7,8 +7,8 @@ const Footer = ({ onPageChange, currentPage }) => {
     const [footerPosition, setFooterPosition] = useState('relative');
 
     const handleNavLinkClick = (pageId) => {
-        onPageChange(pageId);
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
+        onPageChange(pageId);
     };
 
     useEffect(() => {
@@ -54,7 +54,6 @@ const Footer = ({ onPageChange, currentPage }) => {
                                     <li className="nav-item">
                                         <button
                                             className={`nav-link ${currentPage === 'inicio' ? 'activeFooter' : ''}`}
-                                            href="#inicio"
                                             id="inicio"
                                             onClick={() => handleNavLinkClick('inicio')}
                                         >
@@ -64,7 +63,6 @@ const Footer = ({ onPageChange, currentPage }) => {
                                     <li className="nav-item">
                                         <button
                                             className={`nav-link ${currentPage === 'somos' ? 'activeFooter' : ''}`}
-                                            href="#somos"
                                             id="somos"
                                             onClick={() => handleNavLinkClick('somos')}
                                         >

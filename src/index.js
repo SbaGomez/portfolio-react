@@ -1,4 +1,4 @@
-import React, { useState,useEffect  } from 'react';
+import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import Inicio from './components/Inicio';
@@ -26,7 +26,7 @@ function App() {
   // Renderiza la página actual según el estado currentPage
   const renderPage = () => {
     switch (currentPage) {
-      case 'inicio':
+      case 'Inicio':
         return <Inicio />;
       case 'Proyectos':
         return <Proyectos />;
@@ -37,7 +37,7 @@ function App() {
 
   return (
     <React.StrictMode>
-      <Navbar onPageChange={handlePageChange} currentPage={currentPage}/>
+      <Navbar onPageChange={handlePageChange} currentPage={currentPage} />
       {renderPage()}
       <Footer onPageChange={handlePageChange} currentPage={currentPage} />
     </React.StrictMode>

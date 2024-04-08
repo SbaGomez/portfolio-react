@@ -19,6 +19,7 @@
 #home h3 {
     padding-bottom: 20px;
     font-weight: 500;
+    color: aliceblue;
     text-align: center;
     font-size: 26pt;
 }
@@ -26,7 +27,7 @@
 #home p {
     text-align: center;
     font-size: 19px;
-    color: #ccc;
+    color: #9d9c9c;
     padding: 0 40px;
 }
 

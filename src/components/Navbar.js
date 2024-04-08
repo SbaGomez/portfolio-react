@@ -5,9 +5,9 @@ function Navbar({ onPageChange, currentPage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleNavLinkClick = (pageId) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
     onPageChange(pageId);
     setIsMenuOpen(false); // Cierra el menú cuando se hace clic en un enlace
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
   };
 
   const toggleMenu = () => {

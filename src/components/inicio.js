@@ -9,19 +9,19 @@ function Inicio() {
                         <h2>Sebastian Gomez <img className="verificado" src="/verificado.png" alt="Verificado" /></h2>
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <p className="lead">
-                                <strong>Desarrollador web Fullstack</strong> con habilidades en el
-                                <strong>frontend</strong> y <strong>backend</strong>.
+                                <strong>Desarrollador web Fullstack</strong> con habilidades en el 
+                                <strong> frontend</strong> y <strong>backend</strong>.
                             </p>
                             <p className="lead">Mi interés en el <strong>desarrollo web</strong> se centra en crear
-                                <strong>soluciones creativas e innovadoras</strong> que mejoren la vida de las
+                                <strong> soluciones creativas e innovadoras</strong> que mejoren la vida de las
                                 personas y hagan crecer los negocios. Me mantengo actualizado en las
-                                <strong>últimas tecnologías y tendencias</strong> de la industria para crear
+                                <strong> últimas tecnologías y tendencias</strong> de la industria para crear
                                 aplicaciones eficientes y escalables...
                             </p>
                             <p className="lead">En mi <strong>portfolio</strong> encontrarás algunos de los proyectos en
                                 los que
                                 he trabajado, desde <strong>aplicaciones web simples</strong> hasta complejos
-                                <strong>juegos en línea</strong>. Si buscas un <strong>desarrollador
+                                <strong> juegos en línea</strong>. Si buscas un <strong>desarrollador
                                     comprometido</strong>, ¡contáctame!
                             </p>
                             <div className="pd-5 px-md-4">

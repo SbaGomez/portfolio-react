@@ -6,7 +6,7 @@ function Inicio() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-9">
-                        <h2>Sebastian Gomez <img className="verificado" src="..\img\verificado.png" alt="Verificado" /></h2>
+                        <h2>Sebastian Gomez <img className="verificado" src="/verificado.png" alt="Verificado" /></h2>
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <p className="lead">
                                 <strong>Desarrollador web Fullstack</strong> con habilidades en el
@@ -35,7 +35,7 @@ function Inicio() {
                     </div>
                     <div className="col-md-3">
                         <div className="text-center">
-                            <img src="./img/juegos/warzone.webp" alt="warzone" style={{ maxWidth: '100%', height: 'auto' }} width="300px" height="200px" />
+                            <img src="/juegos/warzone.webp" alt="warzone" style={{ maxWidth: '100%', height: 'auto' }} width="300px" height="200px" />
                             <h3>Warzone 2.0</h3>
                             <p>En Call of Duty: Warzone, un popular videojuego de battle royale, los jugadores se sumergen
                                 en intensos enfrentamientos en un vasto mapa abierto ambientado en la ficticia ciudad de

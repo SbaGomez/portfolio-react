@@ -6,8 +6,8 @@ function Inicio() {
             <div className="container">
                 <div className="row">
                     <div className="col-md-9">
-                        <h2>Sebastian Gomez <img className="verificado" src="/verificado.png" alt="Verificado" /></h2>
-                        <div className="bg-dark text-secondary px-4 py-5 text-center">
+                        <h2>Sebastian Gomez <img className="verificado" src="..\img\verificado.png" alt="Verificado" /></h2>
+                        <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <p className="lead">
                                 <strong>Desarrollador web Fullstack</strong> con habilidades en el
                                 <strong>frontend</strong> y <strong>backend</strong>.

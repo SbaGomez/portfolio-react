@@ -5,8 +5,8 @@ function Inicio() {
         <section id="home">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-9">
-                        <h2>Sebastian Gomez <img className="verificado" src="/verificado.png" alt="Verificado" /></h2>
+                    <div className="col-md-12">
+                        <h2>Sebastian Gomez Developer</h2>
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <p className="lead">
                                 <strong>Desarrollador web Fullstack</strong> con habilidades en el 
@@ -25,21 +25,27 @@ function Inicio() {
                                     comprometido</strong>, ¡contáctame!
                             </p>
                             <div className="pd-5 px-md-4">
-                                <a href="#linkedin"><i className="fab fa-linkedin fa-lg me-sm-3 linkedin"></i></a>
-                                <a href="#gmail"><i className="fas fa-envelope fa-lg me-sm-3 gmail"></i></a>
                                 <a href="#whatsapp"><i className="fab fa-whatsapp fa-lg me-sm-3 whatsapp"></i></a>
-                                <a href="#github"><i className="fab fa-github fa-lg me-sm-3 github"></i></a>
-                                <a href="#pdf"><i className="far fa-file-pdf fa-lg pdf"></i></a>
+                                <a href="#instagram"><i className="fab fa-instagram fa-lg me-sm-3 instagram"></i></a>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-md-3">
-                        <div className="text-center">
-                            <img src="/juegos/warzone.webp" alt="warzone" style={{ maxWidth: '100%', height: 'auto' }} width="300px" height="200px" />
-                            <h3>Warzone 2.0</h3>
-                            <p>En Call of Duty: Warzone, un popular videojuego de battle royale, los jugadores se sumergen
-                                en intensos enfrentamientos en un vasto mapa abierto ambientado en la ficticia ciudad de
-                                Verdansk.</p>
+                        
+                        {/* Container de Tecnologías - Separado */}
+                        <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
+                            <h4 className="tecnologias-title">Tecnologías que manejo</h4>
+                            <div className="tecnologias-simple">
+                                <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/CSS3.svg" alt="CSS3" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/nodejs.png" alt="Node.js" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                            </div>
                         </div>
                     </div>
                 </div>

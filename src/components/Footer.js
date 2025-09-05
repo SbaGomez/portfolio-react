@@ -1,14 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import './Footer.css'; // Estilo CSS aquí
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa el componente FontAwesomeIcon
-import { faFacebook, faInstagram, faWhatsapp, faTwitter } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
+import { faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
+import { contactConfig, getCurrentAge } from '../config/contactConfig';
 
 const Footer = ({ onPageChange, currentPage }) => {
     const [footerPosition, setFooterPosition] = useState('relative');
+    const [copied, setCopied] = useState(false);
+
+    const age = getCurrentAge();
 
     const handleNavLinkClick = (pageId) => {
         window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
         onPageChange(pageId);
+    };
+
+    // Función para copiar email al portapapeles
+    const copyEmailToClipboard = async () => {
+        const email = contactConfig.email;
+        try {
+            await navigator.clipboard.writeText(email);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000); // Reset después de 2 segundos
+        } catch (err) {
+            console.error('Error al copiar: ', err);
+            // Fallback para navegadores que no soportan clipboard API
+            const textArea = document.createElement('textarea');
+            textArea.value = email;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        }
     };
 
     useEffect(() => {
@@ -37,13 +62,15 @@ const Footer = ({ onPageChange, currentPage }) => {
                 <div className="row">
                     <div className="col-sm-12 col-md-4">
                         <h3>Informacion</h3>
-                        <p>Nombre: Sergio Sebastian Gomez</p>
-                        <p>Edad: 28</p>
-                        <p>Carrera: Desarrollo de Software</p>
-                        <p>Tipografia Web: Roboto Condensed</p>
+                        <p>Nombre: {contactConfig.fullName}</p>
+                        <p>Edad: {age}</p>
+                        <p>Carrera: {contactConfig.career}</p>
+                        <p>Tipografia Web: {contactConfig.typography}</p>
                         <div className="colorContainer">
                             <div className="coloresUsados">Colores Utilizados:</div>
-                            {/* Aquí deberías agregar tus divs de colores utilizados */}
+                            {contactConfig.colors.map((color, index) => (
+                                <div key={index} className={color.class}></div>
+                            ))}
                         </div>
                     </div>
                     <div className="col-sm-12 col-md-5">
@@ -84,9 +111,9 @@ const Footer = ({ onPageChange, currentPage }) => {
                                     </li>
                                     <li className="nav-item">
                                         <button
-                                            className={`nav-link ${currentPage === 'contacto' ? 'activeFooter' : ''}`}
-                                            id="contacto"
-                                            onClick={() => handleNavLinkClick('contacto')}
+                                            className={`nav-link ${currentPage === 'Contacto' ? 'activeFooter' : ''}`}
+                                            id="Contacto"
+                                            onClick={() => handleNavLinkClick('Contacto')}
                                         >
                                             <i className="fas fa-envelope"></i> CONTACTO
                                         </button>
@@ -99,29 +126,38 @@ const Footer = ({ onPageChange, currentPage }) => {
                         <h3>Contáctame</h3>
                         <p>¡Estoy disponible para brindarte mis servicios! Ponte en contacto conmigo mediante correo electrónico o LinkedIn para discutir cómo puedo ayudarte.</p>
                         <div className="input-group">
-                            <input type="text" className="form-control" id="contact" name="contactsteam" placeholder="sbagomeznight@gmail.com" disabled />
+                            <input type="text" className="form-control" id="contact" name="contactsteam" value={contactConfig.email} readOnly />
                             <span className="input-group-btn">
-                                <a href="mailto:sbagomeznight@gmail.com"><button className="btn_footer" type="button">OK</button></a>
+                                <button 
+                                    className={`btn_footer ${copied ? 'copied' : ''}`} 
+                                    type="button"
+                                    onClick={copyEmailToClipboard}
+                                    title={copied ? '¡Copiado!' : 'Copiar email'}
+                                >
+                                    {copied ? (
+                                        <>
+                                            <i className="fas fa-check"></i> Copiado
+                                        </>
+                                    ) : (
+                                        <>
+                                            <i className="fas fa-copy"></i> Copiar
+                                        </>
+                                    )}
+                                </button>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div className="footer-bottom">
                     <div className="footer-social">
-                        <a href="https://facebook.com/" title="Facebook">
-                            <FontAwesomeIcon icon={faFacebook} className="facebookFooter" />
-                        </a>
-                        <a href="https://instagram.com/" title="Instagram">
+                        <a href={contactConfig.socialMedia.instagram.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.instagram.name}>
                             <FontAwesomeIcon icon={faInstagram} className="instagramFooter" />
                         </a>
-                        <a href="https://web.whatsapp.com/" title="Whatsapp">
+                        <a href={contactConfig.socialMedia.whatsapp.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.whatsapp.name}>
                             <FontAwesomeIcon icon={faWhatsapp} className="whatsappFooter" />
                         </a>
-                        <a href="https://twitter.com/" title="Twitter">
-                            <FontAwesomeIcon icon={faTwitter} className="twitterFooter" />
-                        </a>
                     </div>
-                    <p>Copyright © 2024 Sebastian Gomez Portfolio</p>
+                    <p>{contactConfig.copyright}</p>
                 </div>
             </div>
         </footer>

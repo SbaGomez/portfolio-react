@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import Inicio from './components/Inicio';
 import Proyectos from './components/Proyectos';
+import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import reportWebVitals from './reportWebVitals';
@@ -30,6 +31,8 @@ function App() {
         return <Inicio />;
       case 'Proyectos':
         return <Proyectos />;
+      case 'Contacto':
+        return <Contacto />;
       default:
         return <Inicio />;
     }

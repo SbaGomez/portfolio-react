@@ -1,7 +1,4 @@
-@font-face {
-    font-family: 'Minecraft';
-    src: url('../fonts/Minecraft.ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 /* Inicio */
 #home {
@@ -50,35 +47,131 @@
 #home h2 {
     display: flex;
     align-items: center;
-    font-size: 35pt;
+    justify-content: center;
+    font-size: 48px;
     margin-bottom: 50px;
-    font-family: 'Minecraft', serif;
-    font-weight: lighter;
-    letter-spacing: 4px;
-    color: #fff;
-    text-shadow: 2px 2px 4px rgba(80, 79, 79, 0.2);
-    animation: changeColor 5s infinite alternate;
+    font-family: 'Poppins', 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    letter-spacing: -1px;
+    color: #ffffff;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     position: relative;
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
 }
 
 #home h2::before {
     content: '';
     position: absolute;
-    left: 0;
-    bottom: -10px;
-    background-color: #1A9FFF;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     height: 3px;
     box-sizing: border-box;
-    width: 250px;
+    width: 80px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-#home .verificado {
-    height: 95px;
-    width: 40px;
-    margin-top: 15px;
-    margin-left: 15px;
-}
 
 .bg-dark-inicio{
-    background-color: #181a1c;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 15px;
+    border: 1px solid #333;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin: 30px 0;
+}
+
+.tecnologias-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.tecnologias-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #1A9FFF, #B14143);
+    border-radius: 2px;
+}
+
+.tecnologias-simple {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tech-logo {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    filter: brightness(0.9);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+.tech-logo:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #home h2 {
+        font-size: 40px;
+        font-weight: 600;
+        letter-spacing: -0.5px;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    
+    
+    .tecnologias-simple {
+        gap: 6px;
+        padding: 12px;
+    }
+    
+    .tech-logo {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #home h2 {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.3px;
+        margin-bottom: 30px;
+    }
+    
+    
+    .tecnologias-simple {
+        gap: 5px;
+        padding: 10px;
+    }
+    
+    .tech-logo {
+        width: 10px;
+        height: 10px;
+    }
 }

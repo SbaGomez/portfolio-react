@@ -75,9 +75,9 @@ function Navbar({ onPageChange, currentPage }) {
                 </li>
                 <li className="nav-item">
                   <button
-                    className={`nav-link ${currentPage === 'contacto' ? 'active' : ''}`}
-                    id="contacto"
-                    onClick={() => handleNavLinkClick('contacto')}
+                    className={`nav-link ${currentPage === 'Contacto' ? 'active' : ''}`}
+                    id="Contacto"
+                    onClick={() => handleNavLinkClick('Contacto')}
                   >
                     <i className="fas fa-envelope"></i> Contacto
                   </button>

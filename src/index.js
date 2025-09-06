@@ -7,6 +7,7 @@ import Proyectos from './components/Proyectos';
 import Contacto from './components/Contacto';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import ScrollToTop from './components/ScrollToTop';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -46,6 +47,7 @@ function App() {
       <Navbar onPageChange={handlePageChange} currentPage={currentPage} />
       {renderPage()}
       <Footer onPageChange={handlePageChange} currentPage={currentPage} />
+      <ScrollToTop />
     </React.StrictMode>
   );
 }

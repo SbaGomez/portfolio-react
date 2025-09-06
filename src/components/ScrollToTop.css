@@ -1,0 +1,72 @@
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1A9FFF, #146F9E);
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(26, 159, 255, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+}
+
+.scroll-to-top-btn:hover {
+  background: linear-gradient(135deg, #146F9E, #1A9FFF);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(26, 159, 255, 0.4);
+  opacity: 1;
+}
+
+.scroll-to-top-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(26, 159, 255, 0.3);
+}
+
+.scroll-to-top-btn i {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.scroll-to-top-btn:hover i {
+  transform: translateY(-1px);
+}
+
+/* Animación de aparición */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+.scroll-to-top-btn {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .scroll-to-top-btn {
+    width: 45px;
+    height: 45px;
+    bottom: 15px;
+    right: 15px;
+    font-size: 16px;
+  }
+  
+  .scroll-to-top-btn i {
+    font-size: 16px;
+  }
+}

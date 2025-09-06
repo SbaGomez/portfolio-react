@@ -1,6 +1,10 @@
 import './Inicio.css';
 
-function Inicio() {
+function Inicio({ onPageChange, currentPage }) {
+    const handleNavLinkClick = (pageId) => {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
+        onPageChange(pageId);
+    };
     return (
         <section id="home">
             <div className="container">
@@ -9,7 +13,7 @@ function Inicio() {
                         <h2>Sebastian Gomez Developer</h2>
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <p className="lead">
-                                <strong>Desarrollador web Fullstack</strong> con habilidades en el 
+                                <strong>Desarrollador web Fullstack</strong> con habilidades en el
                                 <strong> frontend</strong> y <strong>backend</strong>.
                             </p>
                             <p className="lead">Mi interés en el <strong>desarrollo web</strong> se centra en crear
@@ -24,27 +28,33 @@ function Inicio() {
                                 <strong> juegos en línea</strong>. Si buscas un <strong>desarrollador
                                     comprometido</strong>, ¡contáctame!
                             </p>
-                            <div className="pd-5 px-md-4">
-                                <a href="#whatsapp"><i className="fab fa-whatsapp fa-lg me-sm-3 whatsapp"></i></a>
-                                <a href="#instagram"><i className="fab fa-instagram fa-lg me-sm-3 instagram"></i></a>
+                            <div className="contact-link-container">
+                                <button
+                                    className={`contact-link ${currentPage === 'Contacto' ? 'active' : ''}`}
+                                    id="Contacto"
+                                    onClick={() => handleNavLinkClick('Contacto')}
+                                >
+                                    <span className="contact-icon">✉</span>
+                                    <span className="contact-text">Contáctame</span>
+                                </button>
                             </div>
                         </div>
-                        
+
                         {/* Container de Tecnologías - Separado */}
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <h4 className="tecnologias-title">Tecnologías que manejo</h4>
                             <div className="tecnologias-simple">
-                                <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/CSS3.svg" alt="CSS3" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/nodejs.png" alt="Node.js" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
-                                <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{width: '120px', height: '120px', display: 'block'}} />
+                                <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/CSS3.svg" alt="CSS3" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/nodejs.png" alt="Node.js" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
                             </div>
                         </div>
                     </div>

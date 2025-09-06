@@ -27,14 +27,14 @@ function App() {
   // Renderiza la página actual según el estado currentPage
   const renderPage = () => {
     switch (currentPage) {
-      case 'Inicio':
-        return <Inicio />;
+      case 'inicio':
+        return <Inicio onPageChange={handlePageChange} currentPage={currentPage} />;
       case 'Proyectos':
-        return <Proyectos />;
+        return <Proyectos onPageChange={handlePageChange} currentPage={currentPage} />;
       case 'Contacto':
-        return <Contacto />;
+        return <Contacto onPageChange={handlePageChange} currentPage={currentPage} />;
       default:
-        return <Inicio />;
+        return <Inicio onPageChange={handlePageChange} currentPage={currentPage} />;
     }
   };
 

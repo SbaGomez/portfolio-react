@@ -12,16 +12,14 @@ function Proyectos() {
             titulo: "Portfolio Personal",
             descripcion: "Sitio web personal desarrollado con React, mostrando mis habilidades y proyectos. Incluye diseño responsivo y animaciones modernas.",
             descripcionCompleta: "Este portfolio personal fue desarrollado completamente en React con un diseño moderno y responsivo. Incluye secciones de presentación, proyectos, habilidades técnicas y contacto. Utiliza animaciones CSS avanzadas, gradientes modernos y un sistema de navegación fluido. El proyecto demuestra habilidades en desarrollo frontend, diseño UX/UI y optimización de rendimiento.",
-            imagen: "/tecnologias/React.svg",
+            imagen: "/proyectos/portfolio-personal.png",
             imagenes: [
-                "/tecnologias/React.svg",
-                "/tecnologias/JavaScript.svg",
-                "/tecnologias/CSS3.svg",
-                "/tecnologias/HTML5.svg"
+                "/proyectos/portfolio-personal.png",
+                "/proyectos/portfolio-contacto.png",
             ],
             tecnologias: ["React", "CSS3", "JavaScript", "HTML5"],
-            linkDemo: "https://tu-portfolio.com",
-            linkGitHub: "https://github.com/tu-usuario/portfolio",
+            linkDemo: "https://sebastiangomez.com.ar/",
+            linkGitHub: "https://github.com/SbaGomez/portfolio-react",
             destacado: true,
             caracteristicas: [
                 "Diseño responsivo",
@@ -35,16 +33,14 @@ function Proyectos() {
             id: 2,
             titulo: "Calculadora 3D",
             descripcion: "Aplicación web para calcular precios de impresión 3D con interfaz intuitiva y cálculos precisos de materiales y costos.",
-            descripcionCompleta: "Aplicación web especializada para el cálculo de precios en impresión 3D. Permite a los usuarios calcular costos basados en material, tiempo de impresión, complejidad del modelo y otros factores. Incluye base de datos de materiales, calculadora de volumen y estimador de tiempo. Interfaz intuitiva con validación en tiempo real.",
-            imagen: "/tecnologias/JavaScript.svg",
+            descripcionCompleta: "Aplicación web especializada para el cálculo de precios en impresión 3D. Permite a los usuarios calcular costos basados en material, tiempo de impresión, complejidad del modelo y otros factores.",
+            imagen: "/proyectos/calculadora-3d.png",
             imagenes: [
-                "/tecnologias/JavaScript.svg",
-                "/tecnologias/CSS3.svg",
-                "/tecnologias/HTML5.svg"
+                "/proyectos/calculadora-3d.png"
             ],
             tecnologias: ["JavaScript", "CSS3", "HTML5"],
-            linkDemo: "https://calculadora-3d.com",
-            linkGitHub: "https://github.com/tu-usuario/calculadora-3d",
+            linkDemo: "https://sebastiangomez.com.ar/Calculadora3D/",
+            linkGitHub: "#",
             destacado: false,
             caracteristicas: [
                 "Cálculos precisos",
@@ -116,7 +112,7 @@ function Proyectos() {
 
     const siguienteImagen = () => {
         if (proyectoSeleccionado) {
-            setImagenActual((prev) => 
+            setImagenActual((prev) =>
                 prev === proyectoSeleccionado.imagenes.length - 1 ? 0 : prev + 1
             );
         }
@@ -124,7 +120,7 @@ function Proyectos() {
 
     const imagenAnterior = () => {
         if (proyectoSeleccionado) {
-            setImagenActual((prev) => 
+            setImagenActual((prev) =>
                 prev === 0 ? proyectoSeleccionado.imagenes.length - 1 : prev - 1
             );
         }
@@ -136,8 +132,8 @@ function Proyectos() {
                 <h2>Proyectos</h2>
                 <div className="proyectos-grid">
                     {proyectos.map((proyecto) => (
-                        <div 
-                            key={proyecto.id} 
+                        <div
+                            key={proyecto.id}
                             className={`proyecto-card ${proyecto.destacado ? 'destacado' : ''}`}
                         >
                             <div className="proyecto-imagen">
@@ -168,7 +164,7 @@ function Proyectos() {
                         <button className="modal-cerrar" onClick={cerrarModal}>
                             <i className="fas fa-times"></i>
                         </button>
-                        
+
                         <div className="modal-header">
                             <h2>{proyectoSeleccionado.titulo}</h2>
                             {proyectoSeleccionado.destacado && <span className="destacado-badge">⭐ Destacado</span>}
@@ -180,19 +176,19 @@ function Proyectos() {
                                     <button className="slider-btn slider-prev" onClick={imagenAnterior}>
                                         <i className="fas fa-chevron-left"></i>
                                     </button>
-                                    
+
                                     <div className="slider-imagen">
-                                        <img 
-                                            src={proyectoSeleccionado.imagenes[imagenActual]} 
+                                        <img
+                                            src={proyectoSeleccionado.imagenes[imagenActual]}
                                             alt={`${proyectoSeleccionado.titulo} - Imagen ${imagenActual + 1}`}
                                         />
                                     </div>
-                                    
+
                                     <button className="slider-btn slider-next" onClick={siguienteImagen}>
                                         <i className="fas fa-chevron-right"></i>
                                     </button>
                                 </div>
-                                
+
                                 <div className="slider-indicadores">
                                     {proyectoSeleccionado.imagenes.map((_, index) => (
                                         <button

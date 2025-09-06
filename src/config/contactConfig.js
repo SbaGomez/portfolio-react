@@ -55,10 +55,10 @@ export const contactConfig = {
             link: 'mailto:admin@sebastiangomez.com.ar'
         },
         {
-            icon: 'fas fa-phone',
-            title: 'Teléfono',
+            icon: 'fab fa-whatsapp',
+            title: 'WhatsApp',
             value: '2255413090',
-            link: 'tel:+542255413090'
+            link: 'https://wa.me/542255413090?text=Hola!%20Me%20interesa%20contactarte%20para%20hablar%20sobre%20un%20proyecto.'
         },
         {
             icon: 'fas fa-map-marker-alt',

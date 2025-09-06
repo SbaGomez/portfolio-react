@@ -2,7 +2,7 @@
     max-width: 400px;
     text-align: left;
     font-size: 14pt;
-    transition: transform 0.3s ease-out !important;
+    transition: transform 0.3s ease-out, visibility 0.3s ease-out !important;
 }
 
 /* En mobile (pantallas menores a 768px) se abre al 100% */
@@ -15,12 +15,24 @@
 
 .offcanvas.show {
     transform: translateX(0) !important;
-    transition: transform 0.3s ease-out !important;
+    transition: transform 0.3s ease-out, visibility 0.3s ease-out !important;
+    visibility: visible !important;
 }
 
 .offcanvas:not(.show) {
     transform: translateX(100%) !important;
-    transition: transform 1s ease-in !important;
+    transition: transform 1s ease-in, visibility 1s ease-in !important;
+    visibility: hidden !important;
+}
+
+/* Sobrescribir todas las transiciones de Bootstrap para el offcanvas */
+.offcanvas * {
+    transition: none !important;
+}
+
+/* Restaurar transiciones solo para los elementos que las necesitan */
+.offcanvas .nav-link {
+    transition: all 0.3s ease !important;
 }
 
 .nav-link {

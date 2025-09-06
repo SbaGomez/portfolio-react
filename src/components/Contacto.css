@@ -1,4 +1,4 @@
-/* Sección de Contacto */
+/* ===== SECCIÓN DE CONTACTO ===== */
 #contacto {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     padding: 100px 0;
@@ -32,14 +32,12 @@
     bottom: -12px;
     background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     height: 3px;
-    box-sizing: border-box;
     width: 80px;
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-
-/* Contenido del Contacto */
+/* ===== LAYOUT PRINCIPAL ===== */
 .contacto-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -47,13 +45,10 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    animation: fadeInUp 0.6s ease-out;
 }
 
-.contacto-form {
-    width: 100%;
-}
-
-/* Información de Contacto */
+/* ===== INFORMACIÓN DE CONTACTO ===== */
 .contacto-info {
     display: flex;
     flex-direction: column;
@@ -75,7 +70,7 @@
     margin-bottom: 0;
 }
 
-/* Detalles de Contacto */
+/* ===== DETALLES DE CONTACTO ===== */
 .contact-details {
     display: flex;
     flex-direction: column;
@@ -99,6 +94,21 @@
     background: rgba(255, 255, 255, 0.08);
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.contact-item:hover::after {
+    left: 100%;
 }
 
 .contact-icon {
@@ -132,7 +142,7 @@
     color: #B14143;
 }
 
-/* Redes Sociales */
+/* ===== REDES SOCIALES ===== */
 .social-links h4 {
     color: white;
     font-size: 20px;
@@ -168,7 +178,7 @@
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Formulario de Contacto */
+/* ===== FORMULARIO DE CONTACTO ===== */
 .contacto-form {
     background: rgba(255, 255, 255, 0.02);
     border-radius: 20px;
@@ -180,8 +190,6 @@
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     position: relative;
     overflow: hidden;
-    max-width: 100%;
-    margin: 0 auto;
     width: 100%;
 }
 
@@ -198,7 +206,14 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+    animation: slideInUp 0.6s ease-out;
+    animation-fill-mode: both;
 }
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
 
 .form-group label {
     color: #1A9FFF;
@@ -243,7 +258,6 @@
 }
 
 .form-group textarea {
-    padding: 16px 16px 16px 50px;
     min-height: 120px;
     resize: vertical;
     line-height: 1.5;
@@ -283,29 +297,7 @@
     backdrop-filter: blur(5px);
 }
 
-/* Animación de entrada para los campos */
-.form-group {
-    animation: slideInUp 0.6s ease-out;
-    animation-fill-mode: both;
-}
-
-.form-group:nth-child(1) { animation-delay: 0.1s; }
-.form-group:nth-child(2) { animation-delay: 0.2s; }
-.form-group:nth-child(3) { animation-delay: 0.3s; }
-.form-group:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Botón de Envío */
+/* ===== BOTÓN DE ENVÍO ===== */
 .btn-enviar {
     display: flex;
     align-items: center;
@@ -364,7 +356,7 @@
     transform: scale(1.05);
 }
 
-/* Barra de Progreso */
+/* ===== BARRA DE PROGRESO ===== */
 .progress-bar {
     width: 100%;
     height: 4px;
@@ -393,12 +385,7 @@
     animation: shimmer 1.5s infinite;
 }
 
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-}
-
-/* Alertas */
+/* ===== ALERTAS ===== */
 .alert {
     display: flex;
     align-items: center;
@@ -430,17 +417,6 @@
     z-index: 1;
 }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
 .alert-success {
     background: rgba(76, 175, 80, 0.08);
     border: 1px solid rgba(76, 175, 80, 0.2);
@@ -469,7 +445,35 @@
     font-size: 18px;
 }
 
-/* Responsive Design */
+/* ===== ANIMACIONES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     #contacto h2 {
         font-size: 40px;
@@ -479,7 +483,6 @@
         text-align: center;
         margin-bottom: 40px;
     }
-    
     
     .contacto-content {
         grid-template-columns: 1fr;
@@ -501,8 +504,6 @@
     
     .contacto-form {
         padding: 35px 25px;
-        max-width: 100%;
-        width: 100%;
     }
     
     .formulario {
@@ -546,7 +547,6 @@
         letter-spacing: -0.3px;
         margin-bottom: 30px;
     }
-    
     
     .contacto-content {
         padding: 0 10px;
@@ -592,8 +592,6 @@
     
     .contacto-form {
         padding: 30px 20px;
-        max-width: 100%;
-        width: 100%;
     }
     
     .formulario {
@@ -624,36 +622,4 @@
         padding: 12px 25px;
         font-size: 14px;
     }
-}
-
-/* Animaciones adicionales */
-.contacto-content {
-    animation: fadeInUp 0.6s ease-out;
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Efecto de brillo en hover para elementos interactivos */
-.contact-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.contact-item:hover::after {
-    left: 100%;
 }

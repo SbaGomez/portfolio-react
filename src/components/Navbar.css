@@ -14,3 +14,14 @@
     margin-right: 15px;
     order: -1;
 }
+
+.nav-link.active {
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%);
+    color: #1a1a1a !important;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link.active i {
+    color: #1a1a1a;
+}

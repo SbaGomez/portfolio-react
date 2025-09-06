@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Navbar.css';
 
 function Navbar({ onPageChange, currentPage }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navbarRef = useRef(null);
 
   const handleNavLinkClick = (pageId) => {
     // Primero cambiar la página
@@ -18,8 +19,25 @@ function Navbar({ onPageChange, currentPage }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Cerrar el menú cuando se hace clic fuera del navbar
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
-    <header>
+    <header ref={navbarRef}>
       <nav className="navbar navbar-dark bg-dark fixed-top">
         <div className="container-fluid justify-content-end">
           <button

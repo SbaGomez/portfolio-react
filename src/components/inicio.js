@@ -53,11 +53,11 @@ function Inicio({ onPageChange, currentPage }) {
                             <div className="tecnologias-simple">
                                 <div className="tech-item">
                                     <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">React</span>
+                                    <span className="tech-name">React - React Native</span>
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">JavaScript</span>
+                                    <span className="tech-name">JavaScript - TypeScript</span>
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
@@ -77,15 +77,15 @@ function Inicio({ onPageChange, currentPage }) {
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">MySQL</span>
+                                    <span className="tech-name">MySQL - MongoDB</span>
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Java</span>
+                                    <span className="tech-name">Java - Spring Boot</span>
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Angular</span>
+                                    <span className="tech-name">Angular - Angular Material</span>
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
@@ -93,7 +93,7 @@ function Inicio({ onPageChange, currentPage }) {
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Android</span>
+                                    <span className="tech-name">Kotlin - Android Studio</span>
                                 </div>
                             </div>
                         </div>

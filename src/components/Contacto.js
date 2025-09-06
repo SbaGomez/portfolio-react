@@ -120,55 +120,79 @@ function Contacto() {
                     <div className="contacto-form">
                         <form onSubmit={handleSubmit} className="formulario">
                             <div className="form-group">
-                                <label htmlFor="nombre">Nombre *</label>
-                                <input
-                                    type="text"
-                                    id="nombre"
-                                    name="nombre"
-                                    value={formData.nombre}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="Tu nombre completo"
-                                />
+                                <label htmlFor="nombre">NOMBRE:</label>
+                                <div className="input-container">
+                                    <i className="fas fa-user input-icon"></i>
+                                    <input
+                                        type="text"
+                                        id="nombre"
+                                        name="nombre"
+                                        value={formData.nombre}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="Escribe tu nombre completo"
+                                    />
+                                </div>
+                                <div className="helper-text">
+                                    Ingresa tu nombre y apellido
+                                </div>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="email">Email *</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="tu@email.com"
-                                />
+                                <label htmlFor="email">EMAIL:</label>
+                                <div className="input-container">
+                                    <i className="fas fa-envelope input-icon"></i>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="tu@email.com"
+                                    />
+                                </div>
+                                <div className="helper-text">
+                                    Por favor, usa un email válido
+                                </div>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="asunto">Asunto *</label>
-                                <input
-                                    type="text"
-                                    id="asunto"
-                                    name="asunto"
-                                    value={formData.asunto}
-                                    onChange={handleChange}
-                                    required
-                                    placeholder="¿De qué quieres hablar?"
-                                />
+                                <label htmlFor="asunto">ASUNTO:</label>
+                                <div className="input-container">
+                                    <i className="fas fa-tag input-icon"></i>
+                                    <input
+                                        type="text"
+                                        id="asunto"
+                                        name="asunto"
+                                        value={formData.asunto}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="¿De qué quieres hablar?"
+                                    />
+                                </div>
+                                <div className="helper-text">
+                                    Describe brevemente el tema de tu mensaje
+                                </div>
                             </div>
 
                             <div className="form-group">
-                                <label htmlFor="mensaje">Mensaje *</label>
-                                <textarea
-                                    id="mensaje"
-                                    name="mensaje"
-                                    value={formData.mensaje}
-                                    onChange={handleChange}
-                                    required
-                                    rows="5"
-                                    placeholder="Cuéntame sobre tu proyecto o idea..."
-                                ></textarea>
+                                <label htmlFor="mensaje">MENSAJE:</label>
+                                <div className="input-container">
+                                    <i className="fas fa-comment input-icon"></i>
+                                    <textarea
+                                        id="mensaje"
+                                        name="mensaje"
+                                        value={formData.mensaje}
+                                        onChange={handleChange}
+                                        required
+                                        rows="5"
+                                        placeholder="Cuéntame sobre tu proyecto o idea..."
+                                    ></textarea>
+                                </div>
+                                <div className="helper-text">
+                                    Escribe tu mensaje detallado aquí
+                                </div>
                             </div>
 
                             <button 

@@ -44,17 +44,50 @@ function Inicio({ onPageChange, currentPage }) {
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <h4 className="tecnologias-title">Tecnologías que manejo</h4>
                             <div className="tecnologias-simple">
-                                <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/CSS3.svg" alt="CSS3" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/nodejs.png" alt="Node.js" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                <div className="tech-item">
+                                    <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">React</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">JavaScript</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">HTML5</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/CSS3.svg" alt="CSS3" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">CSS3</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">Bootstrap</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/nodejs.png" alt="Node.js" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">Node.js</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">MySQL</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">Java</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">Angular</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">.NET Core</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">Android</span>
+                                </div>
                             </div>
                         </div>
                     </div>

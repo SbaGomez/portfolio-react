@@ -285,6 +285,44 @@
     color: #1A9FFF;
 }
 
+/* ===== ESTADOS DE ERROR ===== */
+.form-group input.error,
+.form-group textarea.error {
+    border-color: #f44336;
+    background: rgba(244, 67, 54, 0.05);
+    box-shadow: 
+        0 0 0 2px rgba(244, 67, 54, 0.2),
+        0 4px 12px rgba(244, 67, 54, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.form-group input.error + .input-icon,
+.form-group textarea.error + .input-icon {
+    color: #f44336;
+}
+
+.error-text {
+    background: rgba(244, 67, 54, 0.08);
+    border: 1px solid rgba(244, 67, 54, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #f44336;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 5px;
+    backdrop-filter: blur(5px);
+    animation: slideInUp 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.error-text::before {
+    content: '⚠';
+    font-size: 14px;
+    color: #f44336;
+}
+
 .helper-text {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -534,6 +572,11 @@
         padding: 14px 30px;
         font-size: 15px;
     }
+    
+    .error-text {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -621,5 +664,10 @@
     .btn-enviar {
         padding: 12px 25px;
         font-size: 14px;
+    }
+    
+    .error-text {
+        font-size: 11px;
+        padding: 5px 8px;
     }
 }

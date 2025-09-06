@@ -14,6 +14,54 @@ function Contacto() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
     const [submitProgress, setSubmitProgress] = useState(0);
+    const [errors, setErrors] = useState({});
+    const [touched, setTouched] = useState({});
+
+    // Función para validar email
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    // Función para validar un campo específico
+    const validateField = (name, value) => {
+        let error = '';
+        
+        switch (name) {
+            case 'nombre':
+                if (!value.trim()) {
+                    error = 'El nombre es requerido';
+                } else if (value.trim().length < 2) {
+                    error = 'El nombre debe tener al menos 2 caracteres';
+                }
+                break;
+            case 'email':
+                if (!value.trim()) {
+                    error = 'El email es requerido';
+                } else if (!validateEmail(value)) {
+                    error = 'Por favor, usa un email válido';
+                }
+                break;
+            case 'asunto':
+                if (!value.trim()) {
+                    error = 'El asunto es requerido';
+                } else if (value.trim().length < 3) {
+                    error = 'El asunto debe tener al menos 3 caracteres';
+                }
+                break;
+            case 'mensaje':
+                if (!value.trim()) {
+                    error = 'El mensaje es requerido';
+                } else if (value.trim().length < 10) {
+                    error = 'El mensaje debe tener al menos 10 caracteres';
+                }
+                break;
+            default:
+                break;
+        }
+        
+        return error;
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,10 +69,63 @@ function Contacto() {
             ...prev,
             [name]: value
         }));
+
+        // Validar el campo en tiempo real
+        const error = validateField(name, value);
+        setErrors(prev => ({
+            ...prev,
+            [name]: error
+        }));
+    };
+
+    const handleBlur = (e) => {
+        const { name, value } = e.target;
+        setTouched(prev => ({
+            ...prev,
+            [name]: true
+        }));
+
+        // Validar el campo cuando pierde el foco
+        const error = validateField(name, value);
+        setErrors(prev => ({
+            ...prev,
+            [name]: error
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        // Marcar todos los campos como tocados
+        const allTouched = {
+            nombre: true,
+            email: true,
+            asunto: true,
+            mensaje: true
+        };
+        setTouched(allTouched);
+
+        // Validar todos los campos
+        const newErrors = {};
+        Object.keys(formData).forEach(field => {
+            const error = validateField(field, formData[field]);
+            if (error) {
+                newErrors[field] = error;
+            }
+        });
+
+        setErrors(newErrors);
+
+        // Si hay errores, enfocar el primer campo con error y no enviar
+        if (Object.keys(newErrors).length > 0) {
+            const firstErrorField = Object.keys(newErrors)[0];
+            const errorElement = document.getElementById(firstErrorField);
+            if (errorElement) {
+                errorElement.focus();
+            }
+            return;
+        }
+
         setIsSubmitting(true);
         setSubmitStatus(null);
         setSubmitProgress(0);
@@ -47,6 +148,8 @@ function Contacto() {
             if (result.success) {
                 setSubmitStatus('success');
                 setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
+                setErrors({});
+                setTouched({});
             } else {
                 setSubmitStatus('error');
                 console.error('Error al enviar email:', result.error);
@@ -129,13 +232,20 @@ function Contacto() {
                                         name="nombre"
                                         value={formData.nombre}
                                         onChange={handleChange}
-                                        required
+                                        onBlur={handleBlur}
                                         placeholder="Escribe tu nombre completo"
+                                        className={touched.nombre && errors.nombre ? 'error' : ''}
                                     />
                                 </div>
-                                <div className="helper-text">
-                                    Ingresa tu nombre y apellido
-                                </div>
+                                {touched.nombre && errors.nombre ? (
+                                    <div className="error-text">
+                                        {errors.nombre}
+                                    </div>
+                                ) : (
+                                    <div className="helper-text">
+                                        Ingresa tu nombre y apellido
+                                    </div>
+                                )}
                             </div>
 
                             <div className="form-group">
@@ -148,13 +258,20 @@ function Contacto() {
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        required
+                                        onBlur={handleBlur}
                                         placeholder="tu@email.com"
+                                        className={touched.email && errors.email ? 'error' : ''}
                                     />
                                 </div>
-                                <div className="helper-text">
-                                    Por favor, usa un email válido
-                                </div>
+                                {touched.email && errors.email ? (
+                                    <div className="error-text">
+                                        {errors.email}
+                                    </div>
+                                ) : (
+                                    <div className="helper-text">
+                                        Por favor, usa un email válido
+                                    </div>
+                                )}
                             </div>
 
                             <div className="form-group">
@@ -167,13 +284,20 @@ function Contacto() {
                                         name="asunto"
                                         value={formData.asunto}
                                         onChange={handleChange}
-                                        required
+                                        onBlur={handleBlur}
                                         placeholder="¿De qué quieres hablar?"
+                                        className={touched.asunto && errors.asunto ? 'error' : ''}
                                     />
                                 </div>
-                                <div className="helper-text">
-                                    Describe brevemente el tema de tu mensaje
-                                </div>
+                                {touched.asunto && errors.asunto ? (
+                                    <div className="error-text">
+                                        {errors.asunto}
+                                    </div>
+                                ) : (
+                                    <div className="helper-text">
+                                        Describe brevemente el tema de tu mensaje
+                                    </div>
+                                )}
                             </div>
 
                             <div className="form-group">
@@ -185,14 +309,21 @@ function Contacto() {
                                         name="mensaje"
                                         value={formData.mensaje}
                                         onChange={handleChange}
-                                        required
+                                        onBlur={handleBlur}
                                         rows="5"
                                         placeholder="Cuéntame sobre tu proyecto o idea..."
+                                        className={touched.mensaje && errors.mensaje ? 'error' : ''}
                                     ></textarea>
                                 </div>
-                                <div className="helper-text">
-                                    Escribe tu mensaje detallado aquí
-                                </div>
+                                {touched.mensaje && errors.mensaje ? (
+                                    <div className="error-text">
+                                        {errors.mensaje}
+                                    </div>
+                                ) : (
+                                    <div className="helper-text">
+                                        Escribe tu mensaje detallado aquí
+                                    </div>
+                                )}
                             </div>
 
                             <button 

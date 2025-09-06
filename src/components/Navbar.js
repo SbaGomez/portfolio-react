@@ -61,7 +61,7 @@ function Navbar({ onPageChange, currentPage }) {
                     id="somos"
                     onClick={() => handleNavLinkClick('somos')}
                   >
-                    <i className="fas fa-users"></i> Sobre mi
+                    <i className="fas fa-user"></i> Sobre mi
                   </button>
                 </li>
                 <li className="nav-item">
@@ -70,7 +70,7 @@ function Navbar({ onPageChange, currentPage }) {
                     id="Proyectos"
                     onClick={() => handleNavLinkClick('Proyectos')}
                   >
-                    <i className="fas fa-gamepad"></i> Proyectos
+                    <i className="fas fa-folder-open"></i> Proyectos
                   </button>
                 </li>
                 <li className="nav-item">

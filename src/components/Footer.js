@@ -93,7 +93,7 @@ const Footer = ({ onPageChange, currentPage }) => {
                                             id="somos"
                                             onClick={() => handleNavLinkClick('somos')}
                                         >
-                                            <i className="fas fa-users"></i> SOBRE MI
+                                            <i className="fas fa-user"></i> SOBRE MI
                                         </button>
                                     </li>
                                 </ul>
@@ -106,7 +106,7 @@ const Footer = ({ onPageChange, currentPage }) => {
                                             id="Proyectos"
                                             onClick={() => handleNavLinkClick('Proyectos')}
                                         >
-                                            <i className="fas fa-gamepad"></i> PROYECTOS
+                                            <i className="fas fa-folder-open"></i> PROYECTOS
                                         </button>
                                     </li>
                                     <li className="nav-item">

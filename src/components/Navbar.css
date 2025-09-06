@@ -3,3 +3,14 @@
     text-align: left;
     font-size: 14pt;
 }
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-link i {
+    margin-right: 15px;
+    order: -1;
+}

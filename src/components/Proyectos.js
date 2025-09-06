@@ -122,7 +122,7 @@ function Proyectos() {
     return (
         <section id="proyectos">
             <div className="container">
-                <h2>Proyectos</h2>
+                <h2>Proyectos personales</h2>
                 <div className="proyectos-grid">
                     {proyectos.map((proyecto) => (
                         <div

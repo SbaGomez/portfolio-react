@@ -128,7 +128,7 @@ html {
     display: inline-block;
     font-size: 16px;
     font-weight: 600;
-    color: #87CEEB;
+    color: #d8b30f;
     background: rgba(135, 206, 235, 0.1);
     padding: 4px 8px;
     border-radius: 8px;
@@ -138,7 +138,7 @@ html {
     letter-spacing: 1px;
     animation: fadeInUp 1s ease-out 0.3s both;
     margin-left: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     vertical-align: top;
     transform: translateY(-5px);
 }

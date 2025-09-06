@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import Inicio from './components/Inicio';
+import SobreMi from './components/SobreMi';
 import Proyectos from './components/Proyectos';
 import Contacto from './components/Contacto';
 import Footer from './components/Footer';
@@ -29,6 +30,8 @@ function App() {
     switch (currentPage) {
       case 'inicio':
         return <Inicio onPageChange={handlePageChange} currentPage={currentPage} />;
+      case 'somos':
+        return <SobreMi onPageChange={handlePageChange} currentPage={currentPage} />;
       case 'Proyectos':
         return <Proyectos onPageChange={handlePageChange} currentPage={currentPage} />;
       case 'Contacto':

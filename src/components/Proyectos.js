@@ -5,28 +5,33 @@ import './Proyectos.css';
 function Proyectos() {
     const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
     const [imagenActual, setImagenActual] = useState(0);
+    const [imagenAmpliada, setImagenAmpliada] = useState(null);
 
     const proyectos = [
         {
             id: 1,
-            titulo: "Portfolio Personal",
-            descripcion: "Sitio web personal desarrollado con React, mostrando mis habilidades y proyectos. Incluye diseño responsivo y animaciones modernas.",
-            descripcionCompleta: "Este portfolio personal fue desarrollado completamente en React con un diseño moderno y responsivo. Incluye secciones de presentación, proyectos, habilidades técnicas y contacto. Utiliza animaciones CSS avanzadas, gradientes modernos y un sistema de navegación fluido. El proyecto demuestra habilidades en desarrollo frontend, diseño UX/UI y optimización de rendimiento.",
-            imagen: "/proyectos/portfolio-personal.png",
+            titulo: "Servidor MUOnline",
+            descripcion: "Servidor privado de MU Online con web moderna responsiva, sistema de archivos Louis Season 6 y panel de administración completo para gestión de jugadores y eventos.",
+            descripcionCompleta: "Servidor privado completo de MU Online desarrollado con tecnologías modernas. Incluye una página web responsiva con diseño atractivo, sistema de registro y login de jugadores, panel de administración para gestión de usuarios, eventos y configuraciones del servidor. Utiliza archivos de Louis Season 6 para una experiencia de juego auténtica. La web cuenta con sistema de ranking, noticias, descarga de cliente y estadísticas en tiempo real.",
+            imagen: "/proyectos/bakastamu.png",
             imagenes: [
-                "/proyectos/portfolio-personal.png",
-                "/proyectos/portfolio-contacto.png",
+                "/proyectos/bakastamu.png"
             ],
-            tecnologias: ["React", "CSS3", "JavaScript", "HTML5"],
-            linkDemo: "https://sebastiangomez.com.ar/",
-            linkGitHub: "https://github.com/SbaGomez/portfolio-react",
+            tecnologias: ["PHP", "Bootstrap", "MsSQL"],
+            linkDemo: "https://bakastamu.net",
+            linkGitHub: "#",
+            demoHabilitado: true,
+            githubHabilitado: false,
             destacado: true,
             caracteristicas: [
-                "Diseño responsivo",
-                "Animaciones CSS",
-                "Optimización SEO",
-                "Carga rápida",
-                "Navegación intuitiva"
+                "Web responsiva moderna",
+                "Sistema Louis Season 6",
+                "Panel de administración",
+                "Sistema de ranking",
+                "Foro integrado",
+                "Estadísticas en tiempo real",
+                "Descarga de cliente",
+                "Gestión de eventos"
             ]
         },
         {
@@ -41,6 +46,8 @@ function Proyectos() {
             tecnologias: ["JavaScript", "CSS3", "HTML5"],
             linkDemo: "https://sebastiangomez.com.ar/Calculadora3D/",
             linkGitHub: "#",
+            demoHabilitado: true,
+            githubHabilitado: false,
             destacado: false,
             caracteristicas: [
                 "Cálculos precisos",
@@ -52,50 +59,29 @@ function Proyectos() {
         },
         {
             id: 3,
-            titulo: "Sistema de Gestión",
-            descripcion: "Aplicación full-stack para gestión de inventario con base de datos MySQL y panel de administración completo.",
-            descripcionCompleta: "Sistema completo de gestión empresarial desarrollado con React y Node.js. Incluye módulos de inventario, usuarios, reportes y administración. Base de datos MySQL con relaciones complejas, autenticación JWT, panel de administración con gráficos en tiempo real y sistema de notificaciones. API RESTful con documentación completa.",
-            imagen: "/tecnologias/MySQL.svg",
+            titulo: "Portfolio Personal",
+            descripcion: "Sitio web personal desarrollado con React, mostrando mis habilidades y proyectos. Incluye diseño responsivo y animaciones modernas.",
+            descripcionCompleta: "Aplicación web completa desarrollada con React que demuestra habilidades en desarrollo frontend moderno. La aplicación incluye múltiples secciones interactivas, sistema de navegación fluido, galería de proyectos con modales, formulario de contacto funcional y diseño completamente responsivo. Utiliza técnicas avanzadas de CSS como gradientes, animaciones, flexbox y grid para crear una experiencia de usuario excepcional. El proyecto está optimizado para rendimiento y SEO, con carga rápida y estructura semántica.",
+            imagen: "/proyectos/portfolio-personal.png",
             imagenes: [
-                "/tecnologias/MySQL.svg",
-                "/tecnologias/React.svg",
-                "/tecnologias/nodejs.svg",
-                "/tecnologias/Bootstrap.svg"
+                "/proyectos/portfolio-personal.png",
+                "/proyectos/portfolio-contacto.png",
             ],
-            tecnologias: ["React", "Node.js", "MySQL", "Bootstrap"],
-            linkDemo: "https://sistema-gestion.com",
-            linkGitHub: "https://github.com/tu-usuario/sistema-gestion",
-            destacado: true,
-            caracteristicas: [
-                "Panel de administración",
-                "Base de datos relacional",
-                "Autenticación JWT",
-                "Reportes en tiempo real",
-                "API RESTful"
-            ]
-        },
-        {
-            id: 4,
-            titulo: "E-commerce Moderno",
-            descripcion: "Tienda online completa con carrito de compras, pagos integrados y panel de administración para productos.",
-            descripcionCompleta: "Plataforma de comercio electrónico completa desarrollada con React y Node.js. Incluye catálogo de productos, carrito de compras, sistema de pagos con Stripe, gestión de usuarios, panel de administración y sistema de reviews. Base de datos MongoDB para escalabilidad, autenticación segura y diseño mobile-first.",
-            imagen: "/tecnologias/Bootstrap.svg",
-            imagenes: [
-                "/tecnologias/Bootstrap.svg",
-                "/tecnologias/React.svg",
-                "/tecnologias/nodejs.svg",
-                "/tecnologias/JavaScript.svg"
-            ],
-            tecnologias: ["React", "Bootstrap", "Node.js", "MongoDB"],
-            linkDemo: "https://ecommerce-demo.com",
-            linkGitHub: "https://github.com/tu-usuario/ecommerce",
+            tecnologias: ["React", "CSS3", "JavaScript", "HTML5"],
+            linkDemo: "https://sebastiangomez.com.ar/",
+            linkGitHub: "https://github.com/SbaGomez/portfolio-react",
+            demoHabilitado: true,
+            githubHabilitado: true,
             destacado: false,
             caracteristicas: [
-                "Carrito de compras",
-                "Pagos integrados",
-                "Panel de administración",
-                "Sistema de reviews",
-                "Diseño mobile-first"
+                "Interfaz moderna y elegante",
+                "Diseño completamente responsivo",
+                "Animaciones CSS avanzadas",
+                "Sistema de navegación fluido",
+                "Galería de proyectos interactiva",
+                "Formulario de contacto funcional",
+                "Optimización de rendimiento",
+                "Código limpio y mantenible"
             ]
         }
     ];
@@ -124,6 +110,14 @@ function Proyectos() {
                 prev === 0 ? proyectoSeleccionado.imagenes.length - 1 : prev - 1
             );
         }
+    };
+
+    const abrirImagenAmpliada = (imagenSrc) => {
+        setImagenAmpliada(imagenSrc);
+    };
+
+    const cerrarImagenAmpliada = () => {
+        setImagenAmpliada(null);
     };
 
     return (
@@ -177,7 +171,7 @@ function Proyectos() {
                                         <i className="fas fa-chevron-left"></i>
                                     </button>
 
-                                    <div className="slider-imagen">
+                                    <div className="slider-imagen" onClick={() => abrirImagenAmpliada(proyectoSeleccionado.imagenes[imagenActual])}>
                                         <img
                                             src={proyectoSeleccionado.imagenes[imagenActual]}
                                             alt={`${proyectoSeleccionado.titulo} - Imagen ${imagenActual + 1}`}
@@ -230,18 +224,37 @@ function Proyectos() {
                                 <div className="info-section">
                                     <h3>Enlaces</h3>
                                     <div className="modal-enlaces">
-                                        <a href={proyectoSeleccionado.linkDemo} target="_blank" rel="noopener noreferrer" className="btn-modal-demo">
-                                            <i className="fas fa-external-link-alt"></i>
-                                            Ver Demo
-                                        </a>
-                                        <a href={proyectoSeleccionado.linkGitHub} target="_blank" rel="noopener noreferrer" className="btn-modal-github">
-                                            <i className="fab fa-github"></i>
-                                            Ver Código
-                                        </a>
+                                        {proyectoSeleccionado.demoHabilitado && (
+                                            <a href={proyectoSeleccionado.linkDemo} target="_blank" rel="noopener noreferrer" className="btn-modal-demo">
+                                                <i className="fas fa-external-link-alt"></i>
+                                                Ver Demo
+                                            </a>
+                                        )}
+                                        {proyectoSeleccionado.githubHabilitado && (
+                                            <a href={proyectoSeleccionado.linkGitHub} target="_blank" rel="noopener noreferrer" className="btn-modal-github">
+                                                <i className="fab fa-github"></i>
+                                                Ver Código
+                                            </a>
+                                        )}
+                                        {!proyectoSeleccionado.demoHabilitado && !proyectoSeleccionado.githubHabilitado && (
+                                            <p className="no-enlaces">Enlaces no disponibles</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Modal de Imagen Ampliada */}
+            {imagenAmpliada && (
+                <div className="modal-imagen-overlay" onClick={cerrarImagenAmpliada}>
+                    <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
+                        <button className="modal-imagen-cerrar" onClick={cerrarImagenAmpliada}>
+                            <i className="fas fa-times"></i>
+                        </button>
+                        <img src={imagenAmpliada} alt="Imagen ampliada" className="imagen-ampliada" />
                     </div>
                 </div>
             )}

@@ -267,6 +267,7 @@ html {
 .tech-item:nth-child(9) { animation-delay: 1.6s; }
 .tech-item:nth-child(10) { animation-delay: 1.7s; }
 .tech-item:nth-child(11) { animation-delay: 1.8s; }
+.tech-item:nth-child(12) { animation-delay: 1.9s; }
 
 .tech-logo:hover {
     transform: scale(1.2);

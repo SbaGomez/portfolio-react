@@ -77,7 +77,11 @@ function Inicio({ onPageChange, currentPage }) {
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">MySQL - MongoDB</span>
+                                    <span className="tech-name">MySQL</span>
+                                </div>
+                                <div className="tech-item">
+                                    <img src="/tecnologias/mongodb.svg" alt="MongoDB" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className="tech-name">MongoDB</span>
                                 </div>
                                 <div className="tech-item">
                                     <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />

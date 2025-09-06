@@ -10,7 +10,10 @@ function Inicio({ onPageChange, currentPage }) {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <h2>Sebastian Gomez Developer</h2>
+                        <div className="title-container">
+                            <h2>Sebastian Gomez</h2>
+                            <span className="dev-badge">.Dev</span>
+                        </div>
                         <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
                             <p className="lead">
                                 <strong>Desarrollador web Fullstack</strong> con habilidades en el

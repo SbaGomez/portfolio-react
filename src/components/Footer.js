@@ -11,8 +11,12 @@ const Footer = ({ onPageChange, currentPage }) => {
     const age = getCurrentAge();
 
     const handleNavLinkClick = (pageId) => {
-        window.scrollTo({ top: 0, behavior: 'smooth' }); // Desplazarse hacia arriba
+        // Primero cambiar la página
         onPageChange(pageId);
+        // Luego hacer scroll después de un pequeño delay para asegurar que el componente se haya renderizado
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
     };
 
     // Función para copiar email al portapapeles

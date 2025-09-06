@@ -28,7 +28,6 @@ function Proyectos() {
                 "Sistema Louis Season 6",
                 "Panel de administración",
                 "Sistema de ranking",
-                "Foro integrado",
                 "Estadísticas en tiempo real",
                 "Descarga de cliente",
                 "Gestión de eventos"

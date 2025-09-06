@@ -48,9 +48,9 @@ export const sendEmail = async (formData) => {
     };
 
     try {
-        // Crear una promesa con timeout de 30 segundos
+        // Crear una promesa con timeout de 15 segundos (más realista)
         const timeoutPromise = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Timeout: El envío tardó demasiado')), 30000);
+            setTimeout(() => reject(new Error('Timeout: El envío tardó demasiado')), 15000);
         });
 
         const emailPromise = emailjs.send(
@@ -59,16 +59,20 @@ export const sendEmail = async (formData) => {
             templateParams,
             {
                 publicKey: PUBLIC_KEY,
-                // Configuraciones adicionales para mejorar rendimiento
+                // Configuraciones optimizadas para mejor rendimiento
                 blockHeadless: false,
                 limitRate: {
                     enable: true,
                     id: 'contact-form'
-                }
+                },
+                // Configuraciones adicionales para reducir latencia
+                timeout: 10000, // 10 segundos de timeout interno
+                retry: 2, // 2 reintentos automáticos
+                retryDelay: 1000 // 1 segundo entre reintentos
             }
         );
 
-        // Usar Promise.race pero con un timeout más generoso
+        // Usar Promise.race con timeout optimizado
         const response = await Promise.race([emailPromise, timeoutPromise]);
         
         console.log('✅ Email enviado exitosamente:', response);
@@ -85,6 +89,12 @@ export const sendEmail = async (formData) => {
             errorMessage = 'El email ingresado no es válido.';
         } else if (error.message.includes('Template')) {
             errorMessage = 'Error en la configuración del servidor. Inténtalo más tarde.';
+        } else if (error.message.includes('Network')) {
+            errorMessage = 'Error de conexión. Verifica tu internet e inténtalo de nuevo.';
+        } else if (error.message.includes('Rate limit')) {
+            errorMessage = 'Demasiados intentos. Espera un momento e inténtalo de nuevo.';
+        } else if (error.message.includes('Service')) {
+            errorMessage = 'Servicio temporalmente no disponible. Inténtalo más tarde.';
         }
         
         return { success: false, error: errorMessage };

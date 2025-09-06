@@ -16,6 +16,7 @@ function Contacto() {
     const [submitProgress, setSubmitProgress] = useState(0);
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
+    const [retryCount, setRetryCount] = useState(0);
 
     // Función para validar email
     const validateEmail = (email) => {
@@ -130,13 +131,13 @@ function Contacto() {
         setSubmitStatus(null);
         setSubmitProgress(0);
 
-        // Simular progreso durante el envío
+        // Simular progreso durante el envío (más realista)
         const progressInterval = setInterval(() => {
             setSubmitProgress(prev => {
-                if (prev >= 90) return prev;
-                return prev + Math.random() * 15;
+                if (prev >= 85) return prev; // Parar en 85% hasta recibir respuesta
+                return prev + Math.random() * 8 + 2; // Progreso más gradual
             });
-        }, 200);
+        }, 300);
 
         try {
             // Enviar email usando EmailJS
@@ -150,19 +151,49 @@ function Contacto() {
                 setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
                 setErrors({});
                 setTouched({});
+                setRetryCount(0); // Resetear contador de reintentos
             } else {
-                setSubmitStatus('error');
-                console.error('Error al enviar email:', result.error);
+                // Si falla y no hemos reintentado, intentar una vez más
+                if (retryCount < 1 && (result.error.includes('Timeout') || result.error.includes('Network'))) {
+                    setRetryCount(prev => prev + 1);
+                    console.log(`🔄 Reintentando envío (intento ${retryCount + 1}/2)...`);
+                    
+                    // Esperar 2 segundos antes del reintento
+                    setTimeout(() => {
+                        handleSubmit(e);
+                    }, 2000);
+                    return;
+                } else {
+                    setSubmitStatus('error');
+                    console.error('Error al enviar email:', result.error);
+                }
             }
         } catch (error) {
             clearInterval(progressInterval);
-            setSubmitStatus('error');
-            console.error('Error al enviar email:', error);
+            
+            // Si es un error de red y no hemos reintentado, intentar una vez más
+            if (retryCount < 1 && (error.message.includes('Timeout') || error.message.includes('Network'))) {
+                setRetryCount(prev => prev + 1);
+                console.log(`🔄 Reintentando envío (intento ${retryCount + 1}/2)...`);
+                
+                // Esperar 2 segundos antes del reintento
+                setTimeout(() => {
+                    handleSubmit(e);
+                }, 2000);
+                return;
+            } else {
+                setSubmitStatus('error');
+                console.error('Error al enviar email:', error);
+            }
         } finally {
+            // Limpiar el intervalo de progreso
+            clearInterval(progressInterval);
+            
+            // Esperar un poco antes de ocultar el estado de envío
             setTimeout(() => {
                 setIsSubmitting(false);
                 setSubmitProgress(0);
-            }, 1000);
+            }, 1500);
         }
     };
 
@@ -334,7 +365,7 @@ function Contacto() {
                                 {isSubmitting ? (
                                     <>
                                         <i className="fas fa-spinner fa-spin"></i>
-                                        Enviando... {Math.round(submitProgress)}%
+                                        {retryCount > 0 ? `Reintentando... (${retryCount}/2)` : `Enviando... ${Math.round(submitProgress)}%`}
                                     </>
                                 ) : (
                                     <>

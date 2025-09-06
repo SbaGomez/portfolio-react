@@ -1,7 +1,26 @@
 .offcanvas {
-    max-width: 300px;
+    max-width: 400px;
     text-align: left;
     font-size: 14pt;
+    transition: transform 0.3s ease-out !important;
+}
+
+/* En mobile (pantallas menores a 768px) se abre al 100% */
+@media (max-width: 767.98px) {
+    .offcanvas {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+.offcanvas.show {
+    transform: translateX(0) !important;
+    transition: transform 0.3s ease-out !important;
+}
+
+.offcanvas:not(.show) {
+    transform: translateX(100%) !important;
+    transition: transform 1s ease-in !important;
 }
 
 .nav-link {

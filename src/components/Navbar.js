@@ -50,7 +50,7 @@ function Navbar({ onPageChange, currentPage }) {
           <div
             className={`offcanvas offcanvas-end text-bg-dark ${isMenuOpen ? 'show' : ''}`}
             tabIndex="-1"
-            style={{ maxWidth: isMenuOpen ? '300px' : 'none' }}
+            style={{ maxWidth: isMenuOpen ? '400px' : 'none' }}
             id="offcanvasDarkNavbar"
             aria-labelledby="offcanvasDarkNavbarLabel"
           >

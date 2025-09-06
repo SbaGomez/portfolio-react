@@ -9,13 +9,13 @@
       "type": "image/x-icon"
     },
     {
-      "src": "proyectos/portfolio-personal.png",
+      "src": "SG.jpg",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
     },
     {
-      "src": "proyectos/portfolio-personal.png",
+      "src": "SG.jpg",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any maskable"

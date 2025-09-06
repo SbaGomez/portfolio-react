@@ -6,10 +6,11 @@ function Navbar({ onPageChange, currentPage }) {
   const navbarRef = useRef(null);
 
   const handleNavLinkClick = (pageId) => {
-    // Primero cambiar la página
+    // Cerrar el menú inmediatamente para evitar el parpadeo
+    setIsMenuOpen(false);
+    // Cambiar la página
     onPageChange(pageId);
-    setIsMenuOpen(false); // Cierra el menú cuando se hace clic en un enlace
-    // Luego hacer scroll después de un pequeño delay para asegurar que el componente se haya renderizado
+    // Hacer scroll después de un pequeño delay para asegurar que el componente se haya renderizado
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);

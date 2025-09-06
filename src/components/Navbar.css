@@ -50,9 +50,46 @@
     background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%);
     color: #1a1a1a !important;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+}
+
+.nav-link:not(.active) {
+    transition: all 0.2s ease;
+}
+
+/* Eliminar todos los estilos de Bootstrap para estados activos/focus */
+.nav-link:active,
+.nav-link:focus,
+.nav-link:focus-visible,
+.nav-link:focus-within {
+    background: transparent !important;
+    color: inherit !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.nav-link:active:not(.active),
+.nav-link:focus:not(.active),
+.nav-link:focus-visible:not(.active) {
+    background: transparent !important;
+    color: inherit !important;
 }
 
 .nav-link.active i {
     color: #1a1a1a;
+}
+
+/* Asegurar que no haya colores de fondo azules en ningún estado */
+.nav-link {
+    background: transparent !important;
+}
+
+.nav-link:hover {
+    background: transparent !important;
+}
+
+/* Solo el estado .active debe tener fondo */
+.nav-link.active {
+    color: #1a1a1a !important;
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%) !important;
 }

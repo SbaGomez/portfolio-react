@@ -48,9 +48,9 @@ export const sendEmail = async (formData) => {
     };
 
     try {
-        // Crear una promesa con timeout de 10 segundos
+        // Crear una promesa con timeout de 30 segundos
         const timeoutPromise = new Promise((_, reject) => {
-            setTimeout(() => reject(new Error('Timeout: El envío tardó demasiado')), 10000);
+            setTimeout(() => reject(new Error('Timeout: El envío tardó demasiado')), 30000);
         });
 
         const emailPromise = emailjs.send(
@@ -68,10 +68,11 @@ export const sendEmail = async (formData) => {
             }
         );
 
+        // Usar Promise.race pero con un timeout más generoso
         const response = await Promise.race([emailPromise, timeoutPromise]);
         
         console.log('✅ Email enviado exitosamente:', response);
-        return { success: true };
+        return { success: true, message: 'Mensaje enviado correctamente' };
     } catch (error) {
         console.error('❌ Error enviando email:', error);
         

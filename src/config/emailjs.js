@@ -5,6 +5,16 @@ const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY;
 
+// Inicializar EmailJS una sola vez
+let isEmailJSInitialized = false;
+
+const initializeEmailJS = () => {
+    if (!isEmailJSInitialized && PUBLIC_KEY) {
+        emailjs.init(PUBLIC_KEY);
+        isEmailJSInitialized = true;
+    }
+};
+
 export const sendEmail = async (formData) => {
     const { nombre, email, asunto, mensaje } = formData;
     
@@ -17,8 +27,8 @@ export const sendEmail = async (formData) => {
         };
     }
     
-    // Configurar EmailJS
-    emailjs.init(PUBLIC_KEY);
+    // Inicializar EmailJS solo si no se ha hecho antes
+    initializeEmailJS();
     
     const templateParams = {
         from_name: nombre,
@@ -27,9 +37,7 @@ export const sendEmail = async (formData) => {
         message: mensaje,
         to_email: 'sbagomeznight@gmail.com',
         reply_to: email,
-        // Usar el email verificado en EmailJS
         from_name_display: `${nombre} (${email})`,
-        // Agregar fecha actual
         fecha: new Date().toLocaleString('es-ES', {
             year: 'numeric',
             month: 'long',
@@ -40,16 +48,44 @@ export const sendEmail = async (formData) => {
     };
 
     try {
-        const response = await emailjs.send(
+        // Crear una promesa con timeout de 10 segundos
+        const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Timeout: El envío tardó demasiado')), 10000);
+        });
+
+        const emailPromise = emailjs.send(
             SERVICE_ID,
             TEMPLATE_ID,
-            templateParams
+            templateParams,
+            {
+                publicKey: PUBLIC_KEY,
+                // Configuraciones adicionales para mejorar rendimiento
+                blockHeadless: false,
+                limitRate: {
+                    enable: true,
+                    id: 'contact-form'
+                }
+            }
         );
+
+        const response = await Promise.race([emailPromise, timeoutPromise]);
         
-        console.log('Email enviado exitosamente:', response);
+        console.log('✅ Email enviado exitosamente:', response);
         return { success: true };
     } catch (error) {
-        console.error('Error enviando email:', error);
-        return { success: false, error: error.message };
+        console.error('❌ Error enviando email:', error);
+        
+        // Proporcionar mensajes de error más específicos
+        let errorMessage = 'Error al enviar el mensaje. Inténtalo de nuevo.';
+        
+        if (error.message.includes('Timeout')) {
+            errorMessage = 'El envío tardó demasiado. Verifica tu conexión e inténtalo de nuevo.';
+        } else if (error.message.includes('Invalid email')) {
+            errorMessage = 'El email ingresado no es válido.';
+        } else if (error.message.includes('Template')) {
+            errorMessage = 'Error en la configuración del servidor. Inténtalo más tarde.';
+        }
+        
+        return { success: false, error: errorMessage };
     }
 };

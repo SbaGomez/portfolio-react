@@ -13,6 +13,7 @@ function Contacto() {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState(null);
+    const [submitProgress, setSubmitProgress] = useState(0);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,10 +27,22 @@ function Contacto() {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitStatus(null);
+        setSubmitProgress(0);
+
+        // Simular progreso durante el envío
+        const progressInterval = setInterval(() => {
+            setSubmitProgress(prev => {
+                if (prev >= 90) return prev;
+                return prev + Math.random() * 15;
+            });
+        }, 200);
 
         try {
-            // Enviar email usando SendGrid
+            // Enviar email usando EmailJS
             const result = await sendEmail(formData);
+            
+            clearInterval(progressInterval);
+            setSubmitProgress(100);
             
             if (result.success) {
                 setSubmitStatus('success');
@@ -39,10 +52,14 @@ function Contacto() {
                 console.error('Error al enviar email:', result.error);
             }
         } catch (error) {
+            clearInterval(progressInterval);
             setSubmitStatus('error');
             console.error('Error al enviar email:', error);
         } finally {
-            setIsSubmitting(false);
+            setTimeout(() => {
+                setIsSubmitting(false);
+                setSubmitProgress(0);
+            }, 1000);
         }
     };
 
@@ -162,7 +179,7 @@ function Contacto() {
                                 {isSubmitting ? (
                                     <>
                                         <i className="fas fa-spinner fa-spin"></i>
-                                        Enviando...
+                                        Enviando... {Math.round(submitProgress)}%
                                     </>
                                 ) : (
                                     <>
@@ -171,6 +188,15 @@ function Contacto() {
                                     </>
                                 )}
                             </button>
+
+                            {isSubmitting && (
+                                <div className="progress-bar">
+                                    <div 
+                                        className="progress-fill" 
+                                        style={{ width: `${submitProgress}%` }}
+                                    ></div>
+                                </div>
+                            )}
 
                             {submitStatus === 'success' && (
                                 <div className="alert alert-success">

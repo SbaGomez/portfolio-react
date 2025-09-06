@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Footer.css'; // Estilo CSS aquí
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa el componente FontAwesomeIcon
-import { faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
+import { faInstagram, faWhatsapp, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
 import { contactConfig, getCurrentAge } from '../config/contactConfig';
 
 const Footer = ({ onPageChange, currentPage }) => {
@@ -150,11 +150,17 @@ const Footer = ({ onPageChange, currentPage }) => {
                 </div>
                 <div className="footer-bottom">
                     <div className="footer-social">
+                        <a href={contactConfig.socialMedia.github.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.github.name}>
+                            <FontAwesomeIcon icon={faGithub} className="githubFooter" />
+                        </a>
                         <a href={contactConfig.socialMedia.instagram.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.instagram.name}>
                             <FontAwesomeIcon icon={faInstagram} className="instagramFooter" />
-                        </a>
+                        </a>    
                         <a href={contactConfig.socialMedia.whatsapp.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.whatsapp.name}>
                             <FontAwesomeIcon icon={faWhatsapp} className="whatsappFooter" />
+                        </a>
+                        <a href={contactConfig.socialMedia.linkedin.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.linkedin.name}>
+                            <FontAwesomeIcon icon={faLinkedin} className="linkedinFooter" />
                         </a>
                     </div>
                     <p>{contactConfig.copyright}</p>

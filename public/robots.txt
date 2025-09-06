@@ -1,3 +1,11 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# Permitir acceso a recursos estáticos
+Allow: /static/
+Allow: /proyectos/
+Allow: /tecnologias/
+
+# Sitemap
+Sitemap: https://sebastiangomez.com.ar/sitemap.xml

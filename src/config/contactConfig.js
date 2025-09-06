@@ -26,24 +26,18 @@ export const contactConfig = {
             color: '#25D366',
             name: 'WhatsApp'
         },
-        /*github: {
-            url: 'https://github.com/',
+        github: {
+            url: 'https://github.com/SbaGomez',
             icon: 'fab fa-github',
             color: '#6e5494',
             name: 'GitHub'
         },
         linkedin: {
-            url: 'https://linkedin.com/in/',
+            url: 'https://www.linkedin.com/in/sbagomez/',
             icon: 'fab fa-linkedin',
             color: '#0077B5',
             name: 'LinkedIn'
         },
-        twitter: {
-            url: 'https://twitter.com/',
-            icon: 'fab fa-twitter',
-            color: '#1da1f2',
-            name: 'Twitter'
-        }*/
     },
     
     // Información de contacto para el formulario

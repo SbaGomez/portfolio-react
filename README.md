@@ -1,70 +1,147 @@
-# Getting Started with Create React App
+# 🚀 Portfolio Personal - Sebastian Gomez
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![React](https://img.shields.io/badge/React-18.2.0-blue?style=for-the-badge&logo=react)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=for-the-badge&logo=javascript)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.3-purple?style=for-the-badge&logo=bootstrap)
+![CSS3](https://img.shields.io/badge/CSS3-Advanced-green?style=for-the-badge&logo=css3)
 
-## Available Scripts
+Un portfolio personal moderno y responsivo desarrollado con React, que muestra mis habilidades como desarrollador web fullstack y presenta mis proyectos más destacados.
 
-In the project directory, you can run:
+## 🌟 Características
 
-### `npm start`
+- **Diseño Moderno**: Interfaz elegante con animaciones CSS avanzadas
+- **Completamente Responsivo**: Optimizado para todos los dispositivos
+- **Navegación Fluida**: Sistema de navegación SPA sin recargas
+- **Galería de Proyectos**: Presentación interactiva de proyectos con modales
+- **Formulario de Contacto**: Sistema de contacto funcional con EmailJS
+- **Optimización SEO**: Estructura semántica y meta tags optimizados
+- **Rendimiento**: Carga rápida y optimizada
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Tecnologías Utilizadas
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend
+- **React 18.2.0** - Framework principal
+- **JavaScript ES6+** - Lógica de la aplicación
+- **CSS3** - Estilos avanzados con gradientes y animaciones
+- **Bootstrap 5.3.3** - Framework CSS responsivo
+- **Font Awesome** - Iconografía
 
-### `npm test`
+### Herramientas y Servicios
+- **EmailJS** - Servicio de envío de emails
+- **React Router DOM** - Navegación SPA
+- **Web Vitals** - Monitoreo de rendimiento
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📁 Estructura del Proyecto
 
-### `npm run build`
+```
+src/
+├── components/
+│   ├── Inicio.js          # Página de inicio con presentación
+│   ├── SobreMi.js         # Sección sobre mí
+│   ├── Proyectos.js       # Galería de proyectos
+│   ├── Contacto.js        # Formulario de contacto
+│   ├── Navbar.js          # Barra de navegación
+│   └── Footer.js          # Pie de página
+├── config/
+│   ├── contactConfig.js   # Configuración de contacto
+│   └── emailjs.js         # Configuración EmailJS
+└── index.js              # Punto de entrada principal
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 Instalación y Uso
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Prerrequisitos
+- Node.js (versión 14 o superior)
+- npm o yarn
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Instalación
 
-### `npm run eject`
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/SbaGomez/portfolio-react.git
+   cd portfolio-react
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Configurar EmailJS** (opcional)
+   - Crear cuenta en [EmailJS](https://www.emailjs.com/)
+   - Configurar las credenciales en `src/config/emailjs.js`
+   - Ver [EMAILJS_SETUP.md](EMAILJS_SETUP.md) para instrucciones detalladas
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+4. **Ejecutar en modo desarrollo**
+   ```bash
+   npm start
+   ```
+   La aplicación se abrirá en [http://localhost:3000](http://localhost:3000)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Scripts Disponibles
 
-## Learn More
+- `npm start` - Ejecuta la aplicación en modo desarrollo
+- `npm run build` - Construye la aplicación para producción
+- `npm test` - Ejecuta las pruebas
+- `npm run eject` - Expone la configuración de webpack (irreversible)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🌐 Despliegue
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Build para Producción
+```bash
+npm run build
+```
 
-### Code Splitting
+Los archivos optimizados se generarán en la carpeta `build/` y están listos para ser desplegados en cualquier servidor web estático.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 📱 Proyectos Destacados
 
-### Analyzing the Bundle Size
+### 1. Servidor MUOnline
+- **Tecnologías**: PHP, Bootstrap, MsSQL
+- **Descripción**: Servidor privado completo con web responsiva y panel de administración
+- **Demo**: [bakastamu.net](https://bakastamu.net)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. Calculadora 3D
+- **Tecnologías**: JavaScript, CSS3, HTML5
+- **Descripción**: Aplicación para calcular precios de impresión 3D
+- **Demo**: [Calculadora 3D](https://sebastiangomez.com.ar/Calculadora3D/)
 
-### Making a Progressive Web App
+### 3. Portfolio Personal
+- **Tecnologías**: React, CSS3, JavaScript, HTML5
+- **Descripción**: Este mismo proyecto - portfolio personal moderno
+- **Demo**: [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🎨 Personalización
 
-### Advanced Configuration
+### Modificar Información Personal
+1. Editar `src/components/Inicio.js` para cambiar la presentación
+2. Actualizar `src/components/SobreMi.js` para información personal
+3. Modificar `src/components/Proyectos.js` para agregar/quitar proyectos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Cambiar Estilos
+- Los estilos principales están en `src/index.css`
+- Cada componente tiene su archivo CSS correspondiente
+- Utiliza variables CSS para colores y fuentes principales
 
-### Deployment
+## 🤝 Contribuciones
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Las contribuciones son bienvenidas. Para cambios importantes:
 
-### `npm run build` fails to minify
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📞 Contacto
+
+**Sebastian Gomez** - Desarrollador Web Fullstack
+
+- 🌐 **Portfolio**: [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
+- 📧 **Email**: [Contacto](https://sebastiangomez.com.ar/#contacto)
+- 💼 **LinkedIn**: [Perfil Profesional](https://www.linkedin.com/in/sbagomez/)
+- 🐙 **GitHub**: [@SbaGomez](https://github.com/SbaGomez)
+
+---
+
+⭐ **¡No olvides darle una estrella al proyecto si te gusta!**

@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Portfolio SG",
+  "name": "Portfolio - Sebastián Gómez",
+  "description": "Portfolio de Sebastián Gómez - Desarrollador Full Stack especializado en Angular, React, Typescript y tecnologías web modernas",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +9,24 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "proyectos/portfolio-personal.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
-      "src": "logo512.png",
+      "src": "proyectos/portfolio-personal.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["portfolio", "developer", "web", "technology"]
 }

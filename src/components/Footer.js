@@ -68,7 +68,7 @@ const Footer = ({ onPageChange, currentPage }) => {
                         <h3>Informacion</h3>
                         <p>Nombre: {contactConfig.fullName}</p>
                         <p>Edad: {age}</p>
-                        <p>Carrera: {contactConfig.career}</p>
+                        <p>Estudios: {contactConfig.career}</p>
                         <p>Tipografia Web: {contactConfig.typography}</p>
                         <div className="colorContainer">
                             <div className="coloresUsados">Colores Utilizados:</div>

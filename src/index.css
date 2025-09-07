@@ -221,3 +221,54 @@ a:visited {
   height: 15px;
   margin-right: 5px;
 }
+
+/* Nuevos colores más utilizados */
+.colorRojoSuave {
+  background-color: #d67e7f;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorFondoOscuro {
+  background-color: #1a1a1a;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorFondoSecundario {
+  background-color: #2d2d2d;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorTextoPrincipal {
+  background-color: #ffffff;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  border: 1px solid #ccc;
+}
+
+.colorTextoSecundario {
+  background-color: #b0b0b0;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorGradienteVerde {
+  background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%);
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}
+
+.colorBotonAzul {
+  background-color: #667eea;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+}

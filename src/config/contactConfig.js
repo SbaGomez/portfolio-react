@@ -64,15 +64,18 @@ export const contactConfig = {
     
     // Colores utilizados en el portfolio
     colors: [
+        { name: 'Azul Principal', class: 'colorAzul' },
         { name: 'Azul Oscuro', class: 'colorAzulOscuro' },
-        { name: 'Azul', class: 'colorAzul' },
-        { name: 'Rojo', class: 'colorRojo' },
+        { name: 'Rojo Principal', class: 'colorRojo' },
+        { name: 'Rojo Suave', class: 'colorRojoSuave' },
+        { name: 'Fondo Oscuro', class: 'colorFondoOscuro' },
+        { name: 'Fondo Secundario', class: 'colorFondoSecundario' },
+        { name: 'Texto Principal', class: 'colorTextoPrincipal' },
+        { name: 'Texto Secundario', class: 'colorTextoSecundario' },
+        { name: 'Gradiente Verde', class: 'colorGradienteVerde' },
+        { name: 'Botón Azul', class: 'colorBotonAzul' },
         { name: 'Celeste', class: 'colorCeleste' },
-        { name: 'Dorado', class: 'colorDorado' },
-        { name: 'Naranja', class: 'colorNaranja' },
-        { name: 'Gris', class: 'colorGris' },
-        { name: 'Gris Oscuro', class: 'colorGrisOscuro' },
-        { name: 'Beige', class: 'colorBeige' }
+        { name: 'Gris', class: 'colorGris' }
     ],
     
     // Copyright

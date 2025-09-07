@@ -1,7 +1,7 @@
 /* Sobre Mi Styles */
 #sobre-mi {
     padding: 100px 0 80px;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     color: #ffffff;
     min-height: 100vh;
 }
@@ -15,7 +15,7 @@
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 20px;
-    background: linear-gradient(45deg, #00d4ff, #00ff88);
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -41,7 +41,7 @@
 .info-personal h3 {
     font-size: 2rem;
     margin-bottom: 30px;
-    color: #00d4ff;
+    color: #1A9FFF;
 }
 
 .info-personal p {
@@ -52,7 +52,7 @@
 }
 
 .info-personal strong {
-    color: #00ff88;
+    color: #d67e7f;
     font-weight: 600;
 }
 
@@ -69,8 +69,8 @@
     height: 300px;
     border-radius: 50%;
     overflow: hidden;
-    border: 4px solid #00d4ff;
-    box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+    border: 4px solid #1A9FFF;
+    box-shadow: 0 0 30px rgba(26, 159, 255, 0.3);
     transition: transform 0.3s ease;
 }
 
@@ -81,12 +81,12 @@
 .foto-placeholder {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #00d4ff;
+    color: #1A9FFF;
 }
 
 .foto-placeholder i {
@@ -110,7 +110,7 @@
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 50px;
-    color: #00d4ff;
+    color: #1A9FFF;
 }
 
 .habilidades-grid {
@@ -123,15 +123,15 @@
     background: rgba(255, 255, 255, 0.05);
     padding: 25px;
     border-radius: 15px;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(26, 159, 255, 0.2);
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
 .habilidad-item:hover {
     transform: translateY(-5px);
-    border-color: #00d4ff;
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    border-color: #1A9FFF;
+    box-shadow: 0 10px 30px rgba(26, 159, 255, 0.2);
 }
 
 .habilidad-header {
@@ -143,7 +143,7 @@
 
 .habilidad-header i {
     font-size: 1.5rem;
-    color: #00d4ff;
+    color: #1A9FFF;
     margin-right: 10px;
 }
 
@@ -157,7 +157,7 @@
 .habilidad-porcentaje {
     font-size: 1rem;
     font-weight: 700;
-    color: #00ff88;
+    color: #d67e7f;
 }
 
 .habilidad-bar {
@@ -170,7 +170,7 @@
 
 .habilidad-progress {
     height: 100%;
-    background: linear-gradient(90deg, #00d4ff, #00ff88);
+    background: linear-gradient(90deg, #1A9FFF, #B14143);
     border-radius: 4px;
     transition: width 1.5s ease-out;
     animation: progressFill 2s ease-out;
@@ -188,7 +188,7 @@
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 50px;
-    color: #00d4ff;
+    color: #1A9FFF;
 }
 
 .timeline {
@@ -199,11 +199,11 @@
 .timeline::before {
     content: '';
     position: absolute;
-    left: 15px;
+    left: 18px;
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(180deg, #00d4ff, #00ff88);
+    background: linear-gradient(180deg, #1A9FFF, #B14143);
 }
 
 .timeline-item {
@@ -214,47 +214,47 @@
 
 .timeline-marker {
     position: absolute;
-    left: -37px;
+    left: -40px;
     top: 5px;
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    background: #00d4ff;
-    border: 4px solid #1a1a2e;
-    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.3);
+    background: #1A9FFF;
+    border: 4px solid #1a1a1a;
+    box-shadow: 0 0 0 4px rgba(26, 159, 255, 0.3);
 }
 
 .timeline-content {
     background: rgba(255, 255, 255, 0.05);
     padding: 25px;
     border-radius: 15px;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(26, 159, 255, 0.2);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
 .timeline-content:hover {
     transform: translateX(10px);
-    border-color: #00d4ff;
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    border-color: #1A9FFF;
+    box-shadow: 0 10px 30px rgba(26, 159, 255, 0.2);
 }
 
 .timeline-content h4 {
     font-size: 1.4rem;
-    color: #00ff88;
+    color: #d67e7f;
     margin-bottom: 5px;
 }
 
 .timeline-content h5 {
     font-size: 1.1rem;
-    color: #00d4ff;
+    color: #1A9FFF;
     margin-bottom: 10px;
 }
 
 .timeline-periodo {
     display: inline-block;
-    background: rgba(0, 212, 255, 0.2);
-    color: #00d4ff;
+    background: rgba(26, 159, 255, 0.2);
+    color: #1A9FFF;
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -277,7 +277,7 @@
     font-size: 2.5rem;
     text-align: center;
     margin-bottom: 50px;
-    color: #00d4ff;
+    color: #1A9FFF;
 }
 
 .tecnologias-grid {
@@ -290,20 +290,20 @@
     background: rgba(255, 255, 255, 0.05);
     padding: 30px;
     border-radius: 15px;
-    border: 1px solid rgba(0, 212, 255, 0.2);
+    border: 1px solid rgba(26, 159, 255, 0.2);
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
 }
 
 .tech-category:hover {
     transform: translateY(-5px);
-    border-color: #00d4ff;
-    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    border-color: #1A9FFF;
+    box-shadow: 0 10px 30px rgba(26, 159, 255, 0.2);
 }
 
 .tech-category h4 {
     font-size: 1.3rem;
-    color: #00ff88;
+    color: #d67e7f;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -316,8 +316,8 @@
 }
 
 .tech-tag {
-    background: linear-gradient(45deg, #00d4ff, #00ff88);
-    color: #1a1a2e;
+    background: linear-gradient(45deg, #1A9FFF, #B14143);
+    color: #ffffff;
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -327,7 +327,7 @@
 
 .tech-tag:hover {
     transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+    box-shadow: 0 5px 15px rgba(26, 159, 255, 0.4);
 }
 
 /* Contact Link */
@@ -439,7 +439,7 @@
     }
     
     .timeline::before {
-        left: 10px;
+        left: 13px;
     }
     
     .timeline-item {
@@ -447,7 +447,7 @@
     }
     
     .timeline-marker {
-        left: -27px;
+        left: -30px;
     }
     
     .timeline-content:hover {

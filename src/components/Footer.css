@@ -90,3 +90,31 @@
     padding-top: 20px;
     color: #fff;
 }
+
+/* Estilos para los botones de navegación en el footer */
+.footer .nav-link-footer {
+    background: none;
+    border: none;
+    color: #ccc;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+}
+
+.footer .nav-link-footer:hover {
+    color: #1A9FFF;
+    text-decoration: none;
+}
+
+.footer .nav-link-footer.activeFooter {
+    color: #1A9FFF !important;
+    font-weight: 600 !important;
+}
+
+.footer .nav-link-footer i {
+    margin-right: 8px;
+}

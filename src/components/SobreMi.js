@@ -1,11 +1,9 @@
 import React from 'react';
+import { useNavigation } from '../hooks/useNavigation';
 import './SobreMi.css';
 
-function SobreMi({ onPageChange, currentPage }) {
-    const handleNavLinkClick = (pageId) => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        onPageChange(pageId);
-    };
+function SobreMi() {
+    const navigateWithScroll = useNavigation();
 
     const habilidades = [
         { nombre: "Desarrollo Frontend", nivel: 90, icono: "fas fa-code" },
@@ -86,9 +84,8 @@ function SobreMi({ onPageChange, currentPage }) {
                                 
                                 <div className="contact-link-container">
                                     <button
-                                        className={`contact-link ${currentPage === 'Contacto' ? 'active' : ''}`}
-                                        id="Contacto"
-                                        onClick={() => handleNavLinkClick('Contacto')}
+                                        className="contact-link"
+                                        onClick={() => navigateWithScroll('/contacto')}
                                     >
                                         <span className="contact-icon">✉</span>
                                         <span className="contact-text">Contáctame</span>

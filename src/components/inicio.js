@@ -1,14 +1,8 @@
 import './Inicio.css';
+import { useNavigation } from '../hooks/useNavigation';
 
-function Inicio({ onPageChange, currentPage }) {
-    const handleNavLinkClick = (pageId) => {
-        // Primero cambiar la página
-        onPageChange(pageId);
-        // Luego hacer scroll después de un pequeño delay para asegurar que el componente se haya renderizado
-        setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100);
-    };
+function Inicio() {
+    const navigateWithScroll = useNavigation();
     return (
         <section id="home">
             <div className="container">
@@ -37,9 +31,8 @@ function Inicio({ onPageChange, currentPage }) {
                             </p>
                             <div className="contact-link-container">
                                 <button
-                                    className={`contact-link ${currentPage === 'Contacto' ? 'active' : ''}`}
-                                    id="Contacto"
-                                    onClick={() => handleNavLinkClick('Contacto')}
+                                    className="contact-link"
+                                    onClick={() => navigateWithScroll('/contacto')}
                                 >
                                     <span className="contact-icon">✉</span>
                                     <span className="contact-text">Contáctame</span>

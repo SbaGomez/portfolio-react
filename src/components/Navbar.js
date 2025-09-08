@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
-function Navbar({ onPageChange, currentPage }) {
+function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navbarRef = useRef(null);
+  const location = useLocation();
 
-  const handleNavLinkClick = (pageId) => {
-    // Cerrar el menú inmediatamente para evitar el parpadeo
+  const handleNavLinkClick = () => {
     setIsMenuOpen(false);
-    // Cambiar la página
-    onPageChange(pageId);
-    // Hacer scroll después de un pequeño delay para asegurar que el componente se haya renderizado
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }, 100);
@@ -69,41 +67,40 @@ function Navbar({ onPageChange, currentPage }) {
             <div className="offcanvas-body" id="navbarNav">
               <ul className="navbar-nav nav-pills justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item">
-                  <button
-                    className={`nav-link ${currentPage === 'inicio' ? 'active' : ''}`}
-                    aria-current="page"
-                    id="inicio"
-                    onClick={() => handleNavLinkClick('inicio')}
+                  <Link
+                    to="/"
+                    className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+                    onClick={handleNavLinkClick}
                   >
                     <i className="fas fa-home"></i> Home
-                  </button>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <button
-                    className={`nav-link ${currentPage === 'somos' ? 'active' : ''}`}
-                    id="somos"
-                    onClick={() => handleNavLinkClick('somos')}
+                  <Link
+                    to="/sobre-mi"
+                    className={`nav-link ${location.pathname === '/sobre-mi' ? 'active' : ''}`}
+                    onClick={handleNavLinkClick}
                   >
                     <i className="fas fa-user"></i> Sobre mi
-                  </button>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <button
-                    className={`nav-link ${currentPage === 'Proyectos' ? 'active' : ''}`}
-                    id="Proyectos"
-                    onClick={() => handleNavLinkClick('Proyectos')}
+                  <Link
+                    to="/proyectos"
+                    className={`nav-link ${location.pathname === '/proyectos' ? 'active' : ''}`}
+                    onClick={handleNavLinkClick}
                   >
                     <i className="fas fa-folder-open"></i> Proyectos
-                  </button>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <button
-                    className={`nav-link ${currentPage === 'Contacto' ? 'active' : ''}`}
-                    id="Contacto"
-                    onClick={() => handleNavLinkClick('Contacto')}
+                  <Link
+                    to="/contacto"
+                    className={`nav-link ${location.pathname === '/contacto' ? 'active' : ''}`}
+                    onClick={handleNavLinkClick}
                   >
                     <i className="fas fa-envelope"></i> Contacto
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>

@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Footer.css'; // Estilo CSS aquí
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa el componente FontAwesomeIcon
 import { faInstagram, faWhatsapp, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
 import { contactConfig, getCurrentAge } from '../config/contactConfig';
+import { useNavigation } from '../hooks/useNavigation';
 
-const Footer = ({ onPageChange, currentPage }) => {
+const Footer = () => {
     const [footerPosition, setFooterPosition] = useState('relative');
     const [copied, setCopied] = useState(false);
-
+    const location = useLocation();
     const age = getCurrentAge();
+    const navigateWithScroll = useNavigation();
+    
+    // Inicializar el estado activo con la ruta actual
+    const [activeRoute, setActiveRoute] = useState(location.pathname);
 
-    const handleNavLinkClick = (pageId) => {
-        // Primero cambiar la página
-        onPageChange(pageId);
-        // Luego hacer scroll después de un pequeño delay para asegurar que el componente se haya renderizado
-        setTimeout(() => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 100);
+    // Actualizar el estado activo cuando cambie la ubicación
+    useEffect(() => {
+        setActiveRoute(location.pathname);
+    }, [location.pathname]);
+
+    // Función para determinar si una ruta está activa
+    const isActiveRoute = (path) => {
+        return activeRoute === path;
     };
 
     // Función para copiar email al portapapeles
@@ -83,44 +90,56 @@ const Footer = ({ onPageChange, currentPage }) => {
                             <div className="col">
                                 <ul>
                                     <li className="nav-item">
-                                        <button
-                                            className={`nav-link ${currentPage === 'inicio' ? 'activeFooter' : ''}`}
-                                            id="inicio"
-                                            onClick={() => handleNavLinkClick('inicio')}
+                                        <Link
+                                            to="/"
+                                            className={`nav-link-footer ${isActiveRoute('/') ? 'activeFooter' : ''}`}
+                                            onClick={() => {
+                                                setActiveRoute('/');
+                                                navigateWithScroll('/');
+                                            }}
                                         >
                                             <i className="fas fa-home"></i> HOME
-                                        </button>
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <button
-                                            className={`nav-link ${currentPage === 'somos' ? 'activeFooter' : ''}`}
-                                            id="somos"
-                                            onClick={() => handleNavLinkClick('somos')}
+                                        <Link
+                                            to="/sobre-mi"
+                                            className={`nav-link-footer ${isActiveRoute('/sobre-mi') ? 'activeFooter' : ''}`}
+                                            onClick={() => {
+                                                setActiveRoute('/sobre-mi');
+                                                navigateWithScroll('/sobre-mi');
+                                            }}
                                         >
                                             <i className="fas fa-user"></i> SOBRE MI
-                                        </button>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
                             <div className="col">
                                 <ul>
                                     <li className="nav-item">
-                                        <button
-                                            className={`nav-link ${currentPage === 'Proyectos' ? 'activeFooter' : ''}`}
-                                            id="Proyectos"
-                                            onClick={() => handleNavLinkClick('Proyectos')}
+                                        <Link
+                                            to="/proyectos"
+                                            className={`nav-link-footer ${isActiveRoute('/proyectos') ? 'activeFooter' : ''}`}
+                                            onClick={() => {
+                                                setActiveRoute('/proyectos');
+                                                navigateWithScroll('/proyectos');
+                                            }}
                                         >
                                             <i className="fas fa-folder-open"></i> PROYECTOS
-                                        </button>
+                                        </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <button
-                                            className={`nav-link ${currentPage === 'Contacto' ? 'activeFooter' : ''}`}
-                                            id="Contacto"
-                                            onClick={() => handleNavLinkClick('Contacto')}
+                                        <Link
+                                            to="/contacto"
+                                            className={`nav-link-footer ${isActiveRoute('/contacto') ? 'activeFooter' : ''}`}
+                                            onClick={() => {
+                                                setActiveRoute('/contacto');
+                                                navigateWithScroll('/contacto');
+                                            }}
                                         >
                                             <i className="fas fa-envelope"></i> CONTACTO
-                                        </button>
+                                        </Link>
                                     </li>
                                 </ul>
                             </div>
@@ -132,8 +151,8 @@ const Footer = ({ onPageChange, currentPage }) => {
                         <div className="input-group">
                             <input type="text" className="form-control" id="contact" name="contactsteam" value={contactConfig.email} readOnly />
                             <span className="input-group-btn">
-                                <button 
-                                    className={`btn_footer ${copied ? 'copied' : ''}`} 
+                                <button
+                                    className={`btn_footer ${copied ? 'copied' : ''}`}
                                     type="button"
                                     onClick={copyEmailToClipboard}
                                     title={copied ? '¡Copiado!' : 'Copiar email'}
@@ -159,7 +178,7 @@ const Footer = ({ onPageChange, currentPage }) => {
                         </a>
                         <a href={contactConfig.socialMedia.instagram.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.instagram.name}>
                             <FontAwesomeIcon icon={faInstagram} className="instagramFooter" />
-                        </a>    
+                        </a>
                         <a href={contactConfig.socialMedia.whatsapp.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.whatsapp.name}>
                             <FontAwesomeIcon icon={faWhatsapp} className="whatsappFooter" />
                         </a>

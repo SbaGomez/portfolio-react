@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
 import Inicio from './components/Inicio';
 import SobreMi from './components/SobreMi';
@@ -13,41 +14,48 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('inicio');
+// Componente para actualizar el título de la página según la ruta
+function PageTitleUpdater() {
+  const location = useLocation();
 
-  // Función para cambiar de página cuando se hace clic en el Navbar
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  // Actualizar el título de la página según currentPage
   useEffect(() => {
-    document.title = `Mi Portfolio - ${currentPage}`;
-  }, [currentPage]);
+    const getPageTitle = (pathname) => {
+      switch (pathname) {
+        case '/':
+          return 'Inicio';
+        case '/sobre-mi':
+          return 'Sobre Mi';
+        case '/proyectos':
+          return 'Proyectos';
+        case '/contacto':
+          return 'Contacto';
+        default:
+          return 'Inicio';
+      }
+    };
 
-  // Renderiza la página actual según el estado currentPage
-  const renderPage = () => {
-    switch (currentPage) {
-      case 'inicio':
-        return <Inicio onPageChange={handlePageChange} currentPage={currentPage} />;
-      case 'somos':
-        return <SobreMi onPageChange={handlePageChange} currentPage={currentPage} />;
-      case 'Proyectos':
-        return <Proyectos onPageChange={handlePageChange} currentPage={currentPage} />;
-      case 'Contacto':
-        return <Contacto onPageChange={handlePageChange} currentPage={currentPage} />;
-      default:
-        return <Inicio onPageChange={handlePageChange} currentPage={currentPage} />;
-    }
-  };
+    const pageName = getPageTitle(location.pathname);
+    document.title = `Mi Portfolio - ${pageName}`;
+  }, [location.pathname]);
 
+  return null;
+}
+
+function App() {
   return (
     <React.StrictMode>
-      <Navbar onPageChange={handlePageChange} currentPage={currentPage} />
-      {renderPage()}
-      <Footer onPageChange={handlePageChange} currentPage={currentPage} />
-      <ScrollToTop />
+      <Router>
+        <PageTitleUpdater />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Inicio />} />
+          <Route path="/sobre-mi" element={<SobreMi />} />
+          <Route path="/proyectos" element={<Proyectos />} />
+          <Route path="/contacto" element={<Contacto />} />
+        </Routes>
+        <Footer />
+        <ScrollToTop />
+      </Router>
     </React.StrictMode>
   );
 }

@@ -209,7 +209,7 @@ function Contacto() {
                                     </div>
                                     <div className={styles.contactText}>
                                         <h4>{info.title}</h4>
-                                        <a href={info.link}>{info.value}</a>
+                                        <a href={info.link} target="_blank" rel="noopener noreferrer">{info.value}</a>
                                     </div>
                                 </div>
                             ))}

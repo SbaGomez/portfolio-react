@@ -24,28 +24,34 @@ Un portfolio personal moderno y responsivo desarrollado con React, que muestra m
 - **JavaScript ES6+** - Lógica de la aplicación
 - **CSS3** - Estilos avanzados con gradientes y animaciones
 - **Bootstrap 5.3.3** - Framework CSS responsivo
-- **Font Awesome** - Iconografía
+- **Font Awesome 6.5.2** - Iconografía moderna
 
 ### Herramientas y Servicios
-- **EmailJS** - Servicio de envío de emails
-- **React Router DOM** - Navegación SPA
-- **Web Vitals** - Monitoreo de rendimiento
+- **EmailJS 4.4.1** - Servicio de envío de emails con variables de entorno
+- **React Router DOM 6.22.3** - Navegación SPA
+- **Web Vitals 2.1.4** - Monitoreo de rendimiento
+- **Popper.js 2.11.8** - Posicionamiento de elementos
 
 ## 📁 Estructura del Proyecto
 
 ```
 src/
 ├── components/
-│   ├── Inicio.js          # Página de inicio con presentación
-│   ├── SobreMi.js         # Sección sobre mí
-│   ├── Proyectos.js       # Galería de proyectos
-│   ├── Contacto.js        # Formulario de contacto
-│   ├── Navbar.js          # Barra de navegación
-│   └── Footer.js          # Pie de página
+│   ├── Inicio.js              # Página de inicio con presentación
+│   ├── SobreMi.js             # Sección sobre mí con habilidades y experiencia
+│   ├── Proyectos.js           # Galería de proyectos con modales interactivos
+│   ├── Contacto.js            # Formulario de contacto funcional
+│   ├── Navbar.js              # Barra de navegación responsiva
+│   ├── Footer.js              # Pie de página con enlaces sociales
+│   └── *.module.css           # Estilos modulares para cada componente
 ├── config/
-│   ├── contactConfig.js   # Configuración de contacto
-│   └── emailjs.js         # Configuración EmailJS
-└── index.js              # Punto de entrada principal
+│   ├── contactConfig.js       # Configuración de contacto y redes sociales
+│   └── emailjs.js             # Configuración EmailJS con variables de entorno
+├── hooks/
+│   └── useNavigation.js       # Hook personalizado para navegación
+├── index.js                   # Punto de entrada principal
+├── index.css                  # Estilos globales y variables CSS
+└── reportWebVitals.js         # Monitoreo de rendimiento
 ```
 
 ## 🚀 Instalación y Uso
@@ -96,20 +102,24 @@ Los archivos optimizados se generarán en la carpeta `build/` y están listos pa
 
 ## 📱 Proyectos Destacados
 
-### 1. Servidor MUOnline
+### 1. Servidor MUOnline ⭐
 - **Tecnologías**: PHP, Bootstrap, MsSQL
-- **Descripción**: Servidor privado completo con web responsiva y panel de administración
+- **Descripción**: Servidor privado completo con web responsiva, sistema Louis Season 6 y panel de administración
+- **Características**: Web responsiva moderna, sistema de ranking, estadísticas en tiempo real, gestión de eventos
 - **Demo**: [bakastamu.net](https://bakastamu.net)
 
 ### 2. Calculadora 3D
 - **Tecnologías**: JavaScript, CSS3, HTML5
-- **Descripción**: Aplicación para calcular precios de impresión 3D
+- **Descripción**: Aplicación web especializada para calcular precios de impresión 3D
+- **Características**: Cálculos precisos, base de datos de materiales, interfaz intuitiva, validación en tiempo real
 - **Demo**: [Calculadora 3D](https://sebastiangomez.com.ar/Calculadora3D/)
 
 ### 3. Portfolio Personal
 - **Tecnologías**: React, CSS3, JavaScript, HTML5
-- **Descripción**: Este mismo proyecto - portfolio personal moderno
+- **Descripción**: Aplicación web completa con diseño moderno, animaciones avanzadas y funcionalidades interactivas
+- **Características**: Interfaz moderna, diseño responsivo, animaciones CSS, galería interactiva, formulario funcional
 - **Demo**: [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
+- **Código**: [GitHub](https://github.com/SbaGomez/portfolio-react)
 
 ## 🎨 Personalización
 
@@ -123,24 +133,16 @@ Los archivos optimizados se generarán en la carpeta `build/` y están listos pa
 - Cada componente tiene su archivo CSS correspondiente
 - Utiliza variables CSS para colores y fuentes principales
 
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Para cambios importantes:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
 ## 📞 Contacto
 
-**Sebastian Gomez** - Desarrollador Web Fullstack
+**Sergio Sebastian Gomez** - Desarrollador Web Fullstack
 
 - 🌐 **Portfolio**: [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
-- 📧 **Email**: [Contacto](https://sebastiangomez.com.ar/#contacto)
+- 📧 **Email**: [admin@sebastiangomez.com.ar](mailto:admin@sebastiangomez.com.ar)
+- 📱 **WhatsApp**: [+54 2255 413090](https://wa.me/542255413090)
 - 💼 **LinkedIn**: [Perfil Profesional](https://www.linkedin.com/in/sbagomez/)
 - 🐙 **GitHub**: [@SbaGomez](https://github.com/SbaGomez)
+- 📍 **Ubicación**: Argentina - Buenos Aires
 
 ---
 

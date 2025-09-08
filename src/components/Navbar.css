@@ -84,7 +84,6 @@
     color: #1a1a1a;
 }
 
-/* Asegurar que no haya colores de fondo azules en ningún estado */
 .nav-link {
     background: transparent !important;
 }
@@ -93,7 +92,6 @@
     background: transparent !important;
 }
 
-/* Solo el estado .active debe tener fondo */
 .nav-link.active {
     color: #1a1a1a !important;
     background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%) !important;

@@ -445,7 +445,7 @@
 
 .modalHeader h2 {
     color: white;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: 700;
     margin: 0;
     background: linear-gradient(135deg, #a8e6cf 0%, #88d8c0 50%, #b8e6e6 100%);
@@ -851,26 +851,27 @@
 /* Responsive Modal */
 @media (max-width: 768px) {
     .modalContenido {
-        margin: 10px;
+        margin: 5px;
         max-height: 95vh;
+        width: calc(100vw - 10px);
     }
     
     .modalBody {
         grid-template-columns: 1fr;
-        gap: 40px;
-        padding: 40px 60px;
+        gap: 30px;
+        padding: 30px 20px;
     }
     
     .modalInfo {
-        padding: 0 40px;
+        padding: 0 10px;
     }
     
     .modalHeader {
-        padding: 40px 60px 30px;
+        padding: 30px 20px 20px;
     }
     
     .modalHeader h2 {
-        font-size: 24px;
+        font-size: 28px;
     }
     
     .sliderImagen {
@@ -898,34 +899,38 @@
     
     .modalEnlaces {
         flex-direction: column;
+        gap: 15px;
+        padding: 0 10px;
     }
     
     .btnModalDemo, .btnModalGithub {
         justify-content: center;
-        padding: 10px 20px;
+        padding: 12px 20px;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
     .modalOverlay {
-        padding: 10px;
+        padding: 5px;
     }
     
     .modalContenido {
-        margin: 5px;
+        margin: 2px;
+        width: calc(100vw - 4px);
     }
     
     .modalBody {
-        padding: 30px 40px;
-        gap: 30px;
+        padding: 20px 15px;
+        gap: 25px;
     }
     
     .modalInfo {
-        padding: 0 25px;
+        padding: 0 5px;
     }
     
     .modalHeader {
-        padding: 30px 40px 20px;
+        padding: 20px 15px 15px;
     }
     
     .modalHeader h2 {

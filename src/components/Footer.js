@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './Footer.css'; // Estilo CSS aquí
+import styles from './Footer.module.css'; // Estilo CSS aquí
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa el componente FontAwesomeIcon
 import { faInstagram, faWhatsapp, faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons'; // Importa los íconos de las redes sociales
 import { contactConfig, getCurrentAge } from '../config/contactConfig';
@@ -68,7 +68,7 @@ const Footer = () => {
     }, []);
 
     return (
-        <footer className="footer" style={{ position: footerPosition }}>
+        <footer className={styles.footer} style={{ position: footerPosition }}>
             <div className="container">
                 <div className="row">
                     <div className="col-sm-12 col-md-4">
@@ -92,7 +92,7 @@ const Footer = () => {
                                     <li className="nav-item">
                                         <Link
                                             to="/"
-                                            className={`nav-link-footer ${isActiveRoute('/') ? 'activeFooter' : ''}`}
+                                            className={`${styles.navLinkFooter} ${isActiveRoute('/') ? styles.activeFooter : ''}`}
                                             onClick={() => {
                                                 setActiveRoute('/');
                                                 navigateWithScroll('/');
@@ -104,7 +104,7 @@ const Footer = () => {
                                     <li className="nav-item">
                                         <Link
                                             to="/sobre-mi"
-                                            className={`nav-link-footer ${isActiveRoute('/sobre-mi') ? 'activeFooter' : ''}`}
+                                            className={`${styles.navLinkFooter} ${isActiveRoute('/sobre-mi') ? styles.activeFooter : ''}`}
                                             onClick={() => {
                                                 setActiveRoute('/sobre-mi');
                                                 navigateWithScroll('/sobre-mi');
@@ -120,7 +120,7 @@ const Footer = () => {
                                     <li className="nav-item">
                                         <Link
                                             to="/proyectos"
-                                            className={`nav-link-footer ${isActiveRoute('/proyectos') ? 'activeFooter' : ''}`}
+                                            className={`${styles.navLinkFooter} ${isActiveRoute('/proyectos') ? styles.activeFooter : ''}`}
                                             onClick={() => {
                                                 setActiveRoute('/proyectos');
                                                 navigateWithScroll('/proyectos');
@@ -132,7 +132,7 @@ const Footer = () => {
                                     <li className="nav-item">
                                         <Link
                                             to="/contacto"
-                                            className={`nav-link-footer ${isActiveRoute('/contacto') ? 'activeFooter' : ''}`}
+                                            className={`${styles.navLinkFooter} ${isActiveRoute('/contacto') ? styles.activeFooter : ''}`}
                                             onClick={() => {
                                                 setActiveRoute('/contacto');
                                                 navigateWithScroll('/contacto');
@@ -152,7 +152,7 @@ const Footer = () => {
                             <input type="text" className="form-control" id="contact" name="contactsteam" value={contactConfig.email} readOnly />
                             <span className="input-group-btn">
                                 <button
-                                    className={`btn_footer ${copied ? 'copied' : ''}`}
+                                    className={`${styles.btnFooter} ${copied ? styles.copied : ''}`}
                                     type="button"
                                     onClick={copyEmailToClipboard}
                                     title={copied ? '¡Copiado!' : 'Copiar email'}
@@ -171,8 +171,8 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="footer-bottom">
-                    <div className="footer-social">
+                <div className={styles.footerBottom}>
+                    <div className={styles.footerSocial}>
                         <a href={contactConfig.socialMedia.github.url} target="_blank" rel="noopener noreferrer" title={contactConfig.socialMedia.github.name}>
                             <FontAwesomeIcon icon={faGithub} className="githubFooter" />
                         </a>

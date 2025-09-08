@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './Inicio.css';
-import './Proyectos.css';
+import styles from './Proyectos.module.css';
 
 function Proyectos() {
     const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
@@ -120,27 +119,27 @@ function Proyectos() {
     };
 
     return (
-        <section id="proyectos">
+        <section className={styles.proyectosSection}>
             <div className="container">
-                <h2>Proyectos personales</h2>
-                <div className="proyectos-grid">
+                <h2 className={styles.proyectosTitle}>Proyectos personales</h2>
+                <div className={styles.proyectosGrid}>
                     {proyectos.map((proyecto) => (
                         <div
                             key={proyecto.id}
-                            className={`proyecto-card ${proyecto.destacado ? 'destacado' : ''}`}
+                            className={`${styles.proyectoCard} ${proyecto.destacado ? styles.proyectoCardDestacado : ''}`}
                         >
-                            <div className="proyecto-imagen">
+                            <div className={styles.proyectoImagen}>
                                 <img src={proyecto.imagen} alt={proyecto.titulo} />
                             </div>
-                            <div className="proyecto-contenido">
+                            <div className={styles.proyectoContenido}>
                                 <h3>{proyecto.titulo}</h3>
                                 <p>{proyecto.descripcion}</p>
-                                <div className="proyecto-tecnologias">
+                                <div className={styles.proyectoTecnologias}>
                                     {proyecto.tecnologias.map((tech, index) => (
-                                        <span key={index} className="tech-tag">{tech}</span>
+                                        <span key={index} className={styles.techTag}>{tech}</span>
                                     ))}
                                 </div>
-                                <button className="btn-ver-mas" onClick={() => abrirModal(proyecto)}>
+                                <button className={styles.btnVerMas} onClick={() => abrirModal(proyecto)}>
                                     <i className="fas fa-eye"></i>
                                     Ver más detalles
                                 </button>
@@ -152,56 +151,56 @@ function Proyectos() {
 
             {/* Modal de Proyecto */}
             {proyectoSeleccionado && (
-                <div className="modal-overlay" onClick={cerrarModal}>
-                    <div className="modal-contenido" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-cerrar" onClick={cerrarModal}>
+                <div className={styles.modalOverlay} onClick={cerrarModal}>
+                    <div className={styles.modalContenido} onClick={(e) => e.stopPropagation()}>
+                        <button className={styles.modalCerrar} onClick={cerrarModal}>
                             <i className="fas fa-times"></i>
                         </button>
 
-                        <div className="modal-header">
+                        <div className={styles.modalHeader}>
                             <h2>{proyectoSeleccionado.titulo}</h2>
-                            {proyectoSeleccionado.destacado && <span className="destacado-badge">⭐ Destacado</span>}
+                            {proyectoSeleccionado.destacado && <span className={styles.destacadoBadge}>⭐ Destacado</span>}
                         </div>
 
-                        <div className="modal-body">
-                            <div className="modal-slider">
-                                <div className="slider-container">
-                                    <button className="slider-btn slider-prev" onClick={imagenAnterior}>
+                        <div className={styles.modalBody}>
+                            <div className={styles.modalSlider}>
+                                <div className={styles.sliderContainer}>
+                                    <button className={`${styles.sliderBtn} ${styles.sliderPrev}`} onClick={imagenAnterior}>
                                         <i className="fas fa-chevron-left"></i>
                                     </button>
 
-                                    <div className="slider-imagen" onClick={() => abrirImagenAmpliada(proyectoSeleccionado.imagenes[imagenActual])}>
+                                    <div className={styles.sliderImagen} onClick={() => abrirImagenAmpliada(proyectoSeleccionado.imagenes[imagenActual])}>
                                         <img
                                             src={proyectoSeleccionado.imagenes[imagenActual]}
                                             alt={`${proyectoSeleccionado.titulo} - Imagen ${imagenActual + 1}`}
                                         />
                                     </div>
 
-                                    <button className="slider-btn slider-next" onClick={siguienteImagen}>
+                                    <button className={`${styles.sliderBtn} ${styles.sliderNext}`} onClick={siguienteImagen}>
                                         <i className="fas fa-chevron-right"></i>
                                     </button>
                                 </div>
 
-                                <div className="slider-indicadores">
+                                <div className={styles.sliderIndicadores}>
                                     {proyectoSeleccionado.imagenes.map((_, index) => (
                                         <button
                                             key={index}
-                                            className={`indicador ${index === imagenActual ? 'activo' : ''}`}
+                                            className={`${styles.indicador} ${index === imagenActual ? styles.indicadorActivo : ''}`}
                                             onClick={() => setImagenActual(index)}
                                         />
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="modal-info">
-                                <div className="info-section">
+                            <div className={styles.modalInfo}>
+                                <div className={styles.infoSection}>
                                     <h3>Descripción</h3>
                                     <p>{proyectoSeleccionado.descripcionCompleta}</p>
                                 </div>
 
-                                <div className="info-section">
+                                <div className={styles.infoSection}>
                                     <h3>Características</h3>
-                                    <ul className="caracteristicas-lista">
+                                    <ul className={styles.caracteristicasLista}>
                                         {proyectoSeleccionado.caracteristicas.map((caracteristica, index) => (
                                             <li key={index}>
                                                 <i className="fas fa-check"></i>
@@ -211,32 +210,32 @@ function Proyectos() {
                                     </ul>
                                 </div>
 
-                                <div className="info-section">
+                                <div className={styles.infoSection}>
                                     <h3>Tecnologías</h3>
-                                    <div className="modal-tecnologias">
+                                    <div className={styles.modalTecnologias}>
                                         {proyectoSeleccionado.tecnologias.map((tech, index) => (
-                                            <span key={index} className="tech-tag-modal">{tech}</span>
+                                            <span key={index} className={styles.techTagModal}>{tech}</span>
                                         ))}
                                     </div>
                                 </div>
 
-                                <div className="info-section">
+                                <div className={styles.infoSection}>
                                     <h3>Enlaces</h3>
-                                    <div className="modal-enlaces">
+                                    <div className={styles.modalEnlaces}>
                                         {proyectoSeleccionado.demoHabilitado && (
-                                            <a href={proyectoSeleccionado.linkDemo} target="_blank" rel="noopener noreferrer" className="btn-modal-demo">
+                                            <a href={proyectoSeleccionado.linkDemo} target="_blank" rel="noopener noreferrer" className={styles.btnModalDemo}>
                                                 <i className="fas fa-external-link-alt"></i>
                                                 Ver Demo
                                             </a>
                                         )}
                                         {proyectoSeleccionado.githubHabilitado && (
-                                            <a href={proyectoSeleccionado.linkGitHub} target="_blank" rel="noopener noreferrer" className="btn-modal-github">
+                                            <a href={proyectoSeleccionado.linkGitHub} target="_blank" rel="noopener noreferrer" className={styles.btnModalGithub}>
                                                 <i className="fab fa-github"></i>
                                                 Ver Código
                                             </a>
                                         )}
                                         {!proyectoSeleccionado.demoHabilitado && !proyectoSeleccionado.githubHabilitado && (
-                                            <p className="no-enlaces">Enlaces no disponibles</p>
+                                            <p className={styles.noEnlaces}>Enlaces no disponibles</p>
                                         )}
                                     </div>
                                 </div>
@@ -248,12 +247,12 @@ function Proyectos() {
 
             {/* Modal de Imagen Ampliada */}
             {imagenAmpliada && (
-                <div className="modal-imagen-overlay" onClick={cerrarImagenAmpliada}>
-                    <div className="modal-imagen-contenido" onClick={(e) => e.stopPropagation()}>
-                        <button className="modal-imagen-cerrar" onClick={cerrarImagenAmpliada}>
+                <div className={styles.modalImagenOverlay} onClick={cerrarImagenAmpliada}>
+                    <div className={styles.modalImagenContenido} onClick={(e) => e.stopPropagation()}>
+                        <button className={styles.modalImagenCerrar} onClick={cerrarImagenAmpliada}>
                             <i className="fas fa-times"></i>
                         </button>
-                        <img src={imagenAmpliada} alt="Imagen ampliada" className="imagen-ampliada" />
+                        <img src={imagenAmpliada} alt="Imagen ampliada" className={styles.imagenAmpliada} />
                     </div>
                 </div>
             )}

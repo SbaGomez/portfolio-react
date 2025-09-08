@@ -1,11 +1,34 @@
-/* ===== SECCIÓN DE CONTACTO ===== */
-#contacto {
+/* ===== SECCIÓN DE CONTACTO CSS Modules - Estilos aislados para el componente Contacto ===== */
+.contactoSection {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
     padding: 100px 0;
     min-height: 70vh;
 }
 
-#contacto h2 {
+.infoTitle {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    line-height: 1.2;
+}
+
+.infoTitle::before {
+    content: '';
+    position: absolute;
+    left: 15%;
+    transform: translateX(-50%);
+    bottom: -12px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    height: 3px;
+    width: 80px;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.contactoTitle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +47,7 @@
     line-height: 1.2;
 }
 
-#contacto h2::before {
+.contactoTitle::before {
     content: '';
     position: absolute;
     left: 50%;
@@ -38,7 +61,7 @@
 }
 
 /* ===== LAYOUT PRINCIPAL ===== */
-.contacto-content {
+.contactoContent {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -49,13 +72,13 @@
 }
 
 /* ===== INFORMACIÓN DE CONTACTO ===== */
-.contacto-info {
+.contactoInfo {
     display: flex;
     flex-direction: column;
     gap: 40px;
 }
 
-.info-section h3 {
+.infoSection h3 {
     color: white;
     font-size: 32px;
     font-weight: 600;
@@ -63,7 +86,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.info-section p {
+.infoSection p {
     color: #b0b0b0;
     font-size: 18px;
     line-height: 1.6;
@@ -71,13 +94,13 @@
 }
 
 /* ===== DETALLES DE CONTACTO ===== */
-.contact-details {
+.contactDetails {
     display: flex;
     flex-direction: column;
     gap: 25px;
 }
 
-.contact-item {
+.contactItem {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -90,13 +113,13 @@
     overflow: hidden;
 }
 
-.contact-item:hover {
+.contactItem:hover {
     background: rgba(255, 255, 255, 0.08);
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.contact-item::after {
+.contactItem::after {
     content: '';
     position: absolute;
     top: 0;
@@ -107,14 +130,14 @@
     transition: left 0.5s;
 }
 
-.contact-item:hover::after {
+.contactItem:hover::after {
     left: 100%;
 }
 
-.contact-icon {
+.contactIcon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #1A9FFF 0%, #B14143 100%);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -124,39 +147,39 @@
     flex-shrink: 0;
 }
 
-.contact-text h4 {
+.contactText h4 {
     color: white;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.contact-text a {
+.contactText a {
     color: #1A9FFF;
     text-decoration: none;
     font-size: 16px;
     transition: color 0.3s ease;
 }
 
-.contact-text a:hover {
+.contactText a:hover {
     color: #B14143;
 }
 
 /* ===== REDES SOCIALES ===== */
-.social-links h4 {
+.socialLinks h4 {
     color: white;
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 20px;
 }
 
-.social-icons {
+.socialIcons {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
 }
 
-.social-icon {
+.socialIcon {
     width: 50px;
     height: 50px;
     background: rgba(255, 255, 255, 0.1);
@@ -171,7 +194,7 @@
     border: 2px solid transparent;
 }
 
-.social-icon:hover {
+.socialIcon:hover {
     background: var(--social-color);
     transform: translateY(-3px) scale(1.1);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -179,13 +202,13 @@
 }
 
 /* ===== FORMULARIO DE CONTACTO ===== */
-.contacto-form {
+.contactoForm {
     background: rgba(255, 255, 255, 0.02);
     border-radius: 20px;
     padding: 40px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(15px);
-    box-shadow: 
+    box-shadow:
         0 4px 20px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
     position: relative;
@@ -201,7 +224,7 @@
     z-index: 1;
 }
 
-.form-group {
+.formGroup {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -210,12 +233,23 @@
     animation-fill-mode: both;
 }
 
-.form-group:nth-child(1) { animation-delay: 0.1s; }
-.form-group:nth-child(2) { animation-delay: 0.2s; }
-.form-group:nth-child(3) { animation-delay: 0.3s; }
-.form-group:nth-child(4) { animation-delay: 0.4s; }
+.formGroup:nth-child(1) {
+    animation-delay: 0.1s;
+}
 
-.form-group label {
+.formGroup:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.formGroup:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.formGroup:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.formGroup label {
     color: #1A9FFF;
     font-size: 14px;
     font-weight: 700;
@@ -224,13 +258,13 @@
     margin-bottom: 5px;
 }
 
-.input-container {
+.inputContainer {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.input-icon {
+.inputIcon {
     position: absolute;
     left: 16px;
     color: rgba(255, 255, 255, 0.6);
@@ -239,8 +273,8 @@
     transition: color 0.3s ease;
 }
 
-.form-group input,
-.form-group textarea {
+.formGroup input,
+.formGroup textarea {
     width: 100%;
     padding: 16px 16px 16px 50px;
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -252,56 +286,111 @@
     transition: all 0.3s ease;
     font-family: inherit;
     backdrop-filter: blur(10px);
-    box-shadow: 
+    box-shadow:
         0 2px 8px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.form-group textarea {
+.formGroup textarea {
     min-height: 120px;
     resize: vertical;
     line-height: 1.5;
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
     color: rgba(255, 255, 255, 0.4);
     font-size: 15px;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.formGroup input:focus,
+.formGroup textarea:focus {
     outline: none;
     border-color: #1A9FFF;
     background: rgba(255, 255, 255, 0.05);
-    box-shadow: 
+    box-shadow:
         0 0 0 2px rgba(26, 159, 255, 0.2),
         0 4px 12px rgba(0, 0, 0, 0.15),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.form-group input:focus + .input-icon,
-.form-group textarea:focus + .input-icon {
+.formGroup input:focus+.inputIcon,
+.formGroup textarea:focus+.inputIcon {
     color: #1A9FFF;
 }
 
 /* ===== ESTADOS DE ERROR ===== */
-.form-group input.error,
-.form-group textarea.error {
+.error {
+    border-color: #f44336 !important;
+    background: rgba(244, 67, 54, 0.05) !important;
+    box-shadow:
+        0 0 0 2px rgba(244, 67, 54, 0.2),
+        0 4px 12px rgba(244, 67, 54, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.warning {
+    border-color: #ff9800 !important;
+    background: rgba(255, 152, 0, 0.05) !important;
+    box-shadow:
+        0 0 0 2px rgba(255, 152, 0, 0.2),
+        0 4px 12px rgba(255, 152, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.formGroup input.warning,
+.formGroup textarea.warning {
+    border-color: #ff9800;
+    background: rgba(255, 152, 0, 0.05);
+    box-shadow:
+        0 0 0 2px rgba(255, 152, 0, 0.2),
+        0 4px 12px rgba(255, 152, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.formGroup input.error,
+.formGroup textarea.error {
     border-color: #f44336;
     background: rgba(244, 67, 54, 0.05);
-    box-shadow: 
+    box-shadow:
         0 0 0 2px rgba(244, 67, 54, 0.2),
         0 4px 12px rgba(244, 67, 54, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.form-group input.error + .input-icon,
-.form-group textarea.error + .input-icon {
+.formGroup input.error+.inputIcon,
+.formGroup textarea.error+.inputIcon {
     color: #f44336;
 }
 
-.error-text {
+.formGroup input.warning+.inputIcon,
+.formGroup textarea.warning+.inputIcon {
+    color: #ff9800;
+}
+
+.warningText {
+    background: rgba(255, 152, 0, 0.08);
+    border: 1px solid rgba(255, 152, 0, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #ff9800;
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 5px;
+    backdrop-filter: blur(5px);
+    animation: slideInUp 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.warningText::before {
+    content: '⚠';
+    font-size: 14px;
+    color: #ff9800;
+}
+
+.errorText {
     background: rgba(244, 67, 54, 0.08);
     border: 1px solid rgba(244, 67, 54, 0.2);
     border-radius: 8px;
@@ -317,13 +406,13 @@
     gap: 8px;
 }
 
-.error-text::before {
-    content: '⚠';
+.errorText::before {
+    content: '❌';
     font-size: 14px;
     color: #f44336;
 }
 
-.helper-text {
+.helperText {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 8px;
@@ -336,7 +425,7 @@
 }
 
 /* ===== BOTÓN DE ENVÍO ===== */
-.btn-enviar {
+.btnEnviar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -352,7 +441,7 @@
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 
+    box-shadow:
         0 4px 12px rgba(26, 159, 255, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
     margin-top: 20px;
@@ -362,22 +451,22 @@
     width: 100%;
 }
 
-.btn-enviar:hover:not(:disabled) {
+.btnEnviar:hover:not(:disabled) {
     background: linear-gradient(135deg, #0d7acc 0%, #9a2d2f 100%);
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
         0 6px 16px rgba(26, 159, 255, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.btn-enviar:active:not(:disabled) {
+.btnEnviar:active:not(:disabled) {
     transform: translateY(0);
-    box-shadow: 
+    box-shadow:
         0 2px 8px rgba(26, 159, 255, 0.2),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.btn-enviar:disabled {
+.btnEnviar:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none;
@@ -385,17 +474,17 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-enviar i {
+.btnEnviar i {
     font-size: 16px;
     transition: transform 0.3s ease;
 }
 
-.btn-enviar:hover:not(:disabled) i {
+.btnEnviar:hover:not(:disabled) i {
     transform: scale(1.05);
 }
 
 /* ===== BARRA DE PROGRESO ===== */
-.progress-bar {
+.progressBar {
     width: 100%;
     height: 4px;
     background: rgba(255, 255, 255, 0.1);
@@ -404,7 +493,7 @@
     overflow: hidden;
 }
 
-.progress-fill {
+.progressFill {
     height: 100%;
     background: linear-gradient(90deg, #1A9FFF 0%, #B14143 100%);
     border-radius: 2px;
@@ -412,7 +501,7 @@
     position: relative;
 }
 
-.progress-fill::after {
+.progressFill::after {
     content: '';
     position: absolute;
     top: 0;
@@ -450,35 +539,35 @@
     z-index: 0;
 }
 
-.alert > * {
+.alert>* {
     position: relative;
     z-index: 1;
 }
 
-.alert-success {
+.alertSuccess {
     background: rgba(76, 175, 80, 0.08);
     border: 1px solid rgba(76, 175, 80, 0.2);
     color: #66bb6a;
-    box-shadow: 
+    box-shadow:
         0 4px 16px rgba(76, 175, 80, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.alert-success i {
+.alertSuccess i {
     color: #4caf50;
     font-size: 18px;
 }
 
-.alert-error {
+.alertError {
     background: rgba(244, 67, 54, 0.08);
     border: 1px solid rgba(244, 67, 54, 0.2);
     color: #ef5350;
-    box-shadow: 
+    box-shadow:
         0 4px 16px rgba(244, 67, 54, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-.alert-error i {
+.alertError i {
     color: #f44336;
     font-size: 18px;
 }
@@ -489,6 +578,7 @@
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -500,6 +590,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -507,13 +598,18 @@
 }
 
 @keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
-    #contacto h2 {
+    .contactoTitle {
         font-size: 40px;
         font-weight: 600;
         letter-spacing: -0.5px;
@@ -521,152 +617,152 @@
         text-align: center;
         margin-bottom: 40px;
     }
-    
-    .contacto-content {
+
+    .contactoContent {
         grid-template-columns: 1fr;
         gap: 40px;
         padding: 0 15px;
     }
-    
-    .contacto-info {
+
+    .contactoInfo {
         gap: 30px;
     }
-    
-    .info-section h3 {
+
+    .infoSection h3 {
         font-size: 28px;
     }
-    
-    .info-section p {
+
+    .infoSection p {
         font-size: 16px;
     }
-    
-    .contacto-form {
+
+    .contactoForm {
         padding: 35px 25px;
     }
-    
+
     .formulario {
         gap: 24px;
     }
-    
-    .form-group input,
-    .form-group textarea {
+
+    .formGroup input,
+    .formGroup textarea {
         padding: 14px 14px 14px 45px;
         font-size: 15px;
     }
-    
-    .input-icon {
+
+    .inputIcon {
         left: 14px;
         font-size: 16px;
     }
-    
-    .form-group label {
+
+    .formGroup label {
         font-size: 13px;
     }
-    
-    .helper-text {
+
+    .helperText {
         font-size: 12px;
         padding: 6px 10px;
     }
-    
-    .btn-enviar {
+
+    .btnEnviar {
         padding: 14px 30px;
         font-size: 15px;
     }
-    
-    .error-text {
+
+    .errorText {
         font-size: 12px;
         padding: 6px 10px;
     }
 }
 
 @media (max-width: 480px) {
-    #contacto {
+    .contactoSection {
         padding: 80px 0;
     }
-    
-    #contacto h2 {
+
+    .contactoTitle {
         font-size: 32px;
         font-weight: 600;
         letter-spacing: -0.3px;
         margin-bottom: 30px;
     }
-    
-    .contacto-content {
+
+    .contactoContent {
         padding: 0 10px;
         gap: 30px;
     }
-    
-    .contacto-info {
+
+    .contactoInfo {
         gap: 25px;
     }
-    
-    .info-section h3 {
+
+    .infoSection h3 {
         font-size: 24px;
     }
-    
-    .info-section p {
+
+    .infoSection p {
         font-size: 15px;
     }
-    
-    .contact-item {
+
+    .contactItem {
         padding: 15px;
         gap: 15px;
     }
-    
-    .contact-icon {
+
+    .contactIcon {
         width: 40px;
         height: 40px;
         font-size: 18px;
     }
-    
-    .contact-text h4 {
+
+    .contactText h4 {
         font-size: 16px;
     }
-    
-    .contact-text a {
+
+    .contactText a {
         font-size: 14px;
     }
-    
-    .social-icon {
+
+    .socialIcon {
         width: 45px;
         height: 45px;
         font-size: 18px;
     }
-    
-    .contacto-form {
+
+    .contactoForm {
         padding: 30px 20px;
     }
-    
+
     .formulario {
         gap: 20px;
     }
-    
-    .form-group input,
-    .form-group textarea {
+
+    .formGroup input,
+    .formGroup textarea {
         padding: 12px 12px 12px 40px;
         font-size: 14px;
     }
-    
-    .input-icon {
+
+    .inputIcon {
         left: 12px;
         font-size: 14px;
     }
-    
-    .form-group label {
+
+    .formGroup label {
         font-size: 12px;
     }
-    
-    .helper-text {
+
+    .helperText {
         font-size: 11px;
         padding: 5px 8px;
     }
-    
-    .btn-enviar {
+
+    .btnEnviar {
         padding: 12px 25px;
         font-size: 14px;
     }
-    
-    .error-text {
+
+    .errorText {
         font-size: 11px;
         padding: 5px 8px;
     }

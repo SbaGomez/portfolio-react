@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from '../hooks/useNavigation';
-import './SobreMi.css';
+import styles from './SobreMi.module.css';
 
 function SobreMi() {
     const navigateWithScroll = useNavigation();
@@ -53,18 +53,18 @@ function SobreMi() {
     ];
 
     return (
-        <section id="sobre-mi">
+        <section id="sobre-mi" className={styles.sobreMiSection}>
             <div className="container">
-                <div className="sobre-mi-header">
+                <div className={styles.sobreMiHeader}>
                     <h2>Sobre Mí</h2>
-                    <p className="sobre-mi-subtitle">Conoce más sobre mi experiencia y habilidades</p>
+                    <p className={styles.sobreMiSubtitle}>Conoce más sobre mi experiencia y habilidades</p>
                 </div>
 
                 {/* Información Personal */}
-                <div className="sobre-mi-content">
+                <div className={styles.sobreMiContent}>
                     <div className="row">
                         <div className="col-lg-6">
-                            <div className="info-personal">
+                            <div className={styles.infoPersonal}>
                                 <h3>Mi Historia</h3>
                                 <p>
                                     Soy un <strong>desarrollador web apasionado</strong> con más de 5 años de experiencia 
@@ -82,22 +82,22 @@ function SobreMi() {
                                     del desarrollo web.
                                 </p>
                                 
-                                <div className="contact-link-container">
+                                <div className={styles.contactLinkContainer}>
                                     <button
-                                        className="contact-link"
+                                        className={styles.contactLink}
                                         onClick={() => navigateWithScroll('/contacto')}
                                     >
-                                        <span className="contact-icon">✉</span>
-                                        <span className="contact-text">Contáctame</span>
+                                        <span className={styles.contactIcon}>✉</span>
+                                        <span className={styles.contactText}>Contáctame</span>
                                     </button>
                                 </div>
                             </div>
                         </div>
                         
                         <div className="col-lg-6">
-                            <div className="foto-perfil">
-                                <div className="foto-container">
-                                    <div className="foto-placeholder">
+                            <div className={styles.fotoPerfil}>
+                                <div className={styles.fotoContainer}>
+                                    <div className={styles.fotoPlaceholder}>
                                         <i className="fas fa-user"></i>
                                         <p>Foto de perfil</p>
                                     </div>
@@ -108,19 +108,19 @@ function SobreMi() {
                 </div>
 
                 {/* Habilidades */}
-                <div className="habilidades-section">
+                <div className={styles.habilidadesSection}>
                     <h3>Mis Habilidades</h3>
-                    <div className="habilidades-grid">
+                    <div className={styles.habilidadesGrid}>
                         {habilidades.map((habilidad, index) => (
-                            <div key={index} className="habilidad-item">
-                                <div className="habilidad-header">
+                            <div key={index} className={styles.habilidadItem}>
+                                <div className={styles.habilidadHeader}>
                                     <i className={habilidad.icono}></i>
-                                    <span className="habilidad-nombre">{habilidad.nombre}</span>
-                                    <span className="habilidad-porcentaje">{habilidad.nivel}%</span>
+                                    <span className={styles.habilidadNombre}>{habilidad.nombre}</span>
+                                    <span className={styles.habilidadPorcentaje}>{habilidad.nivel}%</span>
                                 </div>
-                                <div className="habilidad-bar">
+                                <div className={styles.habilidadBar}>
                                     <div 
-                                        className="habilidad-progress" 
+                                        className={styles.habilidadProgress} 
                                         style={{ width: `${habilidad.nivel}%` }}
                                     ></div>
                                 </div>
@@ -130,16 +130,16 @@ function SobreMi() {
                 </div>
 
                 {/* Experiencia */}
-                <div className="experiencia-section">
+                <div className={styles.experienciaSection}>
                     <h3>Experiencia Profesional</h3>
-                    <div className="timeline">
+                    <div className={styles.timeline}>
                         {experiencias.map((exp, index) => (
-                            <div key={index} className="timeline-item">
-                                <div className="timeline-marker"></div>
-                                <div className="timeline-content">
+                            <div key={index} className={styles.timelineItem}>
+                                <div className={styles.timelineMarker}></div>
+                                <div className={styles.timelineContent}>
                                     <h4>{exp.titulo}</h4>
                                     <h5>{exp.empresa}</h5>
-                                    <span className="timeline-periodo">{exp.periodo}</span>
+                                    <span className={styles.timelinePeriodo}>{exp.periodo}</span>
                                     <p>{exp.descripcion}</p>
                                 </div>
                             </div>
@@ -148,16 +148,16 @@ function SobreMi() {
                 </div>
 
                 {/* Educación */}
-                <div className="educacion-section">
+                <div className={styles.educacionSection}>
                     <h3>Educación</h3>
-                    <div className="timeline">
+                    <div className={styles.timeline}>
                         {educacion.map((edu, index) => (
-                            <div key={index} className="timeline-item">
-                                <div className="timeline-marker"></div>
-                                <div className="timeline-content">
+                            <div key={index} className={styles.timelineItem}>
+                                <div className={styles.timelineMarker}></div>
+                                <div className={styles.timelineContent}>
                                     <h4>{edu.titulo}</h4>
                                     <h5>{edu.institucion}</h5>
-                                    <span className="timeline-periodo">{edu.periodo}</span>
+                                    <span className={styles.timelinePeriodo}>{edu.periodo}</span>
                                     <p>{edu.descripcion}</p>
                                 </div>
                             </div>
@@ -166,44 +166,44 @@ function SobreMi() {
                 </div>
 
                 {/* Tecnologías */}
-                <div className="tecnologias-section">
+                <div className={styles.tecnologiasSection}>
                     <h3>Tecnologías que Manejo</h3>
-                    <div className="tecnologias-grid">
-                        <div className="tech-category">
+                    <div className={styles.tecnologiasGrid}>
+                        <div className={styles.techCategory}>
                             <h4>Frontend</h4>
-                            <div className="tech-items">
-                                <span className="tech-tag">React</span>
-                                <span className="tech-tag">JavaScript</span>
-                                <span className="tech-tag">HTML5</span>
-                                <span className="tech-tag">CSS3</span>
-                                <span className="tech-tag">Bootstrap</span>
-                                <span className="tech-tag">Angular</span>
+                            <div className={styles.techItems}>
+                                <span className={`${styles.techTag} ${styles.techTagLightBlue}`}>React</span>
+                                <span className={`${styles.techTag} ${styles.techTagDarkBlue}`}>JavaScript</span>
+                                <span className={`${styles.techTag} ${styles.techTagYellow}`}>HTML5</span>
+                                <span className={`${styles.techTag} ${styles.techTagOrange}`}>CSS3</span>
+                                <span className={`${styles.techTag} ${styles.techTagMediumBlue}`}>Bootstrap</span>
+                                <span className={`${styles.techTag} ${styles.techTagPurple}`}>Angular</span>
                             </div>
                         </div>
-                        <div className="tech-category">
+                        <div className={styles.techCategory}>
                             <h4>Backend</h4>
-                            <div className="tech-items">
-                                <span className="tech-tag">Node.js</span>
-                                <span className="tech-tag">Java</span>
-                                <span className="tech-tag">.NET Core</span>
-                                <span className="tech-tag">PHP</span>
+                            <div className={styles.techItems}>
+                                <span className={`${styles.techTag} ${styles.techTagLightBlue}`}>Node.js</span>
+                                <span className={`${styles.techTag} ${styles.techTagMediumBlue}`}>Java</span>
+                                <span className={`${styles.techTag} ${styles.techTagYellow}`}>.NET Core</span>
+                                <span className={`${styles.techTag} ${styles.techTagOrange}`}>PHP</span>
                             </div>
                         </div>
-                        <div className="tech-category">
+                        <div className={styles.techCategory}>
                             <h4>Base de Datos</h4>
-                            <div className="tech-items">
-                                <span className="tech-tag">MySQL</span>
-                                <span className="tech-tag">MsSQL</span>
-                                <span className="tech-tag">MongoDB</span>
+                            <div className={styles.techItems}>
+                                <span className={`${styles.techTag} ${styles.techTagLightBlue}`}>MySQL</span>
+                                <span className={`${styles.techTag} ${styles.techTagMediumBlue}`}>MsSQL</span>
+                                <span className={`${styles.techTag} ${styles.techTagYellow}`}>MongoDB</span>
                             </div>
                         </div>
-                        <div className="tech-category">
+                        <div className={styles.techCategory}>
                             <h4>Herramientas</h4>
-                            <div className="tech-items">
-                                <span className="tech-tag">Git</span>
-                                <span className="tech-tag">GitHub</span>
-                                <span className="tech-tag">VS Code</span>
-                                <span className="tech-tag">Android Studio</span>
+                            <div className={styles.techItems}>
+                                <span className={`${styles.techTag} ${styles.techTagLightBlue}`}>Git</span>
+                                <span className={`${styles.techTag} ${styles.techTagMediumBlue}`}>GitHub</span>
+                                <span className={`${styles.techTag} ${styles.techTagYellow}`}>VS Code</span>
+                                <span className={`${styles.techTag} ${styles.techTagOrange}`}>Android Studio</span>
                             </div>
                         </div>
                     </div>

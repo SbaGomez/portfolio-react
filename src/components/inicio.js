@@ -1,18 +1,18 @@
-import './Inicio.css';
+import styles from './Inicio.module.css';
 import { useNavigation } from '../hooks/useNavigation';
 
 function Inicio() {
     const navigateWithScroll = useNavigation();
     return (
-        <section id="home">
+        <section className={styles.homeSection}>
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="title-container">
-                            <h2>Sebastian Gomez</h2>
-                            <span className="dev-badge">.Dev</span>
+                        <div className={styles.titleContainer}>
+                            <h2 className={styles.homeTitle}>Sebastian Gomez</h2>
+                            <span className={styles.devBadge}>.Dev</span>
                         </div>
-                        <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
+                        <div className={`${styles.bgDarkInicio} text-secondary px-4 py-5 text-center`}>
                             <p className="lead">
                                 <strong>Desarrollador web Fullstack</strong> con habilidades en el
                                 <strong> frontend</strong> y <strong>backend</strong>.
@@ -29,68 +29,68 @@ function Inicio() {
                                 <strong> juegos en línea</strong>. Si buscas un <strong>desarrollador
                                     comprometido</strong>, ¡contáctame!
                             </p>
-                            <div className="contact-link-container">
+                            <div className={styles.contactLinkContainer}>
                                 <button
-                                    className="contact-link"
+                                    className={styles.contactLink}
                                     onClick={() => navigateWithScroll('/contacto')}
                                 >
-                                    <span className="contact-icon">✉</span>
-                                    <span className="contact-text">Contáctame</span>
+                                    <span className={styles.contactIcon}>✉</span>
+                                    <span className={styles.contactText}>Contáctame</span>
                                 </button>
                             </div>
                         </div>
 
                         {/* Container de Tecnologías - Separado */}
-                        <div className="bg-dark-inicio text-secondary px-4 py-5 text-center">
-                            <h4 className="tecnologias-title">Tecnologías que manejo</h4>
-                            <div className="tecnologias-simple">
-                                <div className="tech-item">
-                                    <img src="/tecnologias/React.svg" alt="React" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">React - React Native</span>
+                        <div className={`${styles.bgDarkInicio} text-secondary px-4 py-5 text-center`}>
+                            <h4 className={styles.tecnologiasTitle}>Tecnologías que manejo</h4>
+                            <div className={styles.tecnologiasSimple}>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/React.svg" alt="React" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>React - React Native</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">JavaScript - TypeScript</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/JavaScript.svg" alt="JavaScript" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>JavaScript - TypeScript</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/HTML5.svg" alt="HTML5" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">HTML5</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/HTML5.svg" alt="HTML5" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>HTML5</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/CSS3.svg" alt="CSS3" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">CSS3</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/CSS3.svg" alt="CSS3" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>CSS3</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Bootstrap</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/Bootstrap.svg" alt="Bootstrap" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>Bootstrap</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/nodejs.png" alt="Node.js" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Node.js</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/nodejs.png" alt="Node.js" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>Node.js</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/MySQL.svg" alt="MySQL" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">MySQL</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/MySQL.svg" alt="MySQL" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>MySQL</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/mongodb.svg" alt="MongoDB" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">MongoDB</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/mongodb.svg" alt="MongoDB" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>MongoDB</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/java.svg" alt="Java" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Java - Spring Boot</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/java.svg" alt="Java" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>Java - Spring Boot</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/angular.svg" alt="Angular" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Angular - Angular Material</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/angular.svg" alt="Angular" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>Angular - Angular Material</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/NETcore.svg" alt=".NET Core" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">.NET Core</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/NETcore.svg" alt=".NET Core" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>.NET Core</span>
                                 </div>
-                                <div className="tech-item">
-                                    <img src="/tecnologias/android.svg" alt="Android" className="tech-logo" style={{ width: '120px', height: '120px', display: 'block' }} />
-                                    <span className="tech-name">Kotlin - Android Studio</span>
+                                <div className={styles.techItem}>
+                                    <img src="/tecnologias/android.svg" alt="Android" className={styles.techLogo} style={{ width: '120px', height: '120px', display: 'block' }} />
+                                    <span className={styles.techName}>Kotlin - Android Studio</span>
                                 </div>
                             </div>
                         </div>

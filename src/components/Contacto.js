@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import './Inicio.css';
-import './Contacto.css';
+import styles from './Contacto.module.css';
 import { sendEmail } from '../config/emailjs';
 import { contactConfig } from '../config/contactConfig';
 
@@ -15,6 +14,7 @@ function Contacto() {
     const [submitStatus, setSubmitStatus] = useState(null);
     const [submitProgress, setSubmitProgress] = useState(0);
     const [errors, setErrors] = useState({});
+    const [warnings, setWarnings] = useState({});
     const [touched, setTouched] = useState({});
 
     // Función para validar email
@@ -26,7 +26,8 @@ function Contacto() {
     // Función para validar un campo específico
     const validateField = (name, value) => {
         let error = '';
-        
+        let warning = '';
+
         switch (name) {
             case 'nombre':
                 if (!value.trim()) {
@@ -39,7 +40,7 @@ function Contacto() {
                 if (!value.trim()) {
                     error = 'El email es requerido';
                 } else if (!validateEmail(value)) {
-                    error = 'Por favor, usa un email válido';
+                    warning = 'Por favor, usa un email válido';
                 }
                 break;
             case 'asunto':
@@ -59,8 +60,8 @@ function Contacto() {
             default:
                 break;
         }
-        
-        return error;
+
+        return { error, warning };
     };
 
     const handleChange = (e) => {
@@ -71,10 +72,14 @@ function Contacto() {
         }));
 
         // Validar el campo en tiempo real
-        const error = validateField(name, value);
+        const { error, warning } = validateField(name, value);
         setErrors(prev => ({
             ...prev,
             [name]: error
+        }));
+        setWarnings(prev => ({
+            ...prev,
+            [name]: warning
         }));
     };
 
@@ -86,16 +91,20 @@ function Contacto() {
         }));
 
         // Validar el campo cuando pierde el foco
-        const error = validateField(name, value);
+        const { error, warning } = validateField(name, value);
         setErrors(prev => ({
             ...prev,
             [name]: error
+        }));
+        setWarnings(prev => ({
+            ...prev,
+            [name]: warning
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Marcar todos los campos como tocados
         const allTouched = {
             nombre: true,
@@ -107,14 +116,19 @@ function Contacto() {
 
         // Validar todos los campos
         const newErrors = {};
+        const newWarnings = {};
         Object.keys(formData).forEach(field => {
-            const error = validateField(field, formData[field]);
+            const { error, warning } = validateField(field, formData[field]);
             if (error) {
                 newErrors[field] = error;
+            }
+            if (warning) {
+                newWarnings[field] = warning;
             }
         });
 
         setErrors(newErrors);
+        setWarnings(newWarnings);
 
         // Si hay errores, enfocar el primer campo con error y no enviar
         if (Object.keys(newErrors).length > 0) {
@@ -141,14 +155,15 @@ function Contacto() {
         try {
             // Enviar email usando EmailJS
             const result = await sendEmail(formData);
-            
+
             clearInterval(progressInterval);
             setSubmitProgress(100);
-            
+
             if (result.success) {
                 setSubmitStatus('success');
                 setFormData({ nombre: '', email: '', asunto: '', mensaje: '' });
                 setErrors({});
+                setWarnings({});
                 setTouched({});
             } else {
                 setSubmitStatus('error');
@@ -167,32 +182,32 @@ function Contacto() {
     };
 
     const contactInfo = contactConfig.contactInfo;
-    const socialLinks = Object.values(contactConfig.socialMedia).filter(social => 
+    const socialLinks = Object.values(contactConfig.socialMedia).filter(social =>
         social.name === 'Instagram' || social.name === 'GitHub' || social.name === 'LinkedIn' || social.name === 'Twitter'
     );
 
     return (
-        <section id="contacto">
+        <section className={styles.contactoSection}>
             <div className="container">
-                <h2>Contacto</h2>
-                
-                <div className="contacto-content">
-                    <div className="contacto-info">
-                        <div className="info-section">
-                            <h3>¡Hablemos!</h3>
+                <h2 className={styles.contactoTitle}>Contacto</h2>
+
+                <div className={styles.contactoContent}>
+                    <div className={styles.contactoInfo}>
+                        <div className={styles.infoSection}>
+                            <h3 className={styles.infoTitle}>¡Hablemos!</h3>
                             <p>
-                                ¿Tienes un proyecto en mente? ¿Quieres colaborar? 
+                                ¿Tienes un proyecto en mente? ¿Quieres colaborar?
                                 Me encantaría escuchar sobre tu idea y cómo puedo ayudarte a hacerla realidad.
                             </p>
                         </div>
 
-                        <div className="contact-details">
+                        <div className={styles.contactDetails}>
                             {contactInfo.map((info, index) => (
-                                <div key={index} className="contact-item">
-                                    <div className="contact-icon">
+                                <div key={index} className={styles.contactItem}>
+                                    <div className={styles.contactIcon}>
                                         <i className={info.icon}></i>
                                     </div>
-                                    <div className="contact-text">
+                                    <div className={styles.contactText}>
                                         <h4>{info.title}</h4>
                                         <a href={info.link}>{info.value}</a>
                                     </div>
@@ -200,16 +215,16 @@ function Contacto() {
                             ))}
                         </div>
 
-                        <div className="social-links">
+                        <div className={styles.socialLinks}>
                             <h4>Sígueme en redes</h4>
-                            <div className="social-icons">
+                            <div className={styles.socialIcons}>
                                 {socialLinks.map((social, index) => (
                                     <a
                                         key={index}
                                         href={social.url}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="social-icon"
+                                        className={styles.socialIcon}
                                         style={{ '--social-color': social.color }}
                                         title={social.name}
                                     >
@@ -220,12 +235,12 @@ function Contacto() {
                         </div>
                     </div>
 
-                    <div className="contacto-form">
-                        <form onSubmit={handleSubmit} className="formulario">
-                            <div className="form-group">
+                    <div className={styles.contactoForm}>
+                        <form onSubmit={handleSubmit} className={styles.formulario}>
+                            <div className={styles.formGroup}>
                                 <label htmlFor="nombre">NOMBRE:</label>
-                                <div className="input-container">
-                                    <i className="fas fa-user input-icon"></i>
+                                <div className={styles.inputContainer}>
+                                    <i className={`fas fa-user ${styles.inputIcon}`}></i>
                                     <input
                                         type="text"
                                         id="nombre"
@@ -234,24 +249,24 @@ function Contacto() {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         placeholder="Escribe tu nombre completo"
-                                        className={touched.nombre && errors.nombre ? 'error' : ''}
+                                        className={touched.nombre && errors.nombre ? styles.error : ''}
                                     />
                                 </div>
                                 {touched.nombre && errors.nombre ? (
-                                    <div className="error-text">
+                                    <div className={styles.errorText}>
                                         {errors.nombre}
                                     </div>
                                 ) : (
-                                    <div className="helper-text">
+                                    <div className={styles.helperText}>
                                         Ingresa tu nombre y apellido
                                     </div>
                                 )}
                             </div>
 
-                            <div className="form-group">
+                            <div className={styles.formGroup}>
                                 <label htmlFor="email">EMAIL:</label>
-                                <div className="input-container">
-                                    <i className="fas fa-envelope input-icon"></i>
+                                <div className={styles.inputContainer}>
+                                    <i className={`fas fa-envelope ${styles.inputIcon}`}></i>
                                     <input
                                         type="email"
                                         id="email"
@@ -260,24 +275,28 @@ function Contacto() {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         placeholder="tu@email.com"
-                                        className={touched.email && errors.email ? 'error' : ''}
+                                        className={touched.email && errors.email ? styles.error : touched.email && warnings.email ? styles.warning : ''}
                                     />
                                 </div>
-                                {touched.email && errors.email ? (
-                                    <div className="error-text">
+                                {touched.email && errors.email ? (  
+                                    <div className={styles.errorText}>
                                         {errors.email}
                                     </div>
+                                ) : touched.email && warnings.email ? (
+                                    <div className={styles.warningText}>
+                                        {warnings.email}
+                                    </div>
                                 ) : (
-                                    <div className="helper-text">
+                                    <div className={styles.helperText}>
                                         Por favor, usa un email válido
                                     </div>
                                 )}
                             </div>
 
-                            <div className="form-group">
+                            <div className={styles.formGroup}>
                                 <label htmlFor="asunto">ASUNTO:</label>
-                                <div className="input-container">
-                                    <i className="fas fa-tag input-icon"></i>
+                                <div className={styles.inputContainer}>
+                                    <i className={`fas fa-tag ${styles.inputIcon}`}></i>
                                     <input
                                         type="text"
                                         id="asunto"
@@ -286,24 +305,24 @@ function Contacto() {
                                         onChange={handleChange}
                                         onBlur={handleBlur}
                                         placeholder="¿De qué quieres hablar?"
-                                        className={touched.asunto && errors.asunto ? 'error' : ''}
+                                        className={touched.asunto && errors.asunto ? styles.error : ''}
                                     />
                                 </div>
                                 {touched.asunto && errors.asunto ? (
-                                    <div className="error-text">
+                                    <div className={styles.errorText}>
                                         {errors.asunto}
                                     </div>
                                 ) : (
-                                    <div className="helper-text">
+                                    <div className={styles.helperText}>
                                         Describe brevemente el tema de tu mensaje
                                     </div>
                                 )}
                             </div>
 
-                            <div className="form-group">
+                            <div className={styles.formGroup}>
                                 <label htmlFor="mensaje">MENSAJE:</label>
-                                <div className="input-container">
-                                    <i className="fas fa-comment input-icon"></i>
+                                <div className={styles.inputContainer}>
+                                    <i className={`fas fa-comment ${styles.inputIcon}`}></i>
                                     <textarea
                                         id="mensaje"
                                         name="mensaje"
@@ -312,23 +331,23 @@ function Contacto() {
                                         onBlur={handleBlur}
                                         rows="5"
                                         placeholder="Cuéntame sobre tu proyecto o idea..."
-                                        className={touched.mensaje && errors.mensaje ? 'error' : ''}
+                                        className={touched.mensaje && errors.mensaje ? styles.error : ''}
                                     ></textarea>
                                 </div>
                                 {touched.mensaje && errors.mensaje ? (
-                                    <div className="error-text">
+                                    <div className={styles.errorText}>
                                         {errors.mensaje}
                                     </div>
                                 ) : (
-                                    <div className="helper-text">
+                                    <div className={styles.helperText}>
                                         Escribe tu mensaje detallado aquí
                                     </div>
                                 )}
                             </div>
 
-                            <button 
-                                type="submit" 
-                                className="btn-enviar"
+                            <button
+                                type="submit"
+                                className={styles.btnEnviar}
                                 disabled={isSubmitting}
                             >
                                 {isSubmitting ? (
@@ -345,23 +364,23 @@ function Contacto() {
                             </button>
 
                             {isSubmitting && (
-                                <div className="progress-bar">
-                                    <div 
-                                        className="progress-fill" 
+                                <div className={styles.progressBar}>
+                                    <div
+                                        className={styles.progressFill}
                                         style={{ width: `${submitProgress}%` }}
                                     ></div>
                                 </div>
                             )}
 
                             {submitStatus === 'success' && (
-                                <div className="alert alert-success">
+                                <div className={`${styles.alert} ${styles.alertSuccess}`}>
                                     <i className="fas fa-check-circle"></i>
                                     ¡Mensaje enviado correctamente! Te responderé pronto.
                                 </div>
                             )}
 
                             {submitStatus === 'error' && (
-                                <div className="alert alert-error">
+                                <div className={`${styles.alert} ${styles.alertError}`}>
                                     <i className="fas fa-exclamation-circle"></i>
                                     Hubo un error al enviar el mensaje. Inténtalo de nuevo.
                                 </div>

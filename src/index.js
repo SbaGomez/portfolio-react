@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './index.css';
-import Inicio from './components/Inicio';
+import Inicio from './components/inicio';
 import SobreMi from './components/SobreMi';
 import Proyectos from './components/Proyectos';
 import Contacto from './components/Contacto';

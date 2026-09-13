@@ -2787,6 +2787,35 @@ rm -f public/tecnologias/nodejs.png EMAILJS_SETUP.md
 
 `public/proyectos/` contiene capturas de los tres proyectos viejos que ya no se muestran, incluida `bakastamu.png` de 812 KB sin optimizar, y `juego-botones.png` que ya estaba huérfana. `nodejs.png` es el duplicado pesado del `.svg`.
 
+Además, **eliminar el script `lint` de `package.json`**. `next lint` fue removido
+en Next 16: el comando ya no existe, así que Next interpreta `lint` como un
+directorio de proyecto y falla con «Invalid project directory provided». El
+scaffold además nunca instaló `eslint` ni `eslint-config-next`, y no hay config
+de ESLint en el repo. Es un script muerto que invoca un comando inexistente
+apoyándose en paquetes ausentes. Las compuertas reales del proyecto son
+`tsc --noEmit`, `pnpm test` y `pnpm build`; montar ESLint ahora sería alcance
+que el spec no pide.
+
+Quitar esta línea de `package.json`:
+
+```json
+    "lint": "next lint",
+```
+
+**Y dejar de trackear `.env`.** Está versionado desde `43a2b34` con las tres
+claves de EmailJS, porque el `.gitignore` de CRA ignora `.env.local` pero no
+`.env`. Sacarlo del índice no lo borra del historial ya empujado —la
+remediación real es rotar las credenciales, y eso es del dueño del repo— pero
+evita arrastrar la exposición a la rama nueva:
+
+```bash
+printf '\n.env\n' >> .gitignore
+git rm --cached .env
+```
+
+El archivo sigue en disco y la aplicación lo sigue leyendo; sólo deja de
+versionarse.
+
 - [ ] **Step 2: Confirmar que no quedaron referencias**
 
 ```bash

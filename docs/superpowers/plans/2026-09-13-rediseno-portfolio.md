@@ -830,7 +830,7 @@ export const proyectos: Proyecto[] = [
 - [ ] **Step 9: Correr los tests y verificar que pasan**
 
 Run: `pnpm test`
-Esperado: PASS en los 10 tests.
+Esperado: PASS en los 11 tests (5 en `fechas.test.ts`, 6 en `data.test.ts`).
 
 - [ ] **Step 10: Commit**
 

@@ -72,3 +72,303 @@ body {
   margin-inline: auto;
   padding: 4rem 1.5rem;
 }
+
+.sg-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.sg-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+}
+
+.sg-badge-pill-dot {
+  color: #4ade80;
+}
+
+.sg-badge-pill-accent {
+  color: #a78bfa;
+}
+
+.sg-button-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-weight: 700;
+  padding: 0.85rem 1.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  transition: background 150ms;
+}
+
+.sg-button-outline:hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.sg-button-outline:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.sg-button-outline:disabled:hover {
+  background: var(--color-bg-card);
+}
+
+.sg-button-outline-sm {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+/* Boton primario: pill redondeada del todo (999px del radio maximo, acá
+   14px) con el gradiente de marca + glow. Es el unico boton con
+   box-shadow -- la elevacion del resto del sistema es por borde y color
+   de fondo, no por sombra. */
+.sg-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--gradient-accent);
+  color: white;
+  font-weight: 700;
+  padding: 0.85rem 1.85rem;
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.35), 0 8px 24px -8px rgba(59, 130, 246, 0.65);
+  transition: filter 150ms, transform 150ms, box-shadow 150ms;
+}
+
+.sg-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.5), 0 10px 28px -6px rgba(59, 130, 246, 0.8);
+}
+
+.sg-button:disabled {
+  cursor: default;
+  filter: grayscale(0.4);
+  opacity: 0.5;
+  box-shadow: none;
+  transform: none;
+}
+
+.sg-step-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 2.25rem;
+  border-radius: 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: border-color 150ms, transform 150ms;
+}
+
+.sg-step-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.sg-step-number-bg {
+  position: absolute;
+  top: -0.5rem;
+  right: 0.5rem;
+  font-size: 5rem;
+  font-weight: 800;
+  color: rgba(59, 130, 246, 0.08);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  transition: color 150ms;
+}
+
+.sg-step-card:hover .sg-step-number-bg {
+  color: rgba(59, 130, 246, 0.22);
+}
+
+.sg-step-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent-light);
+}
+
+.sg-section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+}
+
+.sg-section-heading-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 6rem;
+}
+
+.sg-section-heading-line::before,
+.sg-section-heading-line::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.sg-section-heading-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.sg-glass-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+}
+
+.sg-glass-card-bg {
+  position: absolute;
+  inset: -24px;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/fondo-mobile.webp");
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  filter: blur(10px);
+  opacity: 0.4;
+}
+
+@media (min-width: 640px) {
+  .sg-glass-card-bg {
+    background-image: url("/fondo.webp");
+  }
+}
+
+/* Fallback de iOS Safari: background-attachment: fixed tiene un bug de
+   repintado conocido en ese navegador, asi que por debajo del breakpoint
+   volvemos a scroll normal. Esta es la unica media query de max-width
+   del sistema -- es un fallback, no un breakpoint de layout. */
+@media (max-width: 639px) {
+  .sg-glass-card-bg {
+    background-attachment: scroll;
+  }
+}
+
+.sg-glass-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(59, 130, 246, 0.2), transparent 70%),
+    linear-gradient(to bottom, rgba(10, 14, 26, 0.35) 0%, var(--color-bg) 85%);
+}
+
+.sg-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 2200ms ease, transform 2200ms ease;
+}
+
+.sg-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sg-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .sg-button:hover,
+  .sg-step-card:hover {
+    transform: none;
+  }
+}
+
+.sg-scroll-top {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(6px);
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 200ms, transform 200ms;
+}
+
+.sg-scroll-top-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sg-scroll-top-ring {
+  position: absolute;
+  inset: 0;
+}
+
+.sg-scroll-top-icon {
+  position: relative;
+  z-index: 1;
+  color: var(--color-text);
+}
+
+.sg-wordmark {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.sg-wordmark-dev {
+  background: linear-gradient(100deg, #93c5fd, #3b82f6 55%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* La referencia solo comunica foco via color de borde, lo que resulta
+   insuficiente para accesibilidad -- agregamos un outline visible. */
+:focus-visible {
+  outline: 2px solid var(--color-accent-light);
+  outline-offset: 2px;
+}

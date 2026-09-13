@@ -301,19 +301,6 @@ body {
   transform: translateY(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sg-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .sg-button:hover,
-  .sg-step-card:hover {
-    transform: none;
-  }
-}
-
 .sg-scroll-top {
   position: fixed;
   right: 1.5rem;
@@ -350,6 +337,30 @@ body {
   position: relative;
   z-index: 1;
   color: var(--color-text);
+}
+
+/* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
+   DESPUES de las reglas base de cada selector que toca (.sg-reveal,
+   .sg-button, .sg-step-card, .sg-scroll-top): al tener la misma
+   especificidad que esas reglas, si esta media query quedara antes en el
+   archivo la regla base (mas tardia en la cascada) le ganaria pese a que
+   el media si matchea -- exactamente lo que pasaba con .sg-scroll-top
+   cuando este bloque vivia entre .sg-reveal-visible y .sg-scroll-top. */
+@media (prefers-reduced-motion: reduce) {
+  .sg-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .sg-button:hover,
+  .sg-step-card:hover {
+    transform: none;
+  }
+
+  .sg-scroll-top {
+    transition: none;
+  }
 }
 
 .sg-wordmark {

@@ -339,13 +339,238 @@ body {
   color: var(--color-text);
 }
 
+.sg-nav {
+  position: sticky;
+  top: 1.5rem;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 92%;
+  margin: 1.5rem auto 0;
+  padding: 0.85rem 1.25rem;
+  border-radius: 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 200ms, border-color 200ms, backdrop-filter 200ms;
+}
+
+@media (min-width: 640px) {
+  .sg-nav {
+    width: 80%;
+    margin: 2rem auto 0;
+    padding: 0.85rem 1.5rem;
+  }
+}
+
+.sg-nav-scrolled {
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border);
+}
+
+.sg-nav-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  transition: background 150ms, color 150ms;
+}
+
+.sg-nav-pill:hover {
+  background: rgba(59, 130, 246, 0.14);
+  color: var(--color-text);
+}
+
+.sg-nav-pill.sg-nav-pill-active {
+  background: rgba(59, 130, 246, 0.14);
+  color: var(--color-accent-light);
+  font-weight: 700;
+}
+
+.sg-footer {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.sg-footer-bg {
+  position: absolute;
+  inset: -24px;
+  z-index: 0;
+  pointer-events: none;
+  /* Mismo fondo-mobile.webp/fondo.webp que .sg-page-bg y .sg-glass-card-bg
+     -- acá va detrás de un blur(10px)+opacity:0.4, así que la versión
+     grande no se nota, pero se deja el mismo swap por consistencia. */
+  background-image: url("/fondo-mobile.webp");
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  filter: blur(10px);
+  opacity: 0.4;
+}
+
+@media (min-width: 640px) {
+  .sg-footer-bg {
+    background-image: url("/fondo.webp");
+  }
+}
+
+/* Fallback de iOS Safari, igual que en .sg-glass-card-bg: background-attachment:
+   fixed tiene un bug de repintado conocido en ese navegador por debajo de
+   este breakpoint. */
+@media (max-width: 639px) {
+  .sg-footer-bg {
+    background-attachment: scroll;
+  }
+}
+
+.sg-footer-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(59, 130, 246, 0.2), transparent 70%),
+    linear-gradient(to bottom, rgba(10, 14, 26, 0.35) 0%, var(--color-bg) 85%);
+}
+
+.sg-footer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: 0.875rem;
+  width: fit-content;
+  transition: color 150ms, transform 150ms;
+}
+
+.sg-footer-link:hover {
+  color: var(--color-text);
+  transform: translateX(3px);
+}
+
+.sg-footer-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.sg-footer-heading::before {
+  content: "";
+  width: 3px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--gradient-accent);
+}
+
+.sg-footer-heading-lg {
+  font-size: 1.5rem;
+}
+
+.sg-footer-heading-lg::before {
+  height: 22px;
+}
+
+.sg-footer-input-wrap {
+  position: relative;
+  flex: 1;
+}
+
+.sg-footer-input {
+  width: 100%;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem 0.7rem 2.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 150ms;
+}
+
+.sg-footer-input:focus {
+  border-color: var(--color-accent);
+}
+
+.sg-footer-input-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.sg-footer-connect {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  padding: 0.75rem 0.9rem;
+  text-align: left;
+  transition: border-color 150ms;
+}
+
+.sg-footer-connect:hover {
+  border-color: var(--color-accent);
+}
+
+.sg-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 10px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: color 150ms, border-color 150ms;
+}
+
+.sg-social-icon:hover {
+  color: var(--color-text);
+  border-color: var(--color-accent);
+}
+
+.sg-skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-accent);
+}
+
+.sg-skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
    DESPUES de las reglas base de cada selector que toca (.sg-reveal,
-   .sg-button, .sg-step-card, .sg-scroll-top): al tener la misma
-   especificidad que esas reglas, si esta media query quedara antes en el
-   archivo la regla base (mas tardia en la cascada) le ganaria pese a que
-   el media si matchea -- exactamente lo que pasaba con .sg-scroll-top
-   cuando este bloque vivia entre .sg-reveal-visible y .sg-scroll-top. */
+   .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link): al tener
+   la misma especificidad que esas reglas, si esta media query quedara
+   antes en el archivo la regla base (mas tardia en la cascada) le
+   ganaria pese a que el media si matchea -- exactamente lo que pasaba
+   con .sg-scroll-top cuando este bloque vivia entre .sg-reveal-visible y
+   .sg-scroll-top. */
 @media (prefers-reduced-motion: reduce) {
   .sg-reveal {
     opacity: 1;
@@ -360,6 +585,10 @@ body {
 
   .sg-scroll-top {
     transition: none;
+  }
+
+  .sg-footer-link:hover {
+    transform: none;
   }
 }
 

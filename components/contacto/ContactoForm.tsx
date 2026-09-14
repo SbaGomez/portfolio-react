@@ -31,6 +31,9 @@ export default function ContactoForm() {
   const [enviando, setEnviando] = useState(false);
   const [progreso, setProgreso] = useState(0);
   const [resultado, setResultado] = useState<"ok" | "error" | null>(null);
+  // El motivo concreto lo arma lib/emailjs (servicio caido, limite de envios,
+  // timeout). Sin guardarlo aca, esos mensajes serian codigo inalcanzable.
+  const [mensajeError, setMensajeError] = useState("");
 
   function revalidar(id: CampoFormulario, valor: string) {
     const { error, warning } = validarCampo(id, valor);
@@ -80,6 +83,7 @@ export default function ContactoForm() {
       setTocados({});
     } else {
       setResultado("error");
+      setMensajeError(r.error ?? "");
     }
     setTimeout(() => {
       setEnviando(false);
@@ -172,7 +176,7 @@ export default function ContactoForm() {
         {resultado === "error" && (
           <p className="sg-alert sg-alert-error">
             <AlertCircle size={16} aria-hidden="true" />
-            Hubo un error al enviar el mensaje. Intentá de nuevo.
+            {mensajeError || "Hubo un error al enviar el mensaje. Intentá de nuevo."}
           </p>
         )}
       </div>

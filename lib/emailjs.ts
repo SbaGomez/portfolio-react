@@ -1,11 +1,34 @@
 import emailjs from "@emailjs/browser";
 import type { DatosFormulario } from "./validacion";
+import { contacto } from "@/data/contacto";
 
 const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
 let inicializado = false;
+
+/**
+ * EmailJS no rechaza con un Error sino con un `EmailJSResponseStatus`, que es
+ * una clase suelta con `status` y `text` y que NO extiende Error. Por eso el
+ * `error instanceof Error` de antes daba false para todo fallo del servicio y
+ * el motivo real se perdia sin siquiera loguearse.
+ *
+ * No se importa la clase para no depender de que el paquete la exporte:
+ * alcanza con mirar la forma del objeto.
+ */
+function detalleDeError(error: unknown): { status: number | null; texto: string } {
+  if (typeof error === "object" && error !== null && "text" in error) {
+    const e = error as { status?: unknown; text?: unknown };
+    return {
+      status: typeof e.status === "number" ? e.status : null,
+      texto: typeof e.text === "string" ? e.text : "",
+    };
+  }
+  // El timeout de abajo si rechaza con un Error propio.
+  if (error instanceof Error) return { status: null, texto: error.message };
+  return { status: null, texto: "" };
+}
 
 export async function enviarEmail(
   datos: DatosFormulario,
@@ -46,13 +69,37 @@ export async function enviarEmail(
     ]);
     return { success: true };
   } catch (error) {
-    const msg = error instanceof Error ? error.message : "";
-    if (msg.includes("Timeout")) {
-      return { success: false, error: "El envío tardó demasiado. Verificá tu conexión e intentá de nuevo." };
+    const { status, texto } = detalleDeError(error);
+
+    // Sin esto, un servicio de correo desconectado se ve igual que un corte
+    // de red: el unico que sabe la causa es EmailJS y lo dice aca.
+    console.error(`EmailJS fallo (status ${status ?? "?"}): ${texto || "sin detalle"}`);
+
+    if (texto.includes("Timeout")) {
+      return {
+        success: false,
+        error: "El envío tardó demasiado. Verificá tu conexión e intentá de nuevo.",
+      };
     }
-    if (msg.includes("Template")) {
-      return { success: false, error: "Error en la configuración del servidor. Intentá más tarde." };
+
+    // 412: EmailJS recibio bien la peticion pero su servicio de correo
+    // conectado fallo, casi siempre porque la cuenta perdio la autorizacion.
+    // Reintentar no puede funcionar, asi que no se lo pedimos al visitante:
+    // se le da una via que si anda.
+    if (status === 412) {
+      return {
+        success: false,
+        error: `El formulario está fuera de servicio por un problema de configuración. Escribime directo a ${contacto.email}.`,
+      };
     }
+
+    if (status === 429) {
+      return {
+        success: false,
+        error: "Demasiados envíos seguidos. Esperá un momento e intentá de nuevo.",
+      };
+    }
+
     return { success: false, error: "Error al enviar el mensaje. Intentá de nuevo." };
   }
 }

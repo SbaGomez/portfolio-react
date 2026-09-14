@@ -1,6 +1,6 @@
 import type { Proyecto } from "./tipos";
 
-export const proyectos: Proyecto[] = [
+const fichas: Proyecto[] = [
   {
     slug: "ecosistema-roleplay",
     titulo: "Ecosistema de servidor de roleplay",
@@ -92,7 +92,7 @@ export const proyectos: Proyecto[] = [
       "No usa base de datos: el estado de revisión vive como archivo plano dentro de cada carpeta, así que sobrevive reinicios y se puede inspeccionar desde el explorador de archivos.",
     ],
     stack: ["Electron", "JavaScript (ES Modules)", "FTP"],
-    metricas: { lineas: 2420, commits: 14, periodo: "abr 2026 – may 2026" },
+    metricas: { lineas: 2420, commits: 14, periodo: "abr 2025 – may 2025" },
     destacados: [
       "Estado de revisión persistido como archivo plano por carpeta, sin base de datos e inspeccionable a mano.",
       "Despacho selectivo: solo salen de la máquina los archivos cifrados, la imagen en claro nunca se transfiere.",
@@ -116,7 +116,7 @@ export const proyectos: Proyecto[] = [
       "Proyecto deliberadamente acotado: resuelve un flujo operativo puntual sin arrastrar infraestructura.",
     ],
     stack: ["Electron", "TypeScript", "SheetJS", "Nodemailer"],
-    metricas: { lineas: 1033, commits: 4, periodo: "ene 2026" },
+    metricas: { lineas: 1033, commits: 4, periodo: "ene 2025" },
     destacados: [
       "Verificación real contra la plataforma, no heurística sobre el formato del número.",
       "Sesión persistente: se vincula una sola vez y sobrevive reinicios de la aplicación.",
@@ -178,3 +178,13 @@ export const proyectos: Proyecto[] = [
     destacado: false,
   },
 ];
+
+/**
+ * Ordenadas por año, de la más reciente a la más antigua. Se ordena acá y no
+ * reacomodando el array a mano para que haya una sola fuente de verdad y las
+ * fichas nuevas se ubiquen solas. El sort de JavaScript es estable, así que
+ * dentro del mismo año se respeta el orden en que están escritas.
+ */
+export const proyectos: Proyecto[] = [...fichas].sort((a, b) =>
+  b.anio.localeCompare(a.anio),
+);

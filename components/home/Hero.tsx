@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
-import { GithubIcon } from "@/components/ui/BrandIcons";
+import { LinkedinIcon } from "@/components/ui/BrandIcons";
 import { perfil } from "@/data/perfil";
 import { contacto } from "@/data/contacto";
 
 export default function Hero() {
-  const github = contacto.redes.find((r) => r.nombre === "GitHub")!;
+  const linkedin = contacto.redes.find((r) => r.nombre === "LinkedIn")!;
 
   return (
     <section className="flex flex-col items-center gap-6 px-6 py-32 text-center">
@@ -19,9 +19,9 @@ export default function Hero() {
           <Mail size={18} aria-hidden="true" />
           Contactame
         </Link>
-        <a href={github.url} target="_blank" rel="noopener noreferrer" className="sg-button-outline">
-          <GithubIcon size={18} />
-          GitHub
+        <a href={linkedin.url} target="_blank" rel="noopener noreferrer" className="sg-button-outline">
+          <LinkedinIcon size={18} />
+          LinkedIn
         </a>
       </div>
     </section>

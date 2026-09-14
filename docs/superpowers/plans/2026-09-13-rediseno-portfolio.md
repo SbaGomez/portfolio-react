@@ -35,6 +35,19 @@ Estas reglas aplican a **todas** las tareas. Los valores están copiados literal
 - **Breakpoint único:** `@media (min-width: 640px)`. La referencia usa solo ese en su CSS propio.
 - **Reveal:** 2200ms. Stagger de 50–120ms según sección.
 - **`prefers-reduced-motion: reduce`** desactiva reveals, stagger y lift. Obligatorio en toda tarea que agregue movimiento.
+- **Un solo bloque de reduced-motion, al final de `app/globals.css`.** Toda
+  contraparte va **dentro** de ese bloque, y la regla base del selector debe
+  quedar **antes** de él. No crear bloques nuevos junto a cada regla.
+
+  El motivo se aprendió rompiéndolo en la Task 4: un `@media` **no aporta
+  especificidad**, sólo condiciona la inclusión de sus reglas. Si el bloque
+  queda antes de la regla base, a igual especificidad gana la regla posterior
+  y el override es código muerto — aunque la media query matchee. No hay lint
+  que lo detecte, y leyendo el archivo fuente parece correcto.
+
+  Por eso la verificación de reduced-motion se hace **contra el CSS compilado
+  que sirve el navegador**, no contra el archivo fuente, y comprobando el
+  estilo computado del elemento.
 - **Idioma:** `lang="es"` en el documento. Todo el texto de interfaz en español rioplatense.
 - **Confidencialidad:** los empleadores se nombran (Synerbit, Arvent Group). Los sistemas de clientes NO se nombran ni se describe su arquitectura interna. Ver §2.1 y §7 del spec.
 - **Versiones exactas:** `next@16.3.2`, `react@19.2.8`, `react-dom@19.2.8`, `tailwindcss@^4`, `@tailwindcss/postcss@^4`. Node 20+ (el entorno tiene 24.12.0), pnpm 11.21.0.

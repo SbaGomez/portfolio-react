@@ -44,9 +44,21 @@ export default function SobreMi() {
       <section className="sg-section">
         <SectionHeading titulo="Sobre mí" subtitulo="Perfil profesional." />
         <Reveal>
-          <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-[var(--color-text-muted)]">
-            {perfil.resumen}
-          </p>
+          <div className="flex flex-col items-center gap-6">
+            {/* La imagen es cuadrada de origen, asi que el recorte circular
+                no deforma nada. width/height explicitos para que el navegador
+                reserve el lugar y el texto no salte al cargar. */}
+            <img
+              src="/perfil.webp"
+              alt={`Foto de ${perfil.nombre}`}
+              width={128}
+              height={128}
+              className="h-32 w-32 rounded-full border border-[var(--color-border)] object-cover"
+            />
+            <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-[var(--color-text-muted)]">
+              {perfil.resumen}
+            </p>
+          </div>
         </Reveal>
       </section>
 

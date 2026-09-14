@@ -16,13 +16,19 @@ export default function StatsBar() {
     <div className="sg-section relative z-10 -mt-24 sm:-mt-32">
       <div className="sg-stats-container grid grid-cols-1 sm:grid-cols-3">
         {celdas.map(({ Icon, valor, label }) => (
-          <div key={label} className="flex items-center gap-3 p-5">
-            <span className="sg-step-icon !h-9 !w-9 !rounded-lg">
-              <Icon size={16} aria-hidden="true" />
+          // justify-center: con solo tres celdas anchas, el grupo pegado a la
+          // izquierda dejaba un vacio grande a la derecha de cada una.
+          <div key={label} className="flex items-center justify-center gap-4 p-6">
+            {/* Sin overrides !important: StatsBar es el unico consumidor de
+                .sg-step-icon, asi que se usa su tamaño natural de 3rem. */}
+            <span className="sg-step-icon">
+              <Icon size={20} aria-hidden="true" />
             </span>
-            <span>
-              <b className="block text-base font-bold tabular-nums">{valor}</b>
-              <span className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">
+            <span className="flex flex-col">
+              {/* El numero es el dato: estaba en text-base, mas chico que los
+                  tags de las tarjetas de proyecto. */}
+              <b className="text-2xl font-extrabold leading-none tabular-nums">{valor}</b>
+              <span className="mt-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
                 {label}
               </span>
             </span>

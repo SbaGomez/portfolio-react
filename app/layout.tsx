@@ -7,10 +7,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://sebastiangomez.com.ar"),
   title: {
-    default: "Sebastián Gómez — Full Stack Developer",
+    default: "Sebastian Gomez — Full Stack Developer",
     // Las paginas hijas declaran solo su nombre ("Sobre mi"): el sufijo lo
     // pone este template, y repetirlo alla daria el nombre dos veces.
-    template: "%s — Sebastián Gómez",
+    template: "%s — Sebastian Gomez",
   },
   description:
     "Desarrollador Full Stack. .NET, Java / Spring Boot, Node.js, Angular, React Native y Electron.",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_AR",
     url: "https://sebastiangomez.com.ar",
-    siteName: "Sebastián Gómez",
-    title: "Sebastián Gómez — Full Stack Developer",
+    siteName: "Sebastian Gomez",
+    title: "Sebastian Gomez — Full Stack Developer",
     description: "Desarrollador Full Stack con experiencia en web, backend, mobile y escritorio.",
   },
 };

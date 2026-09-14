@@ -45,7 +45,7 @@ export const proyectos: Proyecto[] = [
       "Compresión de imágenes en el navegador antes de subirlas, para no transferir originales de cámara.",
       "Cinco plantillas de email transaccional propias para verificación y recuperación de cuenta.",
     ],
-    links: { demo: "https://clubdepropietarios.com.ar" },
+    links: {},
     imagenes: [],
     anonimo: false,
     destacado: true,

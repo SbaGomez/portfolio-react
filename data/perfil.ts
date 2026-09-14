@@ -1,8 +1,8 @@
 import type { Perfil } from "./tipos";
 
 export const perfil: Perfil = {
-  nombre: "Sebastián Gómez",
-  nombreCompleto: "Sergio Sebastián Gómez",
+  nombre: "Sebastian Gomez",
+  nombreCompleto: "Sergio Sebastian Gomez",
   titulo: "Full Stack Developer",
   fechaNacimiento: "1995-12-09",
   inicioProfesional: "2022-07-01",

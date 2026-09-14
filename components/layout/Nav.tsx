@@ -28,7 +28,7 @@ export default function Nav() {
 
   return (
     <nav className={`sg-nav ${scrolled ? "sg-nav-scrolled" : ""}`}>
-      <Link href="/" aria-label="Sebastián Gómez" className="shrink-0">
+      <Link href="/" aria-label="Sebastian Gomez" className="shrink-0">
         <Wordmark />
       </Link>
       <div className="flex flex-wrap items-center justify-end gap-1">

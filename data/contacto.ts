@@ -5,7 +5,7 @@ export const contacto: Contacto = {
   telefono: "2255413090",
   telefonoConPais: "+542255413090",
   ubicacion: "Argentina - Buenos Aires",
-  copyright: "Copyright © 2026 Sebastián Gómez. Todos los derechos reservados.",
+  copyright: "Copyright © 2026 Sebastian Gomez. Todos los derechos reservados.",
   redes: [
     { nombre: "GitHub", url: "https://github.com/SbaGomez", color: "#6e5494" },
     { nombre: "LinkedIn", url: "https://www.linkedin.com/in/sbagomez/", color: "#0077B5" },
@@ -20,7 +20,7 @@ export const contacto: Contacto = {
       link: "mailto:admin@sebastiangomez.com.ar",
     },
     {
-      icono: "message-circle",
+      icono: "whatsapp",
       titulo: "WhatsApp",
       valor: "2255413090",
       link: "https://wa.me/542255413090?text=Hola!%20Me%20interesa%20contactarte%20para%20hablar%20sobre%20un%20proyecto.",

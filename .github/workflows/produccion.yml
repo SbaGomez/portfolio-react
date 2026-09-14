@@ -22,9 +22,12 @@ jobs:
 
       - uses: pnpm/action-setup@v4
 
+      # 22 y no 20: pnpm 11.21.0 (el que fija packageManager) exige Node
+      # >=22.13 porque usa node:sqlite, que en Node 20 no existe y hace
+      # fallar el setup. Node 20 ademas ya esta deprecado en los runners.
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
       - run: pnpm install --frozen-lockfile

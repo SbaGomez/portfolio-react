@@ -16,7 +16,7 @@ Portfolio personal en Next.js compilado a HTML estático y servido por Apache.
 
 ## Requisitos
 
-- Node.js 20 o superior
+- Node.js 22.13 o superior (lo exige la versión de pnpm que fija `packageManager`)
 - pnpm
 
 ## Puesta en marcha

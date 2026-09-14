@@ -187,8 +187,8 @@ body {
 .sg-step-number-bg {
   position: absolute;
   top: -0.5rem;
-  right: 0.5rem;
-  font-size: 5rem;
+  right: 0.75rem;
+  font-size: 3rem;
   font-weight: 800;
   color: rgba(59, 130, 246, 0.08);
   line-height: 1;
@@ -584,14 +584,109 @@ body {
   outline-offset: 2px;
 }
 
+.sg-hero-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sg-tech-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: border-color 150ms, transform 150ms;
+}
+
+.sg-tech-chip:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.sg-tag {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-accent-light);
+}
+
+/* Portado de .rw-stats-container: celdas que se tocan sin gap (grid),
+   separadas entre si por un borde interno en vez de espacio. En mobile
+   son 2x2 (grid-cols-2): borde a la derecha en col 1 y abajo en fila 1.
+   Desde 640px son 4x1 (grid-cols-4): sin borde abajo, borde a la derecha
+   en las primeras tres. Fijo a 4 celdas porque StatsBar siempre renderiza
+   4 (ver Step 2). */
+.sg-stats-container {
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: var(--color-bg-card);
+  overflow: hidden;
+}
+
+.sg-stats-container > div {
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sg-stats-container > div:nth-child(2n) {
+  border-right: none;
+}
+
+.sg-stats-container > div:nth-child(3),
+.sg-stats-container > div:nth-child(4) {
+  border-bottom: none;
+}
+
+@media (min-width: 640px) {
+  .sg-stats-container > div {
+    border-bottom: none;
+  }
+
+  .sg-stats-container > div:nth-child(2n) {
+    border-right: 1px solid var(--color-border);
+  }
+
+  .sg-stats-container > div:last-child {
+    border-right: none;
+  }
+}
+
+/* Portado de .rw-cta-band tal cual, con el flex que la referencia resolvia
+   por fuera. Unico lugar del sitio donde el violeta domina sobre el azul
+   -- deliberado, marca el cierre de la pagina. */
+.sg-cta-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(59, 130, 246, 0.05);
+  background:
+    radial-gradient(ellipse 80% 120% at 50% 0%, rgba(109, 91, 208, 0.28), transparent 70%),
+    rgba(17, 26, 46, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  text-align: center;
+}
+
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
    DESPUES de las reglas base de cada selector que toca (.sg-reveal,
-   .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link), y tiene
-   que ser literalmente lo ultimo del archivo: cualquier regla nueva que
-   se agregue mas abajo (motion o no) volveria a dejarlo en no-op porque
-   un @media no suma especificidad -- exactamente el bug que ya paso una
-   vez con .sg-scroll-top cuando este bloque vivia entre
-   .sg-reveal-visible y .sg-scroll-top. Las Tasks 6-9 agregan mas
+   .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link,
+   .sg-tech-chip), y tiene que ser literalmente lo ultimo del archivo:
+   cualquier regla nueva que se agregue mas abajo (motion o no) volveria a
+   dejarlo en no-op porque un @media no suma especificidad -- exactamente
+   el bug que ya paso una vez con .sg-scroll-top cuando este bloque vivia
+   entre .sg-reveal-visible y .sg-scroll-top. Las Tasks 7-9 agregan mas
    contrapartes aca; nada nuevo va despues de este bloque. */
 @media (prefers-reduced-motion: reduce) {
   .sg-reveal {
@@ -610,6 +705,10 @@ body {
   }
 
   .sg-footer-link:hover {
+    transform: none;
+  }
+
+  .sg-tech-chip:hover {
     transform: none;
   }
 }

@@ -3,16 +3,27 @@
 # se agrego, se deployo, y el sintoma no cambio en nada.
 Options -MultiViews
 
-# Este ErrorDocument SI toma efecto. Medido el 2026-09-14 contra produccion:
-# HEAD a una ruta inexistente devuelve "404 Not Found" en ~0.25s y con el
-# mismo Last-Modified que /404.html, o sea que el servidor ya eligio este
-# archivo como cuerpo del error.
+# ErrorDocument 404 /404.html  -->  RETIRADO el 2026-09-14.
 #
-# Lo que falla es entregarlo: el GET no recibe un solo byte (igual con y sin
-# compresion, con y sin Range, con User-Agent de curl o de Chrome) y
-# Cloudflare corta con un 520 a los ~40s. HEAD funciona, GET no: el fallo
-# esta en el cuerpo de la respuesta de error, del lado del hosting.
+# Medido contra produccion con la directiva puesta:
 #
-# SIN RESOLVER. Falta el log de errores del servidor. No tocar este archivo
-# esperando arreglarlo: el problema no esta aca.
-ErrorDocument 404 /404.html
+#   HEAD /noexiste  -> 404 en 0.25s, Last-Modified 19:53:10
+#   HEAD /404.html  -> 200 en 0.25s, Last-Modified 19:53:10   (identico)
+#   GET  /noexiste  -> 0 bytes, cuelga, Cloudflare 520 a los ~40s
+#
+# El Last-Modified identico prueba que la directiva SI tomaba efecto: el
+# servidor ya elegia 404.html como cuerpo del error. Lo que fallaba era
+# entregarlo, con y sin compresion, con y sin Range, con cualquier
+# User-Agent. HEAD respondia, GET no.
+#
+# Se retira para partir el diagnostico en dos:
+#   - si los 404 pasan a responder rapido con la pagina por defecto de
+#     Apache, el fallo esta en el mecanismo de ErrorDocument de este hosting;
+#   - si siguen colgando, es un handler global del hosting y esta directiva
+#     nunca importo.
+#
+# Y aunque no lo arregle, sacarla ya es una mejora: un 404 feo e instantaneo
+# es mejor experiencia que 40 segundos de cuelgue terminando en un 520.
+#
+# Para restaurar la pagina de error propia, volver a agregar:
+#   ErrorDocument 404 /404.html

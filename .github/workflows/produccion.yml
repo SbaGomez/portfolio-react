@@ -74,6 +74,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # Ambas rutas tienen que terminar en barra.
+          # Ambas rutas tienen que terminar en barra. El usuario FTP ya entra
+          # directamente en public_html, asi que el destino es la raiz de la
+          # sesion: si el hosting cambia esa estructura, se toca aca.
           local-dir: ./out/
-          server-dir: ${{ vars.FTP_SERVER_DIR }}
+          server-dir: ./

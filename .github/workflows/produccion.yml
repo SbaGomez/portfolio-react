@@ -1,0 +1,79 @@
+name: Produccion
+
+# El PR contra produccion solo verifica; el deploy ocurre al pushear sobre
+# produccion, o sea cuando el PR se mergea. Desplegar desde el PR subiria
+# codigo sin revisar ni mergear al sitio en vivo.
+on:
+  pull_request:
+    branches: [produccion]
+  push:
+    branches: [produccion]
+
+# Dos merges seguidos no deben subir en paralelo y pisarse entre si.
+concurrency:
+  group: produccion-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm test
+
+      # Las NEXT_PUBLIC_* se leen en build time: sin ellas el sitio compila
+      # igual, pero el formulario queda muerto con "Configuracion de EmailJS
+      # incompleta". Son publicas por diseño (viajan al bundle), pero igual
+      # se pasan como secrets para no versionarlas.
+      - run: pnpm build
+        env:
+          NEXT_PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_SERVICE_ID }}
+          NEXT_PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID }}
+          NEXT_PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY }}
+
+      # Si el .htaccess no viaja, el 404 deja de estar declarado y el fallo
+      # es silencioso: el sitio anda, pero las URLs inexistentes quedan en
+      # blanco. Mejor romper el build aca.
+      - name: Verificar que el export incluye el .htaccess
+        run: test -f out/.htaccess
+
+      - uses: actions/upload-artifact@v4
+        if: github.event_name == 'push'
+        with:
+          name: sitio
+          path: out/
+          # Sin esto el artifact descarta los dotfiles y se pierde el
+          # .htaccess justo despues de haberlo verificado.
+          include-hidden-files: true
+          retention-days: 1
+
+  desplegar:
+    if: github.event_name == 'push'
+    needs: verificar
+    runs-on: ubuntu-latest
+    steps:
+      # Se reusa el build ya verificado en vez de compilar de nuevo: asi se
+      # sube exactamente lo que paso los tests.
+      - uses: actions/download-artifact@v4
+        with:
+          name: sitio
+          path: out
+
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Ambas rutas tienen que terminar en barra.
+          local-dir: ./out/
+          server-dir: ${{ vars.FTP_SERVER_DIR }}

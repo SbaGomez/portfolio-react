@@ -563,35 +563,6 @@ body {
   top: 1rem;
 }
 
-/* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
-   DESPUES de las reglas base de cada selector que toca (.sg-reveal,
-   .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link): al tener
-   la misma especificidad que esas reglas, si esta media query quedara
-   antes en el archivo la regla base (mas tardia en la cascada) le
-   ganaria pese a que el media si matchea -- exactamente lo que pasaba
-   con .sg-scroll-top cuando este bloque vivia entre .sg-reveal-visible y
-   .sg-scroll-top. */
-@media (prefers-reduced-motion: reduce) {
-  .sg-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .sg-button:hover,
-  .sg-step-card:hover {
-    transform: none;
-  }
-
-  .sg-scroll-top {
-    transition: none;
-  }
-
-  .sg-footer-link:hover {
-    transform: none;
-  }
-}
-
 .sg-wordmark {
   font-size: 1.45rem;
   font-weight: 800;
@@ -611,4 +582,34 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-accent-light);
   outline-offset: 2px;
+}
+
+/* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
+   DESPUES de las reglas base de cada selector que toca (.sg-reveal,
+   .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link), y tiene
+   que ser literalmente lo ultimo del archivo: cualquier regla nueva que
+   se agregue mas abajo (motion o no) volveria a dejarlo en no-op porque
+   un @media no suma especificidad -- exactamente el bug que ya paso una
+   vez con .sg-scroll-top cuando este bloque vivia entre
+   .sg-reveal-visible y .sg-scroll-top. Las Tasks 6-9 agregan mas
+   contrapartes aca; nada nuevo va despues de este bloque. */
+@media (prefers-reduced-motion: reduce) {
+  .sg-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .sg-button:hover,
+  .sg-step-card:hover {
+    transform: none;
+  }
+
+  .sg-scroll-top {
+    transition: none;
+  }
+
+  .sg-footer-link:hover {
+    transform: none;
+  }
 }

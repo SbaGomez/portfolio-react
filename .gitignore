@@ -26,4 +26,5 @@ yarn-error.log*
 /.next/
 /out/
 next-env.d.ts
+tsconfig.tsbuildinfo
 .bg-candidates/

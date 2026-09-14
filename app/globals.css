@@ -186,9 +186,13 @@ body {
 
 .sg-step-number-bg {
   position: absolute;
-  top: -0.5rem;
-  right: 0.75rem;
-  font-size: 3rem;
+  /* Adentro de la caja y no colgando del borde: con top negativo el
+     overflow: hidden de la tarjeta le comia el filo superior a los digitos.
+     A 3rem el numero medía mas ancho que el margen que puede reservar el
+     titulo, asi que el texto le pasaba por encima. */
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   color: rgba(59, 130, 246, 0.08);
   line-height: 1;
@@ -249,6 +253,9 @@ body {
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid var(--color-border);
+  /* El contenido va sobre las capas absolutas de fondo y glow, que cubren
+     toda la caja: sin padding propio queda pegado al borde. */
+  padding: 2rem;
 }
 
 .sg-glass-card-bg {
@@ -366,8 +373,14 @@ body {
 }
 
 .sg-nav-scrolled {
-  background: rgba(10, 14, 26, 0.85);
-  backdrop-filter: blur(8px);
+  /* Opacidad baja compensada con mas blur: el fondo tapa menos, pero lo que
+     pasa por detras llega difuminado y el texto del nav sigue legible. */
+  background: rgba(10, 14, 26, 0.6);
+  /* El prefijo va PRIMERO: Lightning CSS trata ambas como la misma
+     propiedad y conserva solo la ultima, y la estandar es la que necesita
+     Firefox. Ver .sg-cta-band y .sg-modal-overlay. */
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
   border: 1px solid var(--color-border);
 }
 
@@ -609,55 +622,40 @@ body {
   transform: translateY(-2px);
 }
 
+/* Escala de los chips del inicio, pero conservando el tinte azul: el fondo
+   de aquellos es --color-bg-card, que es el color de las tarjetas de
+   proyecto, asi que ahi los tags quedarian sin fondo visible. Sin lift en
+   hover a proposito: son <li>, no controles, y no corresponde sugerir que
+   se puede hacer click. */
 .sg-tag {
-  padding: 0.15rem 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.8rem;
   border-radius: 999px;
   background: rgba(59, 130, 246, 0.12);
   border: 1px solid var(--color-border);
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--color-accent-light);
 }
 
-/* Portado de .rw-stats-container: celdas que se tocan sin gap (grid),
-   separadas entre si por un borde interno en vez de espacio. En mobile
-   son 2x2 (grid-cols-2): borde a la derecha en col 1 y abajo en fila 1.
-   Desde 640px son 4x1 (grid-cols-4): sin borde abajo, borde a la derecha
-   en las primeras tres. Fijo a 4 celdas porque StatsBar siempre renderiza
-   4 (ver Step 2). */
+/* Portado de .rw-stats-container. Las divisiones se dibujan con un gap de
+   1px que deja ver el fondo del contenedor, en vez de con un borde por
+   celda: funciona para cualquier cantidad de celdas y en cualquier
+   breakpoint, sin reglas nth-child atadas a un numero fijo. Antes estaba
+   clavado a 4 celdas (2x2 en mobile, 4x1 arriba) y sacar una dejaba bordes
+   colgando en el lugar equivocado. */
 .sg-stats-container {
+  gap: 1px;
+  background: var(--color-border);
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  background: var(--color-bg-card);
   overflow: hidden;
 }
 
 .sg-stats-container > div {
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.sg-stats-container > div:nth-child(2n) {
-  border-right: none;
-}
-
-.sg-stats-container > div:nth-child(3),
-.sg-stats-container > div:nth-child(4) {
-  border-bottom: none;
-}
-
-@media (min-width: 640px) {
-  .sg-stats-container > div {
-    border-bottom: none;
-  }
-
-  .sg-stats-container > div:nth-child(2n) {
-    border-right: 1px solid var(--color-border);
-  }
-
-  .sg-stats-container > div:last-child {
-    border-right: none;
-  }
+  background: var(--color-bg-card);
 }
 
 /* Portado de .rw-cta-band tal cual, con el flex que la referencia resolvia
@@ -674,8 +672,9 @@ body {
   background:
     radial-gradient(ellipse 80% 120% at 50% 0%, rgba(109, 91, 208, 0.28), transparent 70%),
     rgba(17, 26, 46, 0.55);
-  backdrop-filter: blur(6px);
+  /* Prefijo primero: el build conserva solo la ultima declarada. */
   -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   text-align: center;
 }
 
@@ -746,8 +745,9 @@ body {
   justify-content: center;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
+  /* Prefijo primero: el build conserva solo la ultima declarada. */
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 /* Junto al boton principal, la unica superficie del sitio autorizada a

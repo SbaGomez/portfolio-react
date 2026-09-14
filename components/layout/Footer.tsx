@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Copy, Check, MessageCircle } from "lucide-react";
-import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/BrandIcons";
+import { Copy, Check } from "lucide-react";
+import { GithubIcon, LinkedinIcon, InstagramIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import Wordmark from "@/components/ui/Wordmark";
 import { contacto } from "@/data/contacto";
 
@@ -18,7 +18,7 @@ const ICONOS = {
   GitHub: GithubIcon,
   LinkedIn: LinkedinIcon,
   Instagram: InstagramIcon,
-  WhatsApp: MessageCircle,
+  WhatsApp: WhatsappIcon,
 };
 
 export default function Footer() {
@@ -80,8 +80,11 @@ export default function Footer() {
             )}
             <span className="sr-only">{copiado ? "Email copiado" : "Copiar email"}</span>
           </button>
-          <p aria-live="polite" className="h-4 text-xs text-[#4ade80]">
-            {copiado ? "Copiado" : ""}
+          {/* Region viva solo para lectores de pantalla: el check verde del
+              boton ya es la senal visual, y el texto suelto colgaba por fuera
+              del recuadro. */}
+          <p aria-live="polite" className="sr-only">
+            {copiado ? "Email copiado" : ""}
           </p>
         </div>
       </div>

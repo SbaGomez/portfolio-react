@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Mail } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
-import BadgePill from "@/components/ui/BadgePill";
 import { perfil } from "@/data/perfil";
 import { contacto } from "@/data/contacto";
 
@@ -10,7 +9,6 @@ export default function Hero() {
 
   return (
     <section className="flex flex-col items-center gap-6 px-6 py-32 text-center">
-      {perfil.disponible && <BadgePill dot>Disponible para trabajar</BadgePill>}
       <h1 className="text-6xl font-extrabold tracking-tight text-balance sm:text-7xl lg:text-8xl">
         {perfil.nombre}
         <span className="sg-hero-gradient block">FULL STACK</span>

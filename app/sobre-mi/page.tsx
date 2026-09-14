@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import GlassCard from "@/components/ui/GlassCard";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Reveal from "@/components/ui/Reveal";
 import Timeline, { type ItemTimeline } from "@/components/sobre-mi/Timeline";
@@ -45,11 +44,9 @@ export default function SobreMi() {
       <section className="sg-section">
         <SectionHeading titulo="Sobre mí" subtitulo="Perfil profesional." />
         <Reveal>
-          <GlassCard>
-            <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
-              {perfil.resumen}
-            </p>
-          </GlassCard>
+          <p className="mx-auto max-w-3xl text-center text-base leading-relaxed text-[var(--color-text-muted)]">
+            {perfil.resumen}
+          </p>
         </Reveal>
       </section>
 

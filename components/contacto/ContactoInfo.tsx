@@ -1,26 +1,28 @@
-import { Mail, MessageCircle, MapPin } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
-import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/BrandIcons";
+import { GithubIcon, LinkedinIcon, InstagramIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import { contacto } from "@/data/contacto";
 
 const ICONOS_MEDIO = {
   mail: Mail,
-  "message-circle": MessageCircle,
+  whatsapp: WhatsappIcon,
   "map-pin": MapPin,
 };
 
-// Mismo mapa que el Footer: lucide no trae iconos de marca, salvo WhatsApp
-// que se resuelve con el generico de mensaje.
+// Mismo mapa que el Footer: lucide no trae iconos de marca, van inline.
 const ICONOS_RED = {
   GitHub: GithubIcon,
   LinkedIn: LinkedinIcon,
   Instagram: InstagramIcon,
-  WhatsApp: MessageCircle,
+  WhatsApp: WhatsappIcon,
 };
 
 export default function ContactoInfo() {
+  // self-start: es hija directa de la grilla de /contacto, que la estiraria
+  // a la altura del formulario y dejaria un hueco enorme debajo del ultimo
+  // icono.
   return (
-    <GlassCard>
+    <GlassCard className="self-start">
       <h2 className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-light)]">
         Otros medios
       </h2>

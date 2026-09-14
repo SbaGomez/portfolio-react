@@ -77,6 +77,11 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # El servidor exige TLS: con FTP plano rechaza la conexion con
+          # "550 SSL/TLS required on the control channel". "ftps" es TLS
+          # explicito sobre el puerto 21; si el hosting usara TLS implicito
+          # en el 990, el valor seria "ftps-legacy".
+          protocol: ftps
           # Ambas rutas tienen que terminar en barra. El usuario FTP ya entra
           # directamente en public_html, asi que el destino es la raiz de la
           # sesion: si el hosting cambia esa estructura, se toca aca.

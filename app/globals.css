@@ -795,6 +795,61 @@ body {
   color: var(--color-text);
 }
 
+/* Portado de .rw-footer-input, sin el padding izquierdo que ahi deja lugar
+   a un icono. El borde es el unico canal de estado: rojo error, ambar
+   advertencia, acento foco. */
+.sg-input {
+  width: 100%;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 150ms;
+}
+
+.sg-input:focus { border-color: var(--color-accent); }
+.sg-input-error { border-color: #ef4444; }
+.sg-input-warning { border-color: #f59e0b; }
+
+.sg-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  border: 1px solid;
+}
+
+.sg-alert-ok { color: #4ade80; border-color: rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.1); }
+.sg-alert-error { color: #f87171; border-color: rgba(239, 68, 68, 0.35); background: rgba(239, 68, 68, 0.1); }
+
+.sg-progress-track {
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.sg-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--gradient-accent);
+  transition: width 200ms;
+}
+
+.sg-spin { animation: sg-spin 1s linear infinite; }
+
+@keyframes sg-spin {
+  to { transform: rotate(360deg); }
+}
+
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
    DESPUES de las reglas base de cada selector que toca (.sg-reveal,
    .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link,
@@ -826,5 +881,13 @@ body {
 
   .sg-tech-chip:hover {
     transform: none;
+  }
+
+  .sg-spin {
+    animation: none;
+  }
+
+  .sg-progress-fill {
+    transition: none;
   }
 }

@@ -15,7 +15,41 @@ export default function ProyectoModal({
 
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") onCerrar();
+      if (e.key === "Escape") {
+        onCerrar();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      // Trap real: mover el foco al dialogo una sola vez no alcanza, porque
+      // el Tab sigue caminando hacia la pagina de atras, que esta detras de
+      // un overlay y no se puede ver.
+      const cont = ref.current;
+      if (!cont) return;
+      const focusables = cont.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusables.length === 0) {
+        e.preventDefault();
+        cont.focus();
+        return;
+      }
+
+      const primero = focusables[0];
+      const ultimo = focusables[focusables.length - 1];
+      const activo = document.activeElement;
+
+      if (e.shiftKey) {
+        // El contenedor cuenta como "principio": tiene tabIndex -1 y es
+        // donde arranca el foco al abrir.
+        if (activo === primero || activo === cont) {
+          e.preventDefault();
+          ultimo.focus();
+        }
+      } else if (activo === ultimo) {
+        e.preventDefault();
+        primero.focus();
+      }
     }
     document.addEventListener("keydown", onKey);
     // Se guarda el overflow previo en vez de asumir "": si el body ya tenia

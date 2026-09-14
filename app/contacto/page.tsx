@@ -6,6 +6,11 @@ import ContactoInfo from "@/components/contacto/ContactoInfo";
 export const metadata: Metadata = {
   title: "Contacto",
   description: "Escribime para hablar de un proyecto, una idea o una posición.",
+  alternates: { canonical: "/contacto/" },
+  openGraph: {
+    title: "Contacto — Sebastian Gomez",
+    description: "Escribime para hablar de un proyecto, una idea o una posición.",
+  },
 };
 
 export default function Contacto() {
@@ -13,6 +18,7 @@ export default function Contacto() {
     <main id="contenido">
       <section className="sg-section">
         <SectionHeading
+          principal
           titulo="Contacto"
           subtitulo="Contame sobre tu proyecto y te respondo a la brevedad."
         />

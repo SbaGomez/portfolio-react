@@ -10,6 +10,13 @@ import { educacion } from "@/data/educacion";
 export const metadata: Metadata = {
   title: "Sobre mí",
   description: "Experiencia, habilidades técnicas y formación.",
+  alternates: { canonical: "/sobre-mi/" },
+  // Sin esto hereda el del layout y compartir la página muestra el título
+  // genérico del sitio en vez del de la sección.
+  openGraph: {
+    title: "Sobre mí — Sebastian Gomez",
+    description: "Experiencia, habilidades técnicas y formación.",
+  },
 };
 
 const itemsExperiencia: ItemTimeline[] = experiencias.map((e) => ({
@@ -42,7 +49,7 @@ export default function SobreMi() {
   return (
     <main id="contenido">
       <section className="sg-section">
-        <SectionHeading titulo="Sobre mí" subtitulo="Perfil profesional." />
+        <SectionHeading principal titulo="Sobre mí" subtitulo="Perfil profesional." />
         <Reveal>
           <div className="flex flex-col items-center gap-6">
             {/* La imagen es cuadrada de origen, asi que el recorte circular

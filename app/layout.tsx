@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
   description:
     "Desarrollador Full Stack. .NET, Java / Spring Boot, Node.js, Angular, React Native y Electron.",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "es_AR",

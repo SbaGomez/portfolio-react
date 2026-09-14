@@ -2,9 +2,16 @@ export default function SectionHeading({
   titulo,
   subtitulo,
   nota,
+  principal = false,
 }: {
   titulo: string;
   subtitulo?: string;
+  /**
+   * Renderiza el título como <h1> en vez de <h2>. Va en el encabezado
+   * principal de cada página: sin esto las rutas arrancaban en <h2> y se
+   * quedaban sin h1, que además es cómo navegan los lectores de pantalla.
+   */
+  principal?: boolean;
   /**
    * Aclaracion secundaria. Va adentro del encabezado a proposito: como
    * bloque aparte queda a 3rem del subtitulo, que es el margin-bottom de
@@ -18,7 +25,11 @@ export default function SectionHeading({
       <span className="sg-section-heading-line" aria-hidden="true">
         <span className="sg-section-heading-dot" />
       </span>
-      <h2 className="text-3xl font-bold">{titulo}</h2>
+      {principal ? (
+        <h1 className="text-3xl font-bold">{titulo}</h1>
+      ) : (
+        <h2 className="text-3xl font-bold">{titulo}</h2>
+      )}
       {subtitulo && (
         <p className="max-w-xl text-center text-sm text-[var(--color-text-muted)]">{subtitulo}</p>
       )}

@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import TechTag from "@/components/ui/TechTag";
 import { habilidades } from "@/data/habilidades";
 
 export default function HabilidadesGrid() {
@@ -12,7 +13,7 @@ export default function HabilidadesGrid() {
             </h3>
             <ul className="flex flex-wrap gap-1.5">
               {grupo.items.map((item) => (
-                <li key={item} className="sg-tag">{item}</li>
+                <TechTag key={item} nombre={item} />
               ))}
             </ul>
           </div>

@@ -39,6 +39,9 @@ importers:
       sharp:
         specifier: ^0.34.0
         version: 0.34.5
+      simple-icons:
+        specifier: ^16.31.0
+        version: 16.31.0
       tailwindcss:
         specifier: ^4
         version: 4.3.3
@@ -999,6 +1002,10 @@ packages:
   siginfo@2.0.0:
     resolution: {integrity: sha512-ybx0WO1/8bSBLEWXZvEd7gMW3Sn3JFlW3TvX1nREbDLRNQNaeNN8WK0meBwPdAaOI7TtRRRJn/Es1zhrrCHu7g==}
 
+  simple-icons@16.31.0:
+    resolution: {integrity: sha512-dDEqvQrmxL7ZnqQtGHGjCNW6CfiwzAif+83Hol9JXAnAB6wh2zsZD7Sc1kWT0O/RRAKt7xfG8W6UZhYBPD+GAA==}
+    engines: {node: '>=0.12.18'}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -1877,6 +1884,8 @@ snapshots:
     optional: true
 
   siginfo@2.0.0: {}
+
+  simple-icons@16.31.0: {}
 
   source-map-js@1.2.1: {}
 

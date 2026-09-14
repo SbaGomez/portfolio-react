@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "test": "vitest run",
-    "fondo": "node scripts/generar-fondo.mjs"
+    "fondo": "node scripts/generar-fondo.mjs",
+    "iconos": "node scripts/generar-iconos.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -23,6 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "sharp": "^0.34.0",
+    "simple-icons": "^16.31.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.1.11"

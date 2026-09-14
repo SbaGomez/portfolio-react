@@ -1,4 +1,4 @@
-# Portfolio — Sebastián Gómez
+# Portfolio — Sebastian Gomez
 
 Portfolio personal en Next.js compilado a HTML estático y servido por Apache.
 
@@ -37,6 +37,12 @@ El sitio queda en [http://localhost:3000](http://localhost:3000).
 | `pnpm build` | Compila y exporta el sitio estático a `out/` |
 | `pnpm test` | Corre los tests con Vitest |
 | `pnpm fondo` | Regenera las planchas de fondo en `public/` |
+| `pnpm iconos` | Regenera `lib/iconos-generados.ts` con los iconos de tecnología |
+
+`pnpm iconos` hay que correrlo cuando se agrega una tecnología nueva a un
+`stack` en `data/`. Precomputa los iconos en vez de importar `simple-icons`
+desde un componente, que arrastraría los 3460 iconos del paquete al bundle
+del navegador.
 
 No hay script de lint: `next lint` fue removido en Next 16 y el proyecto no usa
 ESLint. Las compuertas reales son `pnpm test` y `pnpm build`, que incluye el

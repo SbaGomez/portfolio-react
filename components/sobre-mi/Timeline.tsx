@@ -1,4 +1,5 @@
 import Reveal from "@/components/ui/Reveal";
+import TechTag from "@/components/ui/TechTag";
 
 export type ItemTimeline = {
   titulo: string;
@@ -32,7 +33,7 @@ export default function Timeline({ items }: { items: ItemTimeline[] }) {
               {item.tags.length > 0 && (
                 <ul className="mt-3 flex flex-wrap gap-1.5">
                   {item.tags.map((t) => (
-                    <li key={t} className="sg-tag">{t}</li>
+                    <TechTag key={t} nombre={t} />
                   ))}
                 </ul>
               )}

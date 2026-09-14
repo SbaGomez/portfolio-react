@@ -2,9 +2,8 @@ import type { Contacto } from "./tipos";
 
 export const contacto: Contacto = {
   email: "admin@sebastiangomez.com.ar",
-  telefono: "2255413090",
-  telefonoConPais: "+542255413090",
-  ubicacion: "Argentina - Buenos Aires",
+  // El telefono y la ubicacion viven en `medios`, que es lo que se renderiza.
+  // Tenerlos ademas como campos sueltos daba dos copias que nadie leia.
   // Sin el año: lo antepone el Footer como rango, calculado en cada visita.
   copyright: "Sebastian Gomez. Todos los derechos reservados.",
   redes: [

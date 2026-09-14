@@ -6,20 +6,12 @@ export type RedSocial = {
 
 export type Perfil = {
   nombre: string;
-  nombreCompleto: string;
-  titulo: string;
-  fechaNacimiento: string;
   inicioProfesional: string;
-  ubicacion: string;
   resumen: string;
-  disponible: boolean;
 };
 
 export type Contacto = {
   email: string;
-  telefono: string;
-  telefonoConPais: string;
-  ubicacion: string;
   copyright: string;
   redes: RedSocial[];
   medios: { icono: string; titulo: string; valor: string; link: string }[];

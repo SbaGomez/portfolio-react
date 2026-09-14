@@ -2638,11 +2638,22 @@ CSS de apoyo — el input sale de `.rw-footer-input` de la referencia (495–518
 @keyframes sg-spin {
   to { transform: rotate(360deg); }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .sg-spin { animation: none; }
-}
 ```
+
+**La contraparte de reduced-motion NO va acá.** Va dentro del único bloque
+`@media (prefers-reduced-motion: reduce)` que vive al final de
+`app/globals.css`, agregando esta regla:
+
+```css
+  .sg-spin { animation: none; }
+```
+
+Escribir un bloque `@media` suelto junto a la regla base reintroduce el bug de
+cascada que el proyecto ya sufrió dos veces: un `@media` no aporta
+especificidad, así que si queda antes de la regla base pierde a igual
+especificidad y el override es código muerto que ningún lint detecta. Las
+reglas base de esta tarea van **antes** del bloque; el bloque sigue siendo lo
+último del archivo.
 
 Portar además `.rw-progress-track` y `.rw-progress-fill` (referencia, 301–317) como `.sg-progress-*`.
 

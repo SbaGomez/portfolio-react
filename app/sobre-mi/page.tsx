@@ -9,7 +9,7 @@ import { experiencias } from "@/data/experiencia";
 import { educacion } from "@/data/educacion";
 
 export const metadata: Metadata = {
-  title: "Sobre mí — Sebastián Gómez",
+  title: "Sobre mí",
   description: "Experiencia, habilidades técnicas y formación.",
 };
 

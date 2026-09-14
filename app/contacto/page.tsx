@@ -4,7 +4,7 @@ import ContactoForm from "@/components/contacto/ContactoForm";
 import ContactoInfo from "@/components/contacto/ContactoInfo";
 
 export const metadata: Metadata = {
-  title: "Contacto — Sebastián Gómez",
+  title: "Contacto",
   description: "Escribime para hablar de un proyecto, una idea o una posición.",
 };
 

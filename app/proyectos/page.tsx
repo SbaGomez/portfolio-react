@@ -3,7 +3,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import ListaProyectos from "@/components/proyectos/ListaProyectos";
 
 export const metadata: Metadata = {
-  title: "Proyectos — Sebastián Gómez",
+  title: "Proyectos",
   description: "Seis proyectos de desarrollo full stack, web, escritorio y servidores.",
 };
 

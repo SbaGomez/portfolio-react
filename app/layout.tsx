@@ -5,7 +5,28 @@ import ScrollToTop from "@/components/ui/ScrollToTop";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Sebastián Gómez",
+  metadataBase: new URL("https://sebastiangomez.com.ar"),
+  title: {
+    default: "Sebastián Gómez — Full Stack Developer",
+    // Las paginas hijas declaran solo su nombre ("Sobre mi"): el sufijo lo
+    // pone este template, y repetirlo alla daria el nombre dos veces.
+    template: "%s — Sebastián Gómez",
+  },
+  description:
+    "Desarrollador Full Stack. .NET, Java / Spring Boot, Node.js, Angular, React Native y Electron.",
+  openGraph: {
+    type: "website",
+    locale: "es_AR",
+    url: "https://sebastiangomez.com.ar",
+    siteName: "Sebastián Gómez",
+    title: "Sebastián Gómez — Full Stack Developer",
+    description: "Desarrollador Full Stack con experiencia en web, backend, mobile y escritorio.",
+  },
+};
+
+export const viewport = {
+  themeColor: "#0a0e1a",
+  colorScheme: "dark" as const,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

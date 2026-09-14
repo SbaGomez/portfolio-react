@@ -1,8 +1,18 @@
-# No sacar: sin -MultiViews, Apache hace content negotiation ante una ruta
-# inexistente y el camino de error se cuelga en vez de servir el 404. Venia
-# en el .htaccess original y se perdio al reescribirlo para el export
-# estatico; el sintoma fue que toda URL inexistente colgaba hasta que
-# Cloudflare cortaba con un 520.
+# -MultiViews evita que Apache haga content negotiation ante rutas sin
+# extension. Se mantiene por prolijidad, pero NO era la causa del 404 roto:
+# se agrego, se deployo, y el sintoma no cambio en nada.
 Options -MultiViews
 
+# Este ErrorDocument SI toma efecto. Medido el 2026-09-14 contra produccion:
+# HEAD a una ruta inexistente devuelve "404 Not Found" en ~0.25s y con el
+# mismo Last-Modified que /404.html, o sea que el servidor ya eligio este
+# archivo como cuerpo del error.
+#
+# Lo que falla es entregarlo: el GET no recibe un solo byte (igual con y sin
+# compresion, con y sin Range, con User-Agent de curl o de Chrome) y
+# Cloudflare corta con un 520 a los ~40s. HEAD funciona, GET no: el fallo
+# esta en el cuerpo de la respuesta de error, del lado del hosting.
+#
+# SIN RESOLVER. Falta el log de errores del servidor. No tocar este archivo
+# esperando arreglarlo: el problema no esta aca.
 ErrorDocument 404 /404.html

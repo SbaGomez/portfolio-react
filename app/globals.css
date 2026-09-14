@@ -679,6 +679,61 @@ body {
   text-align: center;
 }
 
+.sg-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 1.75rem;
+}
+
+/* Línea vertical continua detrás de los puntos. */
+.sg-timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 1px;
+  background: var(--color-border);
+}
+
+.sg-timeline-item {
+  position: relative;
+}
+
+/* top: 1.35rem alinea el punto con la primera línea del título dentro de la
+   card, no con el borde superior de la card. */
+.sg-timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -1.75rem;
+  top: 1.35rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+}
+
+/* Viñeta propia: un guion de acento en vez del bullet del navegador. */
+.sg-bullet {
+  position: relative;
+  padding-left: 0.9rem;
+}
+
+.sg-bullet::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6em;
+  width: 5px;
+  height: 1px;
+  background: var(--color-accent);
+}
+
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
    DESPUES de las reglas base de cada selector que toca (.sg-reveal,
    .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link,

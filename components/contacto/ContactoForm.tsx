@@ -12,8 +12,10 @@ const CAMPOS: {
   ayuda: string;
   Icono: typeof User;
   multilinea?: boolean;
+  /** Valor del atributo autocomplete. Solo se define donde se desactiva. */
+  autocompletar?: string;
 }[] = [
-  { id: "nombre", etiqueta: "Nombre", placeholder: "Escribí tu nombre completo", ayuda: "Ingresá tu nombre y apellido", Icono: User },
+  { id: "nombre", etiqueta: "Nombre", placeholder: "Escribí tu nombre completo", ayuda: "Ingresá tu nombre y apellido", Icono: User, autocompletar: "off" },
   { id: "email", etiqueta: "Email", placeholder: "tu@email.com", ayuda: "Por favor, usá un email válido", Icono: Mail },
   { id: "asunto", etiqueta: "Asunto", placeholder: "¿De qué querés hablar?", ayuda: "Describí brevemente el tema de tu mensaje", Icono: Tag },
   { id: "mensaje", etiqueta: "Mensaje", placeholder: "Contame sobre tu proyecto o idea...", ayuda: "Escribí tu mensaje detallado acá", Icono: MessageSquare, multilinea: true },
@@ -87,7 +89,7 @@ export default function ContactoForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
-      {CAMPOS.map(({ id, etiqueta, placeholder, ayuda, Icono, multilinea }) => {
+      {CAMPOS.map(({ id, etiqueta, placeholder, ayuda, Icono, multilinea, autocompletar }) => {
         const error = tocados[id] ? errores[id] : "";
         const aviso = tocados[id] && !error ? avisos[id] : "";
         const props = {
@@ -95,6 +97,7 @@ export default function ContactoForm() {
           name: id,
           value: datos[id],
           placeholder,
+          autoComplete: autocompletar,
           "aria-invalid": Boolean(error),
           "aria-describedby": `${id}-msg`,
           className: `sg-input ${error ? "sg-input-error" : aviso ? "sg-input-warning" : ""}`,
@@ -109,7 +112,7 @@ export default function ContactoForm() {
         };
 
         return (
-          <div key={id} className="flex flex-col gap-2">
+          <div key={id} className="sg-campo flex flex-col gap-2">
             <label
               htmlFor={id}
               className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-light)]"

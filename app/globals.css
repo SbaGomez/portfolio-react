@@ -914,7 +914,12 @@ body {
    advertencia, acento foco. */
 .sg-input {
   width: 100%;
-  background: var(--color-bg-card);
+  /* Traslúcido sobre desenfoque: deja ver el fondo de la página a través del
+     campo. El prefijo va PRIMERO y la estándar última, porque el build
+     conserva solo la última declarada (ver .sg-nav-scrolled). */
+  background: rgba(17, 26, 46, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   border: 1px solid var(--color-border);
   border-radius: 10px;
   padding: 0.7rem 0.9rem;
@@ -967,6 +972,22 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
   color: #4ade80;
+}
+
+/* La ayuda solo se muestra con el campo enfocado: tenerla siempre visible
+   bajo los cuatro campos era ruido permanente. El error y la advertencia se
+   quedan, porque un error que desaparece al salir del campo es exactamente
+   el que no se llega a leer. Se resuelve con :focus-within y no con estado
+   en React para que funcione igual con mouse y con teclado. */
+.sg-campo .sg-field-msg:not(.sg-field-msg-error):not(.sg-field-msg-warning) {
+  display: none;
+}
+
+/* Repite los :not() a proposito. Sin ellos esta regla queda en (0,3,0) y la
+   de arriba en (0,4,0), porque cada :not() suma la especificidad de su
+   argumento: la de ocultar ganaria y enfocar el campo no mostraria nada. */
+.sg-campo:focus-within .sg-field-msg:not(.sg-field-msg-error):not(.sg-field-msg-warning) {
+  display: flex;
 }
 
 .sg-field-msg-error {

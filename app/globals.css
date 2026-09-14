@@ -953,6 +953,10 @@ body {
 .sg-input-icono {
   position: absolute;
   left: 0.9rem;
+  /* Por encima del input. El backdrop-filter del campo crea contexto de
+     apilado y se pinta como si tuviera z-index 0; como el icono va antes en
+     el DOM, sin esto quedaba detras y el desenfoque se lo comia. */
+  z-index: 2;
   display: flex;
   color: var(--color-text-muted);
   pointer-events: none;
@@ -1046,6 +1050,25 @@ body {
 
 @keyframes sg-spin {
   to { transform: rotate(360deg); }
+}
+
+/* Fila de medio de contacto. El hover se declara solo sobre <a> a proposito:
+   la ubicacion no es un enlace y no debe sugerir que se puede clickear.
+   Sin transform, asi que no necesita contraparte en reduced-motion. */
+.sg-medio {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: rgba(59, 130, 246, 0.06);
+  transition: border-color 150ms, background 150ms;
+}
+
+a.sg-medio:hover {
+  border-color: var(--color-accent);
+  background: rgba(59, 130, 246, 0.12);
 }
 
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir

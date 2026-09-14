@@ -9,7 +9,10 @@ export default function GlassCard({
     <div className={`sg-glass-card ${className}`}>
       <div className="sg-glass-card-bg" aria-hidden="true" />
       <div className="sg-glass-card-glow" aria-hidden="true" />
-      <div className="relative z-[2]">{children}</div>
+      {/* Altura completa para que el contenido pueda distribuirse cuando la
+          tarjeta se estira: sin esto el wrapper mide lo que mide el contenido
+          y un justify-between adentro no tiene contra que repartir. */}
+      <div className="relative z-[2] flex h-full flex-col">{children}</div>
     </div>
   );
 }

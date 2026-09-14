@@ -78,6 +78,22 @@ export default function ProyectoModal({
           <X size={18} />
         </button>
         <h2 id="modal-titulo" className="pr-10 text-2xl font-bold">{proyecto.titulo}</h2>
+        {/* Las capturas solo se piden al abrir el modal: en la grilla serian
+            siete imagenes cargando de entrada sin que nadie las haya pedido. */}
+        {proyecto.imagenes.length > 0 && (
+          <ul className="flex flex-col gap-3">
+            {proyecto.imagenes.map((src) => (
+              <li key={src}>
+                <img
+                  src={src}
+                  alt={`Captura de ${proyecto.titulo}`}
+                  loading="lazy"
+                  className="w-full rounded-[10px] border border-[var(--color-border)]"
+                />
+              </li>
+            ))}
+          </ul>
+        )}
         {proyecto.descripcion.map((p) => (
           <p key={p} className="text-sm text-[var(--color-text-muted)]">{p}</p>
         ))}

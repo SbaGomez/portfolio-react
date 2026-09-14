@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Send, Loader2, CheckCircle2, AlertCircle, User, Mail, Tag, MessageSquare, X } from "lucide-react";
 import { validarCampo, type CampoFormulario, type DatosFormulario } from "@/lib/validacion";
 import { enviarEmail } from "@/lib/emailjs";
 
@@ -10,12 +10,13 @@ const CAMPOS: {
   etiqueta: string;
   placeholder: string;
   ayuda: string;
+  Icono: typeof User;
   multilinea?: boolean;
 }[] = [
-  { id: "nombre", etiqueta: "Nombre", placeholder: "Escribí tu nombre completo", ayuda: "Ingresá tu nombre y apellido" },
-  { id: "email", etiqueta: "Email", placeholder: "tu@email.com", ayuda: "Por favor, usá un email válido" },
-  { id: "asunto", etiqueta: "Asunto", placeholder: "¿De qué querés hablar?", ayuda: "Describí brevemente el tema de tu mensaje" },
-  { id: "mensaje", etiqueta: "Mensaje", placeholder: "Contame sobre tu proyecto o idea...", ayuda: "Escribí tu mensaje detallado acá", multilinea: true },
+  { id: "nombre", etiqueta: "Nombre", placeholder: "Escribí tu nombre completo", ayuda: "Ingresá tu nombre y apellido", Icono: User },
+  { id: "email", etiqueta: "Email", placeholder: "tu@email.com", ayuda: "Por favor, usá un email válido", Icono: Mail },
+  { id: "asunto", etiqueta: "Asunto", placeholder: "¿De qué querés hablar?", ayuda: "Describí brevemente el tema de tu mensaje", Icono: Tag },
+  { id: "mensaje", etiqueta: "Mensaje", placeholder: "Contame sobre tu proyecto o idea...", ayuda: "Escribí tu mensaje detallado acá", Icono: MessageSquare, multilinea: true },
 ];
 
 const VACIO: DatosFormulario = { nombre: "", email: "", asunto: "", mensaje: "" };
@@ -86,7 +87,7 @@ export default function ContactoForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
-      {CAMPOS.map(({ id, etiqueta, placeholder, ayuda, multilinea }) => {
+      {CAMPOS.map(({ id, etiqueta, placeholder, ayuda, Icono, multilinea }) => {
         const error = tocados[id] ? errores[id] : "";
         const aviso = tocados[id] && !error ? avisos[id] : "";
         const props = {
@@ -108,24 +109,37 @@ export default function ContactoForm() {
         };
 
         return (
-          <div key={id} className="flex flex-col gap-1.5">
-            <label htmlFor={id} className="text-xs font-semibold uppercase tracking-wide">
-              {etiqueta}
+          <div key={id} className="flex flex-col gap-2">
+            <label
+              htmlFor={id}
+              className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-light)]"
+            >
+              {etiqueta}:
             </label>
-            {multilinea ? <textarea rows={5} {...props} /> : <input type="text" {...props} />}
+            <div className="sg-input-wrap">
+              <span className="sg-input-icono">
+                <Icono size={16} aria-hidden="true" />
+              </span>
+              {multilinea ? <textarea rows={5} {...props} /> : <input type="text" {...props} />}
+            </div>
             <p
               id={`${id}-msg`}
-              className={`text-xs ${
-                error ? "text-[#ef4444]" : aviso ? "text-[#f59e0b]" : "text-[var(--color-text-muted)]"
+              className={`sg-field-msg ${
+                error ? "sg-field-msg-error" : aviso ? "sg-field-msg-warning" : ""
               }`}
             >
+              {error ? (
+                <X size={14} aria-hidden="true" className="shrink-0" />
+              ) : aviso ? (
+                <AlertCircle size={14} aria-hidden="true" className="shrink-0" />
+              ) : null}
               {error || aviso || ayuda}
             </p>
           </div>
         );
       })}
 
-      <button type="submit" className="sg-button justify-center" disabled={enviando}>
+      <button type="submit" className="sg-button sg-button-enviar" disabled={enviando}>
         {enviando ? (
           <>
             <Loader2 size={18} className="sg-spin" aria-hidden="true" />

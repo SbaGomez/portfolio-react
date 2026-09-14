@@ -812,8 +812,71 @@ body {
 }
 
 .sg-input:focus { border-color: var(--color-accent); }
-.sg-input-error { border-color: #ef4444; }
-.sg-input-warning { border-color: #f59e0b; }
+
+/* El estado no se comunica solo con el borde: tambien tiñe el fondo, que es
+   lo que hace que el campo con error se lea de un vistazo en un formulario
+   largo. */
+.sg-input-error { border-color: #ef4444; background: rgba(239, 68, 68, 0.07); }
+.sg-input-warning { border-color: #f59e0b; background: rgba(245, 158, 11, 0.06); }
+
+/* Icono adelante del campo. El padding-left del input le reserva el lugar;
+   el icono no recibe eventos para no robarle el click al input. */
+.sg-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sg-input-wrap .sg-input {
+  padding-left: 2.6rem;
+}
+
+.sg-input-icono {
+  position: absolute;
+  left: 0.9rem;
+  display: flex;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+/* Mensaje de campo: caja propia con borde, no texto suelto. Ocupa lugar
+   siempre (ayuda, advertencia o error) para que el formulario no salte de
+   alto al validar. */
+.sg-field-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-card);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4ade80;
+}
+
+.sg-field-msg-error {
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+}
+
+.sg-field-msg-warning {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.08);
+  color: #f59e0b;
+}
+
+/* Modificador del boton principal para el envio: ancho completo y degradado
+   que cierra en rojo. Ojo: en este mismo formulario el rojo es el color del
+   error, asi que compite con esa señal. */
+.sg-button-enviar {
+  width: 100%;
+  justify-content: center;
+  background: linear-gradient(90deg, var(--color-accent), #d9455f);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
 
 .sg-alert {
   display: flex;

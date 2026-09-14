@@ -10,6 +10,7 @@ import {
   FileSpreadsheet,
   Lock,
   ShieldCheck,
+  FileText,
 } from "lucide-react";
 import { iconoDe } from "@/lib/iconos";
 
@@ -44,6 +45,7 @@ const GENERICOS: Record<string, ComponenteIcono> = {
   SheetJS: FileSpreadsheet,
   bcrypt: Lock,
   NextAuth: ShieldCheck,
+  jsPDF: FileText,
 };
 
 /**

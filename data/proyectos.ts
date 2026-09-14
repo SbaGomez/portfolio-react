@@ -147,4 +147,28 @@ export const proyectos: Proyecto[] = [
     anonimo: false,
     destacado: false,
   },
+  {
+    slug: "calculadora-3d",
+    titulo: "Calculadora de costos de impresión 3D",
+    anio: "2026",
+    resumen:
+      "Herramienta de costeo para impresión 3D: calcula el costo real de una tirada y emite cotizaciones en PDF para el cliente.",
+    descripcion: [
+      "Calcula el costo de una tirada a partir del material, la energía, el mantenimiento y el laqueado, y lo divide por las unidades que salen de esa impresión para obtener el costo y el precio unitarios.",
+      "Sobre ese cálculo arma cotizaciones de varios ítems y las exporta a PDF. El documento muestra solo lo que el cliente necesita ver: nunca los costos internos ni los márgenes de ganancia.",
+      "Nació en 2025 como una planilla de cálculo y recién se versionó en 2026, así que el historial de commits arranca bastante después que el proyecto.",
+    ],
+    stack: ["JavaScript", "Bootstrap", "HTML5 / CSS3", "jsPDF"],
+    metricas: { lineas: 2444, commits: 10, periodo: "sep 2025 – sep 2026" },
+    destacados: [
+      "Separa los costos fijos de la tirada de los que dependen de las piezas, que es lo que hace que el costo unitario dé bien.",
+      "Cotización de varios ítems, con precio mínimo, máximo o propio sobre el margen configurado.",
+      "PDF generado en el navegador con jsPDF, con logo opcional reescalado antes de guardarlo para no exceder la cuota del navegador.",
+      "Sin backend ni paso de build: HTML, CSS y JavaScript plano servidos como archivos estáticos.",
+    ],
+    links: { demo: "https://sebastiangomez.com.ar/Calculadora3D/" },
+    imagenes: [],
+    anonimo: false,
+    destacado: false,
+  },
 ];

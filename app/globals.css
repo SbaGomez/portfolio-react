@@ -734,6 +734,67 @@ body {
   background: var(--color-accent);
 }
 
+/* El overlay aclara en vez de oscurecer, como el modal de la referencia: el
+   fondo del sitio ya es casi negro, asi que una capa oscura no separaria
+   nada del contenido de atras. */
+.sg-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Junto al boton principal, la unica superficie del sitio autorizada a
+   llevar sombra (§4.3 del spec: la elevacion se comunica con borde y color
+   de fondo, no con sombra). Aca se justifica porque el modal flota sobre
+   contenido desenfocado y necesita despegarse de el. */
+.sg-modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 40rem;
+  /* El detalle de un proyecto puede pasar el alto de la pantalla: scrollea
+     el modal, no el body, que queda bloqueado mientras esta abierto. */
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 24px 80px -24px rgba(0, 0, 0, 0.7);
+}
+
+.sg-modal-cerrar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  /* Sin transform en hover a proposito: no necesita contraparte en el
+     bloque de reduced-motion. */
+  transition: border-color 150ms, color 150ms;
+}
+
+.sg-modal-cerrar:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
    DESPUES de las reglas base de cada selector que toca (.sg-reveal,
    .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link,

@@ -84,7 +84,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: "visor-infracciones",
     titulo: "Visor de infracciones de tránsito",
-    anio: "2026",
+    anio: "2025",
     resumen:
       "Aplicación de escritorio para revisar y despachar infracciones de estacionamiento captadas por dispositivos viales.",
     descripcion: [
@@ -108,7 +108,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: "validador-contactos",
     titulo: "Validador de bases de contactos",
-    anio: "2026",
+    anio: "2025",
     resumen:
       "Herramienta de escritorio que verifica en lote qué teléfonos de una base tienen cuenta activa, y devuelve el resultado como planilla.",
     descripcion: [
@@ -156,7 +156,7 @@ export const proyectos: Proyecto[] = [
   {
     slug: "calculadora-3d",
     titulo: "Calculadora de costos de impresión 3D",
-    anio: "2026",
+    anio: "2025",
     resumen:
       "Herramienta de costeo para impresión 3D: calcula el costo real de una tirada y emite cotizaciones en PDF para el cliente.",
     descripcion: [

@@ -760,7 +760,9 @@ body {
   flex-direction: column;
   gap: 0.75rem;
   width: 100%;
-  max-width: 40rem;
+  /* Ancho pensado para las capturas: a 40rem una captura de 1200px entraba
+     reducida a la mitad y no se leia nada de la interfaz que muestra. */
+  max-width: 64rem;
   /* El detalle de un proyecto puede pasar el alto de la pantalla: scrollea
      el modal, no el body, que queda bloqueado mientras esta abierto. */
   max-height: 85vh;
@@ -793,6 +795,118 @@ body {
 .sg-modal-cerrar:hover {
   border-color: var(--color-accent);
   color: var(--color-text);
+}
+
+/* Slider de capturas. Sin transicion al cambiar de imagen a proposito: una
+   animacion aca obligaria a sumar su contraparte al bloque de
+   reduced-motion, y no aporta nada sobre el cambio directo. */
+.sg-slider {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.sg-slider img {
+  display: block;
+  width: 100%;
+  cursor: zoom-in;
+}
+
+/* Capa de imagen ampliada, por encima del modal (que va en z-index 50). */
+.sg-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(10, 14, 26, 0.92);
+  cursor: zoom-out;
+}
+
+.sg-lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+}
+
+/* Controles de la vista ampliada. Reusan .sg-slider-nav pero mas separados
+   del borde y mas grandes: acá la referencia es la pantalla entera, no una
+   imagen dentro de una tarjeta. */
+.sg-lightbox-prev,
+.sg-lightbox-next {
+  width: 3rem;
+  height: 3rem;
+}
+
+.sg-lightbox-prev {
+  left: 1.5rem;
+}
+
+.sg-lightbox-next {
+  right: 1.5rem;
+}
+
+.sg-lightbox-contador {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(10, 14, 26, 0.75);
+  border: 1px solid var(--color-border);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.sg-slider-nav {
+  position: absolute;
+  top: 50%;
+  /* Centrado vertical, no movimiento: no es cosa de reduced-motion. */
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  background: rgba(10, 14, 26, 0.75);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: border-color 150ms, background 150ms;
+}
+
+.sg-slider-nav:hover {
+  border-color: var(--color-accent);
+  background: rgba(10, 14, 26, 0.9);
+}
+
+.sg-slider-prev {
+  left: 0.75rem;
+}
+
+.sg-slider-next {
+  right: 0.75rem;
+}
+
+.sg-slider-contador {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(10, 14, 26, 0.75);
+  border: 1px solid var(--color-border);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
 }
 
 /* Portado de .rw-footer-input, sin el padding izquierdo que ahi deja lugar

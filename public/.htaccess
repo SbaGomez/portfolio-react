@@ -3,27 +3,23 @@
 # se agrego, se deployo, y el sintoma no cambio en nada.
 Options -MultiViews
 
-# ErrorDocument 404 /404.html  -->  RETIRADO el 2026-09-14.
+# HISTORIA DE ESTE ARCHIVO, PARA NO REPETIR EL CAMINO:
 #
-# Medido contra produccion con la directiva puesta:
+# Con "ErrorDocument 404 /404.html" (la pagina exportada por Next, 19 KB),
+# toda ruta inexistente colgaba ~40s y moria en un 520 de Cloudflare:
 #
-#   HEAD /noexiste  -> 404 en 0.25s, Last-Modified 19:53:10
-#   HEAD /404.html  -> 200 en 0.25s, Last-Modified 19:53:10   (identico)
-#   GET  /noexiste  -> 0 bytes, cuelga, Cloudflare 520 a los ~40s
+#   HEAD /noexiste  -> 404 en 0.25s, Last-Modified igual al de /404.html
+#   GET  /noexiste  -> 0 bytes, cuelga
 #
-# El Last-Modified identico prueba que la directiva SI tomaba efecto: el
-# servidor ya elegia 404.html como cuerpo del error. Lo que fallaba era
-# entregarlo, con y sin compresion, con y sin Range, con cualquier
-# User-Agent. HEAD respondia, GET no.
+# O sea que la directiva SI tomaba efecto y el servidor ya elegia el archivo
+# correcto; lo que fallaba era entregar el cuerpo. Quitarla dejo los 404 en
+# ~0.25s con la pagina pelada de Apache (236 bytes), confirmando que el fallo
+# esta en el mecanismo de ErrorDocument de este hosting.
 #
-# Se retira para partir el diagnostico en dos:
-#   - si los 404 pasan a responder rapido con la pagina por defecto de
-#     Apache, el fallo esta en el mecanismo de ErrorDocument de este hosting;
-#   - si siguen colgando, es un handler global del hosting y esta directiva
-#     nunca importo.
+# Ahora se prueba si el fallo depende del TAMAÑO del cuerpo: 404-min.html es
+# autocontenido (~700 bytes, sin CSS ni JS externos) en vez de 19 KB.
 #
-# Y aunque no lo arregle, sacarla ya es una mejora: un 404 feo e instantaneo
-# es mejor experiencia que 40 segundos de cuelgue terminando en un 520.
-#
-# Para restaurar la pagina de error propia, volver a agregar:
-#   ErrorDocument 404 /404.html
+#   - Si se entrega, el 404 vuelve a tener diseño propio y el limite es el peso.
+#   - Si vuelve a colgar, el mecanismo esta roto de raiz: revertir este commit
+#     y servir la pagina de error desde Cloudflare en vez del origen.
+ErrorDocument 404 /404-min.html

@@ -1,1 +1,8 @@
+# No sacar: sin -MultiViews, Apache hace content negotiation ante una ruta
+# inexistente y el camino de error se cuelga en vez de servir el 404. Venia
+# en el .htaccess original y se perdio al reescribirlo para el export
+# estatico; el sintoma fue que toda URL inexistente colgaba hasta que
+# Cloudflare cortaba con un 520.
+Options -MultiViews
+
 ErrorDocument 404 /404.html

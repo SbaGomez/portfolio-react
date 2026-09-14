@@ -1,149 +1,102 @@
-# 🚀 Portfolio Personal - Sebastian Gomez
+# Portfolio — Sebastián Gómez
 
-![React](https://img.shields.io/badge/React-18.2.0-blue?style=for-the-badge&logo=react)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow?style=for-the-badge&logo=javascript)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.3-purple?style=for-the-badge&logo=bootstrap)
-![CSS3](https://img.shields.io/badge/CSS3-Advanced-green?style=for-the-badge&logo=css3)
+Portfolio personal en Next.js compilado a HTML estático y servido por Apache.
 
-Un portfolio personal moderno y responsivo desarrollado con React, que muestra mis habilidades como desarrollador web fullstack y presenta mis proyectos más destacados.
+**En producción:** [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
 
-## 🌟 Características
+## Stack
 
-- **Diseño Moderno**: Interfaz elegante con animaciones CSS avanzadas
-- **Completamente Responsivo**: Optimizado para todos los dispositivos
-- **Navegación Fluida**: Sistema de navegación SPA sin recargas
-- **Galería de Proyectos**: Presentación interactiva de proyectos con modales
-- **Formulario de Contacto**: Sistema de contacto funcional con EmailJS
-- **Optimización SEO**: Estructura semántica y meta tags optimizados
-- **Rendimiento**: Carga rápida y optimizada
+- **Next.js 16** (App Router, `output: "export"`)
+- **React 19** y **TypeScript**
+- **Tailwind CSS v4** para layout y spacing; el sistema visual propio es CSS plano
+  sobre custom properties en `app/globals.css`
+- **lucide-react** para iconografía
+- **EmailJS** para el formulario de contacto (sin backend)
+- **Vitest** para los tests
 
-## 🛠️ Tecnologías Utilizadas
+## Requisitos
 
-### Frontend
-- **React 18.2.0** - Framework principal
-- **JavaScript ES6+** - Lógica de la aplicación
-- **CSS3** - Estilos avanzados con gradientes y animaciones
-- **Bootstrap 5.3.3** - Framework CSS responsivo
-- **Font Awesome 6.5.2** - Iconografía moderna
+- Node.js 20 o superior
+- pnpm
 
-### Herramientas y Servicios
-- **EmailJS 4.4.1** - Servicio de envío de emails con variables de entorno
-- **React Router DOM 6.22.3** - Navegación SPA
-- **Web Vitals 2.1.4** - Monitoreo de rendimiento
-- **Popper.js 2.11.8** - Posicionamiento de elementos
+## Puesta en marcha
 
-## 📁 Estructura del Proyecto
-
-```
-src/
-├── components/
-│   ├── Inicio.js              # Página de inicio con presentación
-│   ├── SobreMi.js             # Sección sobre mí con habilidades y experiencia
-│   ├── Proyectos.js           # Galería de proyectos con modales interactivos
-│   ├── Contacto.js            # Formulario de contacto funcional
-│   ├── Navbar.js              # Barra de navegación responsiva
-│   ├── Footer.js              # Pie de página con enlaces sociales
-│   └── *.module.css           # Estilos modulares para cada componente
-├── config/
-│   ├── contactConfig.js       # Configuración de contacto y redes sociales
-│   └── emailjs.js             # Configuración EmailJS con variables de entorno
-├── hooks/
-│   └── useNavigation.js       # Hook personalizado para navegación
-├── index.js                   # Punto de entrada principal
-├── index.css                  # Estilos globales y variables CSS
-└── reportWebVitals.js         # Monitoreo de rendimiento
-```
-
-## 🚀 Instalación y Uso
-
-### Prerrequisitos
-- Node.js (versión 14 o superior)
-- npm o yarn
-
-### Instalación
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone https://github.com/SbaGomez/portfolio-react.git
-   cd portfolio-react
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Configurar EmailJS** (opcional)
-   - Crear cuenta en [EmailJS](https://www.emailjs.com/)
-   - Configurar las credenciales en `src/config/emailjs.js`
-   - Ver [EMAILJS_SETUP.md](EMAILJS_SETUP.md) para instrucciones detalladas
-
-4. **Ejecutar en modo desarrollo**
-   ```bash
-   npm start
-   ```
-   La aplicación se abrirá en [http://localhost:3000](http://localhost:3000)
-
-### Scripts Disponibles
-
-- `npm start` - Ejecuta la aplicación en modo desarrollo
-- `npm run build` - Construye la aplicación para producción
-- `npm test` - Ejecuta las pruebas
-- `npm run eject` - Expone la configuración de webpack (irreversible)
-
-## 🌐 Despliegue
-
-### Build para Producción
 ```bash
-npm run build
+pnpm install
+cp .env.local.example .env.local   # completar las tres credenciales
+pnpm dev
 ```
 
-Los archivos optimizados se generarán en la carpeta `build/` y están listos para ser desplegados en cualquier servidor web estático.
+El sitio queda en [http://localhost:3000](http://localhost:3000).
 
-## 📱 Proyectos Destacados
+## Scripts
 
-### 1. Servidor MUOnline ⭐
-- **Tecnologías**: PHP, Bootstrap, MsSQL
-- **Descripción**: Servidor privado completo con web responsiva, sistema Louis Season 6 y panel de administración
-- **Características**: Web responsiva moderna, sistema de ranking, estadísticas en tiempo real, gestión de eventos
-- **Demo**: [bakastamu.net](https://bakastamu.net)
+| Script | Qué hace |
+| --- | --- |
+| `pnpm dev` | Servidor de desarrollo |
+| `pnpm build` | Compila y exporta el sitio estático a `out/` |
+| `pnpm test` | Corre los tests con Vitest |
+| `pnpm fondo` | Regenera las planchas de fondo en `public/` |
 
-### 2. Calculadora 3D
-- **Tecnologías**: JavaScript, CSS3, HTML5
-- **Descripción**: Aplicación web especializada para calcular precios de impresión 3D
-- **Características**: Cálculos precisos, base de datos de materiales, interfaz intuitiva, validación en tiempo real
-- **Demo**: [Calculadora 3D](https://sebastiangomez.com.ar/Calculadora3D/)
+No hay script de lint: `next lint` fue removido en Next 16 y el proyecto no usa
+ESLint. Las compuertas reales son `pnpm test` y `pnpm build`, que incluye el
+chequeo de tipos.
 
-### 3. Portfolio Personal
-- **Tecnologías**: React, CSS3, JavaScript, HTML5
-- **Descripción**: Aplicación web completa con diseño moderno, animaciones avanzadas y funcionalidades interactivas
-- **Características**: Interfaz moderna, diseño responsivo, animaciones CSS, galería interactiva, formulario funcional
-- **Demo**: [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
-- **Código**: [GitHub](https://github.com/SbaGomez/portfolio-react)
+## Variables de entorno
 
-## 🎨 Personalización
+Van en `.env.local`, que no se versiona. `.env.local.example` lista las claves
+vacías como plantilla.
 
-### Modificar Información Personal
-1. Editar `src/components/Inicio.js` para cambiar la presentación
-2. Actualizar `src/components/SobreMi.js` para información personal
-3. Modificar `src/components/Proyectos.js` para agregar/quitar proyectos
+- `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+- `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+- `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
 
-### Cambiar Estilos
-- Los estilos principales están en `src/index.css`
-- Cada componente tiene su archivo CSS correspondiente
-- Utiliza variables CSS para colores y fuentes principales
+Las tres son públicas por diseño: viajan al bundle del navegador, que es donde
+corre EmailJS.
 
-## 📞 Contacto
+## Dónde vive el contenido
 
-**Sergio Sebastian Gomez** - Desarrollador Web Fullstack
+Todo el contenido está separado de la presentación, en módulos tipados bajo
+`data/`. **Actualizar el CV es editar esos archivos, no los componentes.**
 
-- 🌐 **Portfolio**: [sebastiangomez.com.ar](https://sebastiangomez.com.ar)
-- 📧 **Email**: [admin@sebastiangomez.com.ar](mailto:admin@sebastiangomez.com.ar)
-- 📱 **WhatsApp**: [+54 2255 413090](https://wa.me/542255413090)
-- 💼 **LinkedIn**: [Perfil Profesional](https://www.linkedin.com/in/sbagomez/)
-- 🐙 **GitHub**: [@SbaGomez](https://github.com/SbaGomez)
-- 📍 **Ubicación**: Argentina - Buenos Aires
+| Archivo | Contenido |
+| --- | --- |
+| `data/perfil.ts` | Nombre, título, resumen profesional |
+| `data/experiencia.ts` | Puestos, períodos y tareas |
+| `data/educacion.ts` | Formación académica |
+| `data/habilidades.ts` | Habilidades por categoría |
+| `data/tecnologias.ts` | Stack mostrado en la home |
+| `data/proyectos.ts` | Fichas de proyectos |
+| `data/contacto.ts` | Email, teléfono, redes |
+| `data/tipos.ts` | Tipos que gobiernan todo lo anterior |
 
----
+## Estructura
 
-⭐ **¡No olvides darle una estrella al proyecto si te gusta!**
+```
+app/          rutas del App Router (/, /sobre-mi, /proyectos, /contacto)
+components/   componentes por sección, más las primitivas en ui/
+data/         contenido tipado
+lib/          validación, envío de email y utilidades de fechas
+tests/        tests de Vitest
+scripts/      generador de las planchas de fondo
+```
+
+## Despliegue
+
+```bash
+pnpm build
+```
+
+Genera el sitio completo en `out/`. Desplegar es subir el **contenido** de esa
+carpeta a la raíz del hosting. El `.htaccess` incluido sólo declara la página
+404: como cada ruta se exporta como carpeta con su `index.html`, Apache las
+sirve sin reglas de reescritura.
+
+## Convenciones
+
+- Clases propias con prefijo `sg-`, definidas en `app/globals.css`.
+- Tema único oscuro; los colores salen de las custom properties en `:root` y
+  nunca se hardcodean en los componentes.
+- El bloque `@media (prefers-reduced-motion: reduce)` es **lo último** de
+  `app/globals.css`: una media query no aporta especificidad, así que cualquier
+  regla agregada después lo dejaría sin efecto.

@@ -3,15 +3,26 @@
 import sharp from "sharp";
 import { mkdirSync } from "node:fs";
 
-const AURORA = {
+/**
+ * Variante "Dos polos" de .bg-candidates: azul arriba a la izquierda,
+ * violeta abajo a la derecha, como el loader de ragnarok.
+ *
+ * Los centros e intensidades no son a ojo: salen de muestrear bg-c.png y
+ * despejar el factor de mezcla f en `base + (color - base) * f`. Dieron
+ * f=0.56 para el azul en (0.22, 0.09) y f=0.37 para el violeta en
+ * (0.83, 0.78); los radios se ajustaron contra cuatro puntos de control por
+ * polo usando la caida coseno^1.6 que aplica render().
+ */
+const DOS_POLOS = {
   base: "#0a0e1a",
   seed: 20260913,
   noiseScale: 2.6,
+  // La viñeta oscurece hacia abajo, que es justo donde ahora vive el polo
+  // violeta: con el 0.25 de la variante anterior se lo comia.
+  vignette: 0.08,
   glows: [
-    { x: 0.5, y: -0.05, rx: 0.85, ry: 0.75, color: "#3b82f6", intensity: 0.55 },
-    { x: 0.12, y: 0.62, rx: 0.55, ry: 0.6, color: "#1e3a8a", intensity: 0.45 },
-    { x: 0.88, y: 0.3, rx: 0.5, ry: 0.55, color: "#93c5fd", intensity: 0.2 },
-    { x: 0.68, y: 0.85, rx: 0.45, ry: 0.5, color: "#a78bfa", intensity: 0.16 },
+    { x: 0.22, y: 0.09, rx: 0.72, ry: 0.65, color: "#3b82f6", intensity: 0.56 },
+    { x: 0.83, y: 0.78, rx: 0.58, ry: 0.67, color: "#7c3aed", intensity: 0.37 },
   ],
 };
 
@@ -107,7 +118,7 @@ function render(width, height, opts) {
 }
 
 async function escribir(width, height, salida) {
-  const rgb = render(width, height, AURORA);
+  const rgb = render(width, height, DOS_POLOS);
   await sharp(rgb, { raw: { width, height, channels: 3 } })
     .webp({ quality: 82 })
     .toFile(salida);

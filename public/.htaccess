@@ -3,23 +3,32 @@
 # se agrego, se deployo, y el sintoma no cambio en nada.
 Options -MultiViews
 
-# HISTORIA DE ESTE ARCHIVO, PARA NO REPETIR EL CAMINO:
+# POR QUE EL 404 APUNTA A UN ARCHIVO CHICO Y NO AL DE NEXT
 #
-# Con "ErrorDocument 404 /404.html" (la pagina exportada por Next, 19 KB),
-# toda ruta inexistente colgaba ~40s y moria en un 520 de Cloudflare:
+# Este hosting no puede entregar un cuerpo de error grande. Medido contra
+# produccion, en este orden:
 #
-#   HEAD /noexiste  -> 404 en 0.25s, Last-Modified igual al de /404.html
-#   GET  /noexiste  -> 0 bytes, cuelga
+#   1. ErrorDocument -> /404.html (el de Next, 19 KB)
+#        HEAD /noexiste -> 404 en 0.25s, Last-Modified igual al de 404.html
+#        GET  /noexiste -> 0 bytes, cuelga ~40s, Cloudflare corta con un 520
+#      La directiva SI tomaba efecto y el servidor ya elegia el archivo: lo
+#      que fallaba era entregarlo.
 #
-# O sea que la directiva SI tomaba efecto y el servidor ya elegia el archivo
-# correcto; lo que fallaba era entregar el cuerpo. Quitarla dejo los 404 en
-# ~0.25s con la pagina pelada de Apache (236 bytes), confirmando que el fallo
-# esta en el mecanismo de ErrorDocument de este hosting.
+#   2. Sin ErrorDocument
+#        GET /noexiste -> 404 en 0.25s con la pagina pelada de Apache (236 B)
+#      Confirma que el cuelgue venia del cuerpo del ErrorDocument.
 #
-# Ahora se prueba si el fallo depende del TAMAÑO del cuerpo: 404-min.html es
-# autocontenido (~700 bytes, sin CSS ni JS externos) en vez de 19 KB.
+#   3. ErrorDocument -> /404-min.html (autocontenido, 757 bytes)
+#        GET /noexiste -> 404 en 0.25s con la pagina propia. Funciona.
 #
-#   - Si se entrega, el 404 vuelve a tener diseño propio y el limite es el peso.
-#   - Si vuelve a colgar, el mecanismo esta roto de raiz: revertir este commit
-#     y servir la pagina de error desde Cloudflare en vez del origen.
+# O sea que el mecanismo no esta roto: depende del peso del cuerpo. El umbral
+# exacto no se busco; lo probado es que 757 bytes pasan y 19 KB no.
+#
+# CUIDADO AL EDITAR 404-min.html: tiene que seguir siendo autocontenido y
+# chico. Si se le agregan fuentes, imagenes o CSS externo y crece, el 404
+# puede volver a colgarse ~40s y terminar en un 520. Cualquier cambio de peso
+# se verifica con:
+#
+#   curl -s -o /dev/null -w '%{http_code} %{size_download} %{time_total}\n' \
+#     https://sebastiangomez.com.ar/noexiste
 ErrorDocument 404 /404-min.html

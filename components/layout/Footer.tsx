@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Copy, Check } from "lucide-react";
 import { GithubIcon, LinkedinIcon, InstagramIcon, WhatsappIcon } from "@/components/ui/BrandIcons";
 import Wordmark from "@/components/ui/Wordmark";
@@ -21,8 +21,23 @@ const ICONOS = {
   WhatsApp: WhatsappIcon,
 };
 
+const ANIO_INICIAL = 2025;
+
 export default function Footer() {
   const [copiado, setCopiado] = useState(false);
+
+  // Se calcula despues de montar y no durante el render: el sitio es un
+  // export estatico, asi que en el render quedaria horneado el año del build
+  // y dejaria de actualizarse. Ademas evita un desajuste de hidratacion al
+  // cruzar un fin de año.
+  const [anio, setAnio] = useState<number | null>(null);
+
+  useEffect(() => {
+    setAnio(new Date().getFullYear());
+  }, []);
+
+  const rango =
+    anio && anio > ANIO_INICIAL ? `${ANIO_INICIAL} - ${anio}` : String(ANIO_INICIAL);
 
   async function copiar() {
     await navigator.clipboard.writeText(contacto.email);
@@ -51,6 +66,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     aria-label={red.nombre}
                     className="sg-social-icon"
+                    style={{ "--color-red": red.color } as React.CSSProperties}
                   >
                     <Icon size={16} aria-hidden="true" />
                   </a>
@@ -89,7 +105,7 @@ export default function Footer() {
         </div>
       </div>
       <p className="relative z-[2] border-t border-[var(--color-border)] px-6 py-5 text-center text-xs text-[var(--color-text-muted)]">
-        {contacto.copyright}
+        © {rango} {contacto.copyright}
       </p>
     </footer>
   );

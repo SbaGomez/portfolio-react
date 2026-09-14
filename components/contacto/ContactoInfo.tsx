@@ -84,6 +84,7 @@ export default function ContactoInfo() {
                     rel="noopener noreferrer"
                     aria-label={red.nombre}
                     className="sg-social-icon"
+                    style={{ "--color-red": red.color } as React.CSSProperties}
                   >
                     <Icon size={16} aria-hidden="true" />
                   </a>

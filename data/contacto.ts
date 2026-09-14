@@ -5,7 +5,8 @@ export const contacto: Contacto = {
   telefono: "2255413090",
   telefonoConPais: "+542255413090",
   ubicacion: "Argentina - Buenos Aires",
-  copyright: "Copyright © 2026 Sebastian Gomez. Todos los derechos reservados.",
+  // Sin el año: lo antepone el Footer como rango, calculado en cada visita.
+  copyright: "Sebastian Gomez. Todos los derechos reservados.",
   redes: [
     { nombre: "GitHub", url: "https://github.com/SbaGomez", color: "#6e5494" },
     { nombre: "LinkedIn", url: "https://www.linkedin.com/in/sbagomez/", color: "#0077B5" },

@@ -556,9 +556,12 @@ body {
   transition: color 150ms, border-color 150ms;
 }
 
+/* El color de marca llega como --color-red desde los datos (data/contacto.ts
+   ya tenia ese campo sin usar). El valor por defecto cubre a los recuadros
+   que usan esta clase sin ser una red, como los medios de contacto. */
 .sg-social-icon:hover {
-  color: var(--color-text);
-  border-color: var(--color-accent);
+  color: var(--color-red, var(--color-text));
+  border-color: var(--color-red, var(--color-accent));
 }
 
 .sg-skip-link {

@@ -1,7 +1,7 @@
 import type { Contacto } from "./tipos";
 
 export const contacto: Contacto = {
-  email: "admin@sebastiangomez.com.ar",
+  email: "contacto@sebastiangomez.com.ar",
   // El telefono y la ubicacion viven en `medios`, que es lo que se renderiza.
   // Tenerlos ademas como campos sueltos daba dos copias que nadie leia.
   // Sin el año: lo antepone el Footer como rango, calculado en cada visita.
@@ -16,8 +16,8 @@ export const contacto: Contacto = {
     {
       icono: "mail",
       titulo: "Email",
-      valor: "admin@sebastiangomez.com.ar",
-      link: "mailto:admin@sebastiangomez.com.ar",
+      valor: "contacto@sebastiangomez.com.ar",
+      link: "mailto:contacto@sebastiangomez.com.ar",
     },
     {
       icono: "whatsapp",

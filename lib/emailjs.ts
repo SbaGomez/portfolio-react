@@ -46,7 +46,11 @@ export async function enviarEmail(
     from_email: datos.email,
     subject: datos.asunto,
     message: datos.mensaje,
-    to_email: "sbagomeznight@gmail.com",
+    // Derivado de data/contacto.ts y no hardcodeado: era el ultimo literal
+    // que duplicaba la direccion publica. OJO: esto solo manda a donde dice
+    // si el campo "To Email" de la plantilla en EmailJS es {{to_email}};
+    // si ahi hay una direccion fija, gana esa y este valor es inerte.
+    to_email: contacto.email,
     reply_to: datos.email,
     from_name_display: `${datos.nombre} (${datos.email})`,
     fecha: new Date().toLocaleString("es-AR", {

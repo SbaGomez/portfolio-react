@@ -107,14 +107,19 @@ export default function ProyectoModal({
         </button>
         <h2 id="modal-titulo" className="pr-10 text-2xl font-bold">{proyecto.titulo}</h2>
 
-        {/* Las capturas solo se piden al abrir el modal: en la grilla serian
-            siete imagenes cargando de entrada sin que nadie las haya pedido. */}
+        {/* Sin loading="lazy" a proposito. Aca no hay nada que diferir: este
+            <img> es uno solo, no siete, y recien existe despues de que el
+            usuario abrio el modal, o sea que ya se carga a demanda. Diferirlo
+            posterga algo que acaban de pedir, y encima queda insertado dentro
+            de dos contenedores con scroll propio (.sg-slider con
+            overflow:hidden y .sg-modal con overflow-y:auto), que es donde la
+            carga diferida falla en varios navegadores moviles: el observer no
+            llega a disparar y la imagen no aparece nunca. */}
         {total > 0 && (
           <div className="sg-slider">
             <img
               src={proyecto.imagenes[indice]}
               alt={`Captura ${indice + 1} de ${total} de ${proyecto.titulo}`}
-              loading="lazy"
               onClick={() => setAmpliada(true)}
             />
 

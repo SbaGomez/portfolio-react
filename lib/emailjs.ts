@@ -43,16 +43,21 @@ export async function enviarEmail(
 
   const params = {
     from_name: datos.nombre,
-    // El remitente es NUESTRO dominio, no el del visitante. Antes iba
-    // datos.email: el servidor de Ferozo mandaba un mensaje que decia venir
-    // de @gmail.com (o del dominio que fuera), y gmail.com declara por SPF
-    // que solo los servidores de Google pueden hacerlo. Resultado: el SPF
-    // fallaba y el mensaje caia como spam. Desde nuestro dominio el SPF pasa,
-    // porque spf.hostmar.com autoriza al servidor que lo envia.
+    // El correo del visitante. La plantilla de EmailJS ata TRES campos a esta
+    // misma variable —"From Email", "Reply To" y la linea "Email:" del
+    // cuerpo—, asi que tiene que llevar su direccion: es lo unico que hace
+    // que el cuerpo lo muestre y que "Responder" le conteste a el.
     //
-    // El mail del visitante no se pierde: viaja en reply_to (asi "Responder"
-    // le contesta a el) y en from_name_display, que va en el cuerpo.
-    from_email: contacto.email,
+    // CONTRAPARTIDA CONOCIDA: el mensaje sale diciendo venir del dominio del
+    // visitante (gmail.com, por ejemplo), que por SPF no autoriza al servidor
+    // de Ferozo que lo envia. Es una senal de spam. Si los mensajes empiezan
+    // a caer en la carpeta de basura, la causa es esta.
+    //
+    // El arreglo entonces NO es tocar esta linea, sino desatar los tres
+    // campos en la plantilla: poner {{reply_to}} en "Reply To" y en la linea
+    // "Email:" del cuerpo, y dejar {{from_email}} solo como remitente con una
+    // direccion del dominio propio. El parametro reply_to ya se manda abajo.
+    from_email: datos.email,
     subject: datos.asunto,
     message: datos.mensaje,
     // Derivado de data/contacto.ts y no hardcodeado: era el ultimo literal

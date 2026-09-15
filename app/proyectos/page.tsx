@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionHeading from "@/components/ui/SectionHeading";
 import ListaProyectos from "@/components/proyectos/ListaProyectos";
+import { proyectos } from "@/data/proyectos";
 
 export const metadata: Metadata = {
   title: "Proyectos",
@@ -24,7 +25,7 @@ export default function Proyectos() {
           subtitulo="Trabajo full stack en web, escritorio y servidores."
           nota="Varios de estos proyectos son privados o pertenecen a clientes, así que no todos tienen código público."
         />
-        <ListaProyectos />
+        <ListaProyectos proyectos={proyectos} />
       </section>
     </main>
   );

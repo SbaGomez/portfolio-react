@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
-import Reveal from "@/components/ui/Reveal";
-import ProyectoCard from "@/components/proyectos/ProyectoCard";
+import ListaProyectos from "@/components/proyectos/ListaProyectos";
 import { proyectos } from "@/data/proyectos";
 
 export default function ProyectosDestacados() {
@@ -14,13 +13,11 @@ export default function ProyectosDestacados() {
         titulo="Proyectos"
         subtitulo="Una selección del trabajo más reciente."
       />
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {destacados.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 100}>
-            <ProyectoCard proyecto={p} />
-          </Reveal>
-        ))}
-      </div>
+      {/* La misma grilla que usa /proyectos, con el mismo modal: antes esta
+          seccion armaba su propia grilla sin onAbrir, y por eso las tarjetas
+          del inicio no tenian "Ver detalle". Solo la grilla es de cliente; el
+          encabezado y el enlace de abajo siguen siendo de servidor. */}
+      <ListaProyectos proyectos={destacados} pasoDelay={100} />
       <div className="mt-8 flex justify-center">
         <Link href="/proyectos" className="sg-button-outline">
           Ver todos los proyectos

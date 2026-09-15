@@ -43,7 +43,16 @@ export async function enviarEmail(
 
   const params = {
     from_name: datos.nombre,
-    from_email: datos.email,
+    // El remitente es NUESTRO dominio, no el del visitante. Antes iba
+    // datos.email: el servidor de Ferozo mandaba un mensaje que decia venir
+    // de @gmail.com (o del dominio que fuera), y gmail.com declara por SPF
+    // que solo los servidores de Google pueden hacerlo. Resultado: el SPF
+    // fallaba y el mensaje caia como spam. Desde nuestro dominio el SPF pasa,
+    // porque spf.hostmar.com autoriza al servidor que lo envia.
+    //
+    // El mail del visitante no se pierde: viaja en reply_to (asi "Responder"
+    // le contesta a el) y en from_name_display, que va en el cuerpo.
+    from_email: contacto.email,
     subject: datos.asunto,
     message: datos.mensaje,
     // Derivado de data/contacto.ts y no hardcodeado: era el ultimo literal

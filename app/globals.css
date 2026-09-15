@@ -809,6 +809,18 @@ body {
   overflow: hidden;
   border: 1px solid var(--color-border);
   background: var(--color-bg);
+  /* No sacar. .sg-modal es una columna flex con max-height, y flexbox encoge
+     los hijos antes de permitir scroll. Por especificacion, un item flex cuyo
+     overflow no es visible tiene tamaño minimo automatico CERO -- y este lo
+     tiene en hidden, para redondear las esquinas de la captura. Resultado sin
+     esta linea: el contenedor se comprime y su overflow recorta la imagen,
+     que conserva su tamaño propio pero queda dentro de una caja mas chica.
+     Medido en produccion: en un telefono de 390px el slider quedaba en 2px
+     con la imagen en 171 (invisible, y los parrafos siguientes pintados
+     encima); en escritorio quedaba en 301 de 598, o sea la captura cortada
+     al medio sin que se notara. Los parrafos no se encogen porque su overflow
+     es visible y conservan su altura minima de contenido. */
+  flex-shrink: 0;
 }
 
 .sg-slider img {

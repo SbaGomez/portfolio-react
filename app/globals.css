@@ -129,12 +129,6 @@ body {
   background: var(--color-bg-card);
 }
 
-.sg-button-outline-sm {
-  padding: 0.5rem 0.9rem;
-  font-size: 0.8rem;
-  border-radius: 8px;
-}
-
 /* Boton primario: pill redondeada del todo (999px del radio maximo, acá
    14px) con el gradiente de marca + glow. Es el unico boton con
    box-shadow -- la elevacion del resto del sistema es por borde y color
@@ -176,11 +170,15 @@ body {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   overflow: hidden;
-  transition: border-color 150ms, transform 150ms;
+  transition: border-color 150ms, background 150ms, transform 150ms;
 }
 
+/* El borde sube al 30% y no al acento pleno: desde el 18% del reposo, saltar
+   al 100% era un golpe de atencion desproporcionado para un hover. Lo que
+   compensa la señal es el fondo, que aclara un escalon. */
 .sg-step-card:hover {
-  border-color: var(--color-accent);
+  border-color: rgba(59, 130, 246, 0.3);
+  background: #141f36;
   transform: translateY(-2px);
 }
 
@@ -194,15 +192,143 @@ body {
   right: 1.5rem;
   font-size: 2rem;
   font-weight: 800;
-  color: rgba(59, 130, 246, 0.08);
+  /* El color lo pone la tarjeta segun el año (ver ProyectoCard), por eso llega
+     como una terna RGB en una variable y no como un color entero: la opacidad
+     del reposo y la del hover se deciden aca, que es donde viven. El respaldo
+     es el violeta, para cualquier año que todavia no tenga color propio. */
+  color: rgba(var(--anio-rgb, 167, 139, 250), 0.1);
   line-height: 1;
   pointer-events: none;
   user-select: none;
   transition: color 150ms;
 }
 
+/* Casi el doble del reposo y no el triple, por lo mismo que el borde: el año
+   acompaña al hover, no lo protagoniza. */
 .sg-step-card:hover .sg-step-number-bg {
-  color: rgba(59, 130, 246, 0.22);
+  color: rgba(var(--anio-rgb, 167, 139, 250), 0.18);
+}
+
+/* Las dos acciones de la tarjeta son dos puertas al mismo proyecto, asi que
+   van como un solo control partido y no como dos botones sueltos. El violeta
+   ya vive en el sistema (.sg-badge-pill-accent y la banda de cierre); aca
+   ademas distingue: "Ver online" es el unico que te saca del sitio. */
+.sg-card-actions {
+  display: flex;
+  border: 1px solid rgba(167, 139, 250, 0.26);
+  border-radius: 10px;
+}
+
+/* No lleva overflow: hidden para recortar las esquinas, que seria lo natural:
+   el :focus-visible global dibuja su outline con offset positivo y el recorte
+   se lo comeria, dejando los botones sin anillo de foco al navegar con
+   teclado. Por eso se redondea cada segmento por separado, a 9px: los 10 del
+   contenedor menos el borde. */
+.sg-card-action {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #c4b5fd;
+  transition: background 150ms, color 150ms;
+}
+
+.sg-card-action:first-child { border-radius: 9px 0 0 9px; }
+.sg-card-action:last-child { border-radius: 0 9px 9px 0; }
+.sg-card-action:only-child { border-radius: 9px; }
+
+/* El divisor es el borde izquierdo del segundo segmento: asi desaparece solo
+   en las tarjetas que no tienen demo, sin un elemento aparte ni una condicion
+   en el JSX. */
+.sg-card-action + .sg-card-action {
+  border-left: 1px solid rgba(167, 139, 250, 0.26);
+}
+
+.sg-card-action:hover {
+  background: rgba(167, 139, 250, 0.2);
+  color: #ddd6fe;
+}
+
+/* Metricas de la tarjeta. Una manda y las otras dos acompañan: el tamaño del
+   proyecto es lo que se compara entre tarjetas, y de paso el periodo deja de
+   ocupar un tercio del ancho. Ese tercio era el problema -- "dic 2025 - ene
+   2026" no entraba, saltaba a dos renglones y dejaba su etiqueta mas abajo
+   que las otras dos. */
+.sg-metricas {
+  display: grid;
+  /* La segunda fila es commits + periodo: el primero mide lo que necesita y
+     el periodo se queda con el resto, que es lo que garantiza que no corte. */
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.55rem 0;
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+  padding-top: 0.9rem;
+}
+
+/* El <dt> tiene que preceder al <dd> en el DOM, pero el dato va antes que su
+   etiqueta: el orden visual lo arregla flex, igual que hacia la version
+   anterior de este bloque. */
+.sg-metricas > div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.sg-metricas dt {
+  order: 2;
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+}
+
+.sg-metricas dd {
+  order: 1;
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.sg-metrica-lineas {
+  grid-column: 1 / -1;
+}
+
+/* Mismo recurso que .sg-hero-gradient y .sg-wordmark-dev: el degradado se
+   recorta contra el texto. Cierra en violeta y no en celeste para atarlo al
+   color de los botones de la tarjeta. */
+.sg-metrica-lineas dd {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  background: linear-gradient(135deg, var(--color-accent-light), #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.sg-metrica-lineas dt {
+  font-size: 0.78rem;
+}
+
+.sg-metrica-commits dd {
+  font-size: 0.85rem;
+}
+
+/* El divisor es el borde de la celda del periodo, no un elemento aparte. */
+.sg-metrica-periodo {
+  border-left: 1px solid var(--color-border);
+  margin-left: 0.75rem;
+  padding-left: 0.75rem;
+}
+
+.sg-metrica-periodo dd {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
 }
 
 .sg-step-icon {

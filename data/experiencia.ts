@@ -3,6 +3,25 @@ import type { Experiencia } from "./tipos";
 export const experiencias: Experiencia[] = [
   {
     puesto: "Software Developer",
+    empresa: "Arvent Group",
+    desde: "2026-06",
+    // Unico con hasta en null: es el puesto actual. El Timeline solo pinta
+    // `periodo`, asi que el null no se renderiza en ningun lado.
+    hasta: null,
+    periodo: "Jun 2026 – Actualidad",
+    // Describe como se trabaja, no sobre que: el proyecto es de un cliente y
+    // su dominio no se publica.
+    tareas: [
+      "Desarrollo y mantenimiento de un sistema compuesto por varias aplicaciones web y servicios, sobre .NET y con arquitectura en capas que separa dominio, servicios e infraestructura.",
+      "Implementación de procesos asincrónicos desacoplados mediante colas de mensajes, para tareas de larga duración y comunicación entre servicios.",
+      "Trabajo sobre bases de datos relacionales: consultas, esquemas y optimización en entornos productivos.",
+      "Empaquetado de los servicios en contenedores y despliegue a través de entornos integrados de build y release.",
+      "Escritura de pruebas automatizadas sobre las capas de dominio y de acceso a datos.",
+    ],
+    stack: [".NET", "C#", "MSSQL", "RabbitMQ", "Docker", "Azure DevOps"],
+  },
+  {
+    puesto: "Software Developer",
     empresa: "Synerbit",
     desde: "2024-05",
     hasta: "2026-05",

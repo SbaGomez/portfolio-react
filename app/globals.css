@@ -9,6 +9,12 @@
   --color-text: #e8edf7;
   --color-text-muted: #8b96ad;
   --color-border: rgba(59, 130, 246, 0.18);
+  /* Borde de hover. Existe como token porque antes cada regla saltaba del 18%
+     del reposo al acento pleno, y ese salto de casi seis veces era un golpe de
+     atencion desproporcionado para algo que solo dice "esto se puede tocar".
+     NO se usa en los :focus: el foco del teclado tiene que gritar, y ahi el
+     acento pleno esta bien puesto. */
+  --color-border-hover: rgba(59, 130, 246, 0.45);
   --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
   color-scheme: dark;
 }
@@ -17,6 +23,43 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Barra de scroll propia y discreta, en lugar de la del sistema operativo.
+   Van las dos sintaxis a proposito y no es redundancia: la estandar
+   (scrollbar-width/color) es la unica que entiende Firefox, y
+   ::-webkit-scrollbar es la unica que permite sacarle las flechas de los
+   extremos y redondear el pulgar en Chrome y Edge.
+
+   Se declara solo en html porque ambas propiedades estandar SE HEREDAN: el
+   modal y cualquier otra caja con overflow la reciben sin repetirla. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(147, 197, 253, 0.22) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(147, 197, 253, 0.22);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(147, 197, 253, 0.4);
+}
+
+/* Las flechas de los extremos son lo que mas delata a la barra del sistema:
+   Firefox ya no las dibuja, y aca se las sacamos al resto. */
+*::-webkit-scrollbar-button {
+  display: none;
 }
 
 .sg-page-bg {
@@ -666,7 +709,7 @@ body {
 }
 
 .sg-footer-connect:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border-hover);
 }
 
 .sg-social-icon {
@@ -685,9 +728,13 @@ body {
 /* El color de marca llega como --color-red desde los datos (data/contacto.ts
    ya tenia ese campo sin usar). El valor por defecto cubre a los recuadros
    que usan esta clase sin ser una red, como los medios de contacto. */
+/* Solo se atenua el respaldo. Cuando el recuadro SI es una red, el borde toma
+   su color de marca y eso se respeta: ahi el color identifica a GitHub o a
+   LinkedIn, no decora. El respaldo lo usan los recuadros que no son una red,
+   como los iconos de los medios de contacto. */
 .sg-social-icon:hover {
   color: var(--color-red, var(--color-text));
-  border-color: var(--color-red, var(--color-accent));
+  border-color: var(--color-red, var(--color-border-hover));
 }
 
 .sg-skip-link {
@@ -747,7 +794,7 @@ body {
 }
 
 .sg-tech-chip:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border-hover);
   transform: translateY(-2px);
 }
 
@@ -777,14 +824,30 @@ body {
    colgando en el lugar equivocado. */
 .sg-stats-container {
   gap: 1px;
-  background: var(--color-border);
-  border: 1px solid var(--color-border);
+  /* Este color ES el divisor: es lo unico que se ve por el hueco de 1px entre
+     celdas. Dejo de usar --color-border (azul) porque ahora las celdas son
+     translucidas y este fondo tambien se ve POR DETRAS de ellas: con el azul,
+     la barra entera quedaba teñida en vez de solo las lineas.
+
+     Muy bajo a proposito: el divisor tiene que insinuarse, no dibujarse. Mas
+     arriba, las tres lineas blancas se leian antes que los numeros. */
+  background: rgba(255, 255, 255, 0.05);
+  /* Apenas visible. Con un borde marcado la barra quedaba recuadrada y saltaba
+     por encima del hero; la forma se la da el desenfoque, no el contorno. */
+  border: 1px solid rgba(147, 197, 253, 0.1);
   border-radius: 16px;
   overflow: hidden;
+  /* El prefijo va PRIMERO y la estandar ultima: el build trata a las dos como
+     la misma propiedad y conserva solo la ultima declarada, y la estandar es
+     la que necesita Firefox. Ver .sg-nav-scrolled, .sg-cta-band y .sg-input. */
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
 }
 
+/* Translucidas, para que el fondo de la pagina se vea a traves. El desenfoque
+   lo hace el contenedor: alcanza con que lo declare una vez. */
 .sg-stats-container > div {
-  background: var(--color-bg-card);
+  background: rgba(10, 14, 26, 0.22);
 }
 
 /* Portado de .rw-cta-band tal cual, con el flex que la referencia resolvia
@@ -922,7 +985,7 @@ body {
 }
 
 .sg-modal-cerrar:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border-hover);
   color: var(--color-text);
 }
 
@@ -1025,7 +1088,7 @@ body {
 }
 
 .sg-slider-nav:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border-hover);
   background: rgba(10, 14, 26, 0.9);
 }
 
@@ -1208,7 +1271,7 @@ body {
 }
 
 a.sg-medio:hover {
-  border-color: var(--color-accent);
+  border-color: var(--color-border-hover);
   background: rgba(59, 130, 246, 0.12);
 }
 

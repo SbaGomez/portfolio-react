@@ -138,7 +138,15 @@ html {
   color: var(--color-accent-light);
 }
 
+/* Dibuja el punto, ademas de darle color. Antes solo declaraba el color y
+   ningun componente del sitio la usaba, asi que no habia un punto que pintar.
+   Conserva `color` para que siga sirviendo como modificador de texto. */
 .sg-badge-pill-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: currentColor;
   color: #4ade80;
 }
 
@@ -737,6 +745,24 @@ html {
   border-color: var(--color-red, var(--color-border-hover));
 }
 
+/* Redes de la columna de contacto: coloreadas ya en reposo y un poco mas
+   grandes. Va como modificador y no tocando .sg-social-icon porque esa misma
+   clase dibuja los cuadraditos de los medios de contacto y los del pie, que
+   siguen en gris. */
+.sg-social-icon-marca {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--color-red-claro, var(--color-text-muted));
+}
+
+/* Tiene que ir DESPUES de .sg-social-icon:hover: las dos reglas pesan igual y
+   gana la ultima. Sin esto el hover heredaria el color de marca original, que
+   es el oscuro, y el icono se APAGARIA al pasar el mouse en vez de encenderse.  */
+.sg-social-icon-marca:hover {
+  color: var(--color-red-claro, var(--color-text));
+  border-color: var(--color-red-claro, var(--color-border-hover));
+}
+
 .sg-skip-link {
   position: absolute;
   left: -9999px;
@@ -1275,6 +1301,37 @@ a.sg-medio:hover {
   background: rgba(59, 130, 246, 0.12);
 }
 
+/* Estado de disponibilidad, arriba de la columna de contacto. Es un
+   modificador de .sg-badge-pill y no una clase nueva.
+
+   El fondo y el borde quedan los de la pastilla base: el verde lo carga solo
+   el punto, que ademas late. Con el texto en blanco y un unico punto de color,
+   la señal se lee igual y la pastilla deja de competir con el resto.
+
+   El align-self no es decorativo: .sg-badge-pill es inline-flex, pero como
+   hija de un contenedor flex en columna se blockifica y el align-items:
+   stretch por defecto la estira a todo el ancho de la tarjeta. Con flex-start
+   vuelve a medir lo que mide su contenido, que es lo que una pastilla hace. */
+.sg-badge-pill-disponible {
+  align-self: flex-start;
+  color: var(--color-text);
+}
+
+/* El anillo se dibuja con box-shadow y no con un pseudo-elemento escalado:
+   asi no ocupa lugar ni puede correr al texto de al lado mientras crece. */
+@keyframes sg-pulso {
+  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(74, 222, 128, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+/* El pulso se cuelga del punto DENTRO de esta pastilla y no de
+   .sg-badge-pill-dot a secas: latir significa "esto esta vivo ahora", no
+   "esto es un punto". Un punto de estado en otro contexto no deberia latir. */
+.sg-badge-pill-disponible .sg-badge-pill-dot {
+  animation: sg-pulso 2.4s ease-out infinite;
+}
+
 /* Un solo bloque para todo el "reduced motion" del sistema. Tiene que ir
    DESPUES de las reglas base de cada selector que toca (.sg-reveal,
    .sg-button, .sg-step-card, .sg-scroll-top, .sg-footer-link,
@@ -1309,6 +1366,12 @@ a.sg-medio:hover {
   }
 
   .sg-spin {
+    animation: none;
+  }
+
+  /* Un punto que late sin parar es exactamente lo que molesta a quien pidio
+     menos movimiento. Se queda quieto y verde, que es lo que comunica. */
+  .sg-badge-pill-disponible .sg-badge-pill-dot {
     animation: none;
   }
 

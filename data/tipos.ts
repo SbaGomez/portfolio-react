@@ -1,7 +1,12 @@
+// Dos colores por red, y no uno: `color` es el de marca tal cual, que sirve
+// para un borde o un acento, y `colorClaro` es esa misma marca subida de
+// luminosidad para que el icono se lea sobre el fondo oscuro del sitio. Con el
+// hex original, LinkedIn (#0077B5) y GitHub (#6e5494) quedan casi invisibles.
 export type RedSocial = {
   nombre: string;
   url: string;
   color: string;
+  colorClaro: string;
 };
 
 export type Perfil = {
@@ -10,9 +15,19 @@ export type Perfil = {
   resumen: string;
 };
 
+// Lo unico del sitio que afirma algo sobre la disponibilidad de una persona,
+// asi que vive en los datos y no en el markup: corregirlo el dia que deje de
+// ser cierto es editar una linea.
+export type Disponibilidad = {
+  estado: string;
+  titular: string;
+  detalle: string;
+};
+
 export type Contacto = {
   email: string;
   copyright: string;
+  disponibilidad: Disponibilidad;
   redes: RedSocial[];
   medios: { icono: string; titulo: string; valor: string; link: string }[];
 };

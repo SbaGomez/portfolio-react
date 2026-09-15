@@ -78,11 +78,16 @@ export default function Footer() {
 
         <nav className="flex flex-col gap-2" aria-label="Secciones">
           <h2 className="sg-footer-heading">Secciones</h2>
-          {SECCIONES.map((s) => (
-            <Link key={s.href} href={s.href} className="sg-footer-link">
-              {s.label}
-            </Link>
-          ))}
+          {/* Los enlaces van en su propio contenedor y no directo en el nav:
+              con la grilla puesta sobre el nav, el <h2> caia dentro de una
+              celda en vez de encabezar las dos columnas. */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+            {SECCIONES.map((s) => (
+              <Link key={s.href} href={s.href} className="sg-footer-link">
+                {s.label}
+              </Link>
+            ))}
+          </div>
         </nav>
 
         <div className="flex flex-col gap-2">

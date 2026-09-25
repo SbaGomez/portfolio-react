@@ -129,6 +129,7 @@ export default function Terminos() {
   return (
     <DocumentoLegal
       titulo="Condiciones del servicio"
+      actual="/presupuestador/terminos/"
       actualizado="24 de septiembre de 2026"
       secciones={secciones}
     />

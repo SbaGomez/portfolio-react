@@ -158,10 +158,10 @@ const fichas: Proyecto[] = [
     titulo: "Presupuestador",
     anio: "2026",
     resumen:
-      "Aplicación de escritorio para armar presupuestos, exportarlos a PDF y sincronizarlos entre PCs a través de Google Drive.",
+      "Aplicación de escritorio para armar presupuestos, exportarlos a PDF, enviarlos por WhatsApp y sincronizarlos entre PCs a través de Google Drive.",
     descripcion: [
       "Herramienta para comercios y profesionales: arma presupuestos con descuentos por ítem y generales, los numera solo, los guarda en un historial con búsqueda y los exporta a PDF con el logo y los datos del negocio.",
-      "Funciona completa sin conexión. La sincronización con Google Drive es opcional y sirve a la vez de respaldo y de puente entre las computadoras del usuario, sin ningún servidor propio en el medio.",
+      "Funciona sin conexión. Google Drive sirve a la vez de respaldo y de puente entre las computadoras del usuario, y la cuenta de Google identifica la licencia: 15 días de prueba y después una licencia paga que se activa al instante.",
     ],
     stack: ["C#", ".NET 10", "WPF", "EF Core", "SQLite", "QuestPDF", "Google Drive API", "OAuth 2.0"],
     metricas: { lineas: 6046, commits: 28, periodo: "sep 2026" },
@@ -169,8 +169,9 @@ const fichas: Proyecto[] = [
       "Sincronización con el permiso mínimo de Drive (drive.appdata): una carpeta oculta propia de la app, sin acceso al resto de los archivos del usuario.",
       "Token de Google cifrado con DPAPI y atado al usuario de Windows.",
       "Aviso de sesión abierta en otra PC y resolución de conflictos que respalda localmente la versión descartada.",
-      "Exportación a PDF con QuestPDF, con el color y el logo del negocio.",
-      "Distribución como un único ejecutable autocontenido, sin instalador.",
+      "Exportación a PDF con QuestPDF, con el color y el logo del negocio, y envío directo por WhatsApp.",
+      "Instalador con actualizaciones automáticas por diferencias (Velopack), sin permisos de administrador.",
+      "Licencias firmadas con Ed25519 desde un Cloudflare Worker, atadas a la cuenta de Google y válidas sin conexión hasta 30 días.",
     ],
     links: { demo: "https://sebastiangomez.com.ar/presupuestador/", repo: "https://github.com/SbaGomez/PresupuestadorApp" },
     imagenes: [

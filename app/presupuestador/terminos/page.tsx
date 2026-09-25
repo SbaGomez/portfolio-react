@@ -28,17 +28,50 @@ const secciones: SeccionLegal[] = [
     titulo: "Qué es la aplicación",
     contenido: (
       <p>
-        Presupuestador permite armar presupuestos, guardarlos en tu computadora, exportarlos a PDF y,
-        de forma opcional, respaldarlos y sincronizarlos entre tus PCs usando tu propia cuenta de
-        Google Drive. La aplicación se ofrece de forma gratuita.
+        Presupuestador permite armar presupuestos, guardarlos en tu computadora, exportarlos a PDF,
+        enviarlos por WhatsApp y respaldarlos y sincronizarlos entre tus PCs usando tu propia cuenta
+        de Google Drive.
       </p>
+    ),
+  },
+  {
+    titulo: "Prueba gratuita y licencia",
+    contenido: (
+      <>
+        <p>
+          Al vincular tu cuenta de Google por primera vez comienza una{" "}
+          <strong>prueba gratuita de 15 días</strong> con todas las funciones. La prueba se otorga
+          una sola vez por cuenta de Google, aunque reinstales la aplicación o la uses en otra PC.
+        </p>
+        <p>
+          Terminada la prueba, para seguir usando la aplicación con todas sus funciones necesitás
+          una <strong>licencia paga</strong>, que se contrata por un período determinado. El precio y
+          los medios de pago se informan al contactar al desarrollador por WhatsApp o a{" "}
+          <a href={`mailto:${contacto.email}`}>{contacto.email}</a>. Una vez acreditado el pago, la
+          licencia se activa en tu cuenta sin necesidad de reinstalar.
+        </p>
+        <ul>
+          <li>La licencia es personal y está atada a tu cuenta de Google; podés usarla en todas las computadoras donde vincules esa misma cuenta.</li>
+          <li>La aplicación te avisa unos días antes de que la prueba o la licencia venzan.</li>
+          <li>
+            Si la prueba o la licencia vencen, la aplicación pasa a modo de solo lectura: podés
+            seguir viendo, buscando, exportando y enviando tus presupuestos, pero no crear, editar,
+            duplicar ni eliminar hasta renovar. Tus datos no se borran.
+          </li>
+          <li>
+            Sin conexión, la aplicación sigue funcionando hasta 30 días desde la última vez que
+            comprobó la licencia.
+          </li>
+        </ul>
+      </>
     ),
   },
   {
     titulo: "Tu cuenta de Google",
     contenido: (
       <p>
-        La sincronización con Google Drive es opcional. Si la activás, también aplican los{" "}
+        Vincular una cuenta de Google es necesario para activar la prueba y la licencia, y para el
+        respaldo en Google Drive. También aplican los{" "}
         <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">
           Términos del Servicio de Google
         </a>
@@ -78,9 +111,9 @@ const secciones: SeccionLegal[] = [
     titulo: "Respaldo de tus datos",
     contenido: (
       <p>
-        Tus datos viven en tu computadora y, si lo activás, en tu Google Drive. Te recomendamos
-        mantener la sincronización activa o hacer copias de respaldo propias: el desarrollador no
-        guarda copias y no puede recuperar información perdida.
+        Tus datos viven en tu computadora y en la copia de respaldo de tu Google Drive. Te
+        recomendamos no desvincular la cuenta o hacer copias de respaldo propias: el desarrollador
+        no guarda copias de tus presupuestos y no puede recuperar información perdida.
       </p>
     ),
   },
@@ -130,7 +163,7 @@ export default function Terminos() {
     <DocumentoLegal
       titulo="Condiciones del servicio"
       actual="/presupuestador/terminos/"
-      actualizado="24 de septiembre de 2026"
+      actualizado="25 de septiembre de 2026"
       secciones={secciones}
     />
   );

@@ -39,8 +39,8 @@ const secciones: SeccionLegal[] = [
           <li>Los datos de tus clientes que ingreses en cada presupuesto: nombre y, opcionalmente, teléfono.</li>
         </ul>
         <p>
-          Todo esto se guarda <strong>únicamente en tu computadora</strong>, en la carpeta
-          <code> %LOCALAPPDATA%\Presupuestador</code>. La aplicación no tiene un servidor propio, no
+          Todo esto se guarda <strong>únicamente en tu computadora</strong>, en la carpeta{" "}
+          <code>%LOCALAPPDATA%\Presupuestador</code>. La aplicación no tiene un servidor propio, no
           envía estadísticas de uso ni reportes de errores, y no incluye publicidad ni herramientas de
           seguimiento. Los registros de errores se guardan solo en tu equipo y se borran solos a los
           14 días.
@@ -169,6 +169,7 @@ export default function Privacidad() {
   return (
     <DocumentoLegal
       titulo="Política de privacidad"
+      actual="/presupuestador/privacidad/"
       actualizado="24 de septiembre de 2026"
       secciones={secciones}
     />

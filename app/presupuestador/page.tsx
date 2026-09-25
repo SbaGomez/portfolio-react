@@ -13,6 +13,7 @@ import {
   Mail,
 } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
+import CapturasSlider from "@/components/presupuestador/CapturasSlider";
 import { WhatsappIcon } from "@/components/ui/BrandIcons";
 import { contacto } from "@/data/contacto";
 
@@ -125,23 +126,7 @@ export default function Presupuestador() {
           ))}
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
-          {CAPTURAS.map(({ src, texto }) => (
-            <figure key={src} className="flex flex-col gap-2">
-              <a href={src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl">
-                <img
-                  src={src}
-                  alt={`Captura de Presupuestador: ${texto}`}
-                  width={1200}
-                  height={750}
-                  loading="lazy"
-                  className="h-auto w-full transition-transform duration-300 hover:scale-[1.02]"
-                />
-              </a>
-              <figcaption className="text-center text-sm text-[var(--color-text-muted)]">{texto}</figcaption>
-            </figure>
-          ))}
-        </div>
+        <CapturasSlider capturas={CAPTURAS} />
 
         <GlassCard className="p-6 sm:p-8">
           <div className="flex flex-col gap-4 text-sm leading-relaxed text-[var(--color-text-muted)]">
@@ -161,14 +146,21 @@ export default function Presupuestador() {
               con esa misma cuenta. Si vence, no perdés nada: podés seguir viendo, buscando,
               exportando y enviando tus presupuestos hasta que la renueves.
             </p>
-            <div className="flex flex-wrap gap-3 pt-1">
-              <a href={WHATSAPP} target="_blank" rel="noopener noreferrer" className="sg-button">
+            {/* En mobile van apilados y a todo el ancho: lado a lado no entran,
+                y el email es una sola palabra larga que no puede partirse. */}
+            <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:flex-wrap">
+              <a
+                href={WHATSAPP}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sg-button justify-center max-sm:px-4!"
+              >
                 <WhatsappIcon size={18} />
                 Pedir licencia por WhatsApp
               </a>
-              <a href={MAIL} className="sg-button-outline">
-                <Mail size={18} aria-hidden="true" />
-                {contacto.email}
+              <a href={MAIL} className="sg-button-outline min-w-0 justify-center max-sm:px-4!">
+                <Mail size={18} className="shrink-0" aria-hidden="true" />
+                <span className="min-w-0 [overflow-wrap:anywhere]">{contacto.email}</span>
               </a>
             </div>
           </div>

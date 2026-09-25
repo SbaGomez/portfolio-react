@@ -14,9 +14,10 @@ export const metadata: Metadata = {
 
 const email = <a href={`mailto:${contacto.email}`}>{contacto.email}</a>;
 
-// El texto describe lo que la app hace de verdad: el unico permiso es
-// drive.appdata y no hay servidor propio ni analitica. Si la app cambia de
-// permisos o suma un servicio, esta pagina tiene que cambiar con ella.
+// El texto describe lo que la app hace de verdad: pide openid, email y
+// drive.appdata, y el unico servidor propio es el de licencias, que guarda el
+// email y las fechas de prueba y vencimiento. No hay analitica. Si la app
+// cambia de permisos o suma un servicio, esta pagina tiene que cambiar con ella.
 const secciones: SeccionLegal[] = [
   {
     titulo: "Quién es el responsable",
@@ -40,24 +41,31 @@ const secciones: SeccionLegal[] = [
         </ul>
         <p>
           Todo esto se guarda <strong>únicamente en tu computadora</strong>, en la carpeta{" "}
-          <code>%LOCALAPPDATA%\Presupuestador</code>. La aplicación no tiene un servidor propio, no
-          envía estadísticas de uso ni reportes de errores, y no incluye publicidad ni herramientas de
-          seguimiento. Los registros de errores se guardan solo en tu equipo y se borran solos a los
-          14 días.
+          <code>%LOCALAPPDATA%\Presupuestador</code>, y en la copia de respaldo de tu Google Drive que
+          se explica más abajo. La aplicación no envía estadísticas de uso ni reportes de errores, y
+          no incluye publicidad ni herramientas de seguimiento. Los registros de errores se guardan
+          solo en tu equipo y se borran solos a los 14 días.
         </p>
       </>
     ),
   },
   {
-    titulo: "Sincronización con Google Drive (opcional)",
+    titulo: "Tu cuenta de Google y Google Drive",
     contenido: (
       <>
         <p>
-          Si decidís vincular tu cuenta de Google, la aplicación usa Google Drive para guardar una
-          copia de respaldo y sincronizar tus presupuestos entre tus computadoras. Para eso solicita
-          un único permiso:
+          Para usar la aplicación tenés que vincular tu cuenta de Google. La cuenta sirve para dos
+          cosas: identificar tu licencia y guardar una copia de respaldo de tus presupuestos en tu
+          Google Drive, sincronizada entre tus computadoras. Para eso la aplicación solicita estos
+          permisos:
         </p>
         <ul>
+          <li>
+            <strong>
+              <code>openid</code> y <code>email</code>
+            </strong>{" "}
+            — tu identidad y la dirección de email verificada de tu cuenta de Google.
+          </li>
           <li>
             <strong>
               <code>https://www.googleapis.com/auth/drive.appdata</code>
@@ -70,8 +78,9 @@ const secciones: SeccionLegal[] = [
         <p>Con ese acceso, la aplicación:</p>
         <ul>
           <li>
-            Lee la <strong>dirección de email</strong> de tu cuenta de Google, solo para mostrarte
-            qué cuenta está vinculada y comprobar que, si volvés a vincular, sea la misma.
+            Usa la <strong>dirección de email</strong> de tu cuenta de Google para mostrarte qué
+            cuenta está vinculada, para comprobar que, si volvés a vincular, sea la misma, y para
+            consultar tu licencia (ver la sección siguiente).
           </li>
           <li>
             Guarda en esa carpeta privada un archivo de respaldo con tu base de presupuestos, tu logo y
@@ -84,10 +93,10 @@ const secciones: SeccionLegal[] = [
           </li>
         </ul>
         <p>
-          Los datos obtenidos de Google se usan exclusivamente para brindarte esta función de
-          respaldo y sincronización. No se venden, no se comparten con terceros, no se usan para
-          publicidad y ninguna persona los lee. Viajan directamente entre tu computadora y Google;
-          nunca pasan por servidores del desarrollador.
+          Los datos obtenidos de Google se usan exclusivamente para brindarte el respaldo, la
+          sincronización y la licencia. No se venden, no se comparten con terceros, no se usan para
+          publicidad y ninguna persona lee tus presupuestos. El respaldo viaja directamente entre tu
+          computadora y Google y nunca pasa por servidores del desarrollador.
         </p>
         <p>
           El uso y la transferencia de la información recibida de las API de Google por parte de
@@ -105,6 +114,28 @@ const secciones: SeccionLegal[] = [
     ),
   },
   {
+    titulo: "Licencia y período de prueba",
+    contenido: (
+      <>
+        <p>
+          Para saber si tenés una prueba o una licencia vigente, la aplicación envía al servidor de
+          licencias del desarrollador (alojado en Cloudflare) el token de identidad de tu cuenta de
+          Google. El servidor lo verifica ante Google, toma de él tu email y guarda únicamente:
+        </p>
+        <ul>
+          <li>Tu dirección de email.</li>
+          <li>La fecha en que empezó tu prueba gratuita y la fecha de vencimiento de tu licencia.</li>
+          <li>Una nota interna opcional del desarrollador, por ejemplo sobre el pago de la licencia.</li>
+        </ul>
+        <p>
+          El servidor no recibe tus presupuestos, tus clientes, los datos de tu negocio ni ningún
+          archivo de tu Drive. Estos datos se usan solo para administrar tu licencia y no se
+          comparten con terceros.
+        </p>
+      </>
+    ),
+  },
+  {
     titulo: "Cómo se protege la información",
     contenido: (
       <ul>
@@ -112,8 +143,14 @@ const secciones: SeccionLegal[] = [
           El token de acceso de Google se guarda en tu computadora cifrado con la protección de datos
           de Windows (DPAPI), atado a tu usuario de Windows.
         </li>
-        <li>La comunicación con Google se hace siempre por conexiones cifradas (HTTPS).</li>
-        <li>El desarrollador no tiene acceso a tus datos ni a tu cuenta de Google.</li>
+        <li>
+          La comunicación con Google y con el servidor de licencias se hace siempre por conexiones
+          cifradas (HTTPS).
+        </li>
+        <li>
+          El desarrollador no tiene acceso a tus presupuestos, a tu Drive ni a tu cuenta de Google;
+          solo ve tu email y el estado de tu licencia.
+        </li>
       </ul>
     ),
   },
@@ -139,6 +176,11 @@ const secciones: SeccionLegal[] = [
           <li>
             <strong>Borrar los datos locales:</strong> eliminá la carpeta{" "}
             <code>%LOCALAPPDATA%\Presupuestador</code> de tu computadora.
+          </li>
+          <li>
+            <strong>Borrar tu registro de licencia:</strong> escribí a {email} desde la cuenta
+            vinculada y lo eliminamos. Tené en cuenta que, sin ese registro, se pierde la licencia
+            que tengas vigente.
           </li>
         </ul>
         <p>Si necesitás ayuda para borrar tus datos, escribí a {email}.</p>
@@ -170,7 +212,7 @@ export default function Privacidad() {
     <DocumentoLegal
       titulo="Política de privacidad"
       actual="/presupuestador/privacidad/"
-      actualizado="24 de septiembre de 2026"
+      actualizado="25 de septiembre de 2026"
       secciones={secciones}
     />
   );

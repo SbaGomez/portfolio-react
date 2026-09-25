@@ -173,7 +173,12 @@ const fichas: Proyecto[] = [
       "Distribución como un único ejecutable autocontenido, sin instalador.",
     ],
     links: { demo: "https://sebastiangomez.com.ar/presupuestador/", repo: "https://github.com/SbaGomez/PresupuestadorApp" },
-    imagenes: [],
+    imagenes: [
+      "/proyectos/presupuestador-editor.webp",
+      "/proyectos/presupuestador-pdf.webp",
+      "/proyectos/presupuestador-listado.webp",
+      "/proyectos/presupuestador-negocio.webp",
+    ],
     anonimo: false,
     destacado: false,
   },

@@ -13,8 +13,7 @@ import {
   Mail,
 } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
-import CapturasSlider from "@/components/presupuestador/CapturasSlider";
-import VideoPromo from "@/components/presupuestador/VideoPromo";
+import CapturasSlider, { type VideoSlide } from "@/components/presupuestador/CapturasSlider";
 import { WhatsappIcon } from "@/components/ui/BrandIcons";
 import { contacto } from "@/data/contacto";
 
@@ -84,6 +83,12 @@ const CAPTURAS = [
   { src: "/proyectos/presupuestador-negocio.webp", texto: "Los datos de tu negocio y el diseño del PDF, cargados una sola vez" },
 ];
 
+const VIDEO: VideoSlide = {
+  horizontal: { src: "/presupuestador/video-horizontal.mp4", poster: "/presupuestador/video-horizontal.webp" },
+  vertical: { src: "/presupuestador/video-vertical.mp4", poster: "/presupuestador/video-vertical.webp" },
+  texto: "Presupuestador en uso, de punta a punta",
+};
+
 export default function Presupuestador() {
   return (
     <main id="contenido">
@@ -118,7 +123,7 @@ export default function Presupuestador() {
           </p>
         </header>
 
-        <VideoPromo />
+        <CapturasSlider capturas={CAPTURAS} video={VIDEO} />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FUNCIONES.map(({ icono: Icono, titulo, texto }) => (
@@ -129,8 +134,6 @@ export default function Presupuestador() {
             </GlassCard>
           ))}
         </div>
-
-        <CapturasSlider capturas={CAPTURAS} />
 
         <GlassCard className="p-6 sm:p-8">
           <div className="flex flex-col gap-4 text-sm leading-relaxed text-[var(--color-text-muted)]">

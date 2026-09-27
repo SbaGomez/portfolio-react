@@ -23,14 +23,18 @@ const fichas: Proyecto[] = [
     ],
     links: { demo: "https://sebastiangomez.com.ar/presupuestador/", repo: "https://github.com/SbaGomez/PresupuestadorApp" },
     imagenes: [
+      "/proyectos/presupuestador-listado.webp",
       "/proyectos/presupuestador-editor.webp",
       "/proyectos/presupuestador-pdf.webp",
-      "/proyectos/presupuestador-listado.webp",
       "/proyectos/presupuestador-resumen.webp",
       "/proyectos/presupuestador-negocio.webp",
     ],
+    video: {
+      horizontal: { src: "/presupuestador/video-horizontal.mp4", poster: "/presupuestador/video-horizontal.webp" },
+      vertical: { src: "/presupuestador/video-vertical.mp4", poster: "/presupuestador/video-vertical.webp" },
+    },
     anonimo: false,
-    destacado: false,
+    destacado: true,
   },
   {
     slug: "ecosistema-roleplay",
@@ -110,7 +114,7 @@ const fichas: Proyecto[] = [
     links: {},
     imagenes: [],
     anonimo: false,
-    destacado: true,
+    destacado: false,
   },
   {
     slug: "visor-infracciones",

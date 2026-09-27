@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import VideoResponsivo from "@/components/ui/VideoResponsivo";
 import type { Proyecto } from "@/data/tipos";
+import { siguienteCaptura } from "@/lib/slider";
 
 export default function ProyectoModal({
   proyecto,
@@ -15,7 +17,15 @@ export default function ProyectoModal({
   const [indice, setIndice] = useState(0);
   const [ampliada, setAmpliada] = useState(false);
 
-  const total = proyecto.imagenes.length;
+  // Si hay video, ocupa la posicion 0 y las capturas van corridas un lugar.
+  // La vista ampliada es solo de capturas: ahi se recorren sin el video.
+  const video = proyecto.video;
+  const offset = video ? 1 : 0;
+  const cantidadCapturas = proyecto.imagenes.length;
+  const total = cantidadCapturas + offset;
+  const esVideo = video !== undefined && indice === 0;
+  const captura = proyecto.imagenes[indice - offset];
+  const numeroCaptura = indice - offset + 1;
 
   // Foco inicial y bloqueo del scroll del body: solo al montar. Si esto
   // viviera en el mismo efecto que el teclado, cada cambio de estado del
@@ -43,10 +53,19 @@ export default function ProyectoModal({
         return;
       }
 
-      if (total > 1 && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
-        e.preventDefault();
+      // Con el foco en el video, las flechas son del reproductor (adelantar y atrasar).
+      if (
+        (e.key === "ArrowLeft" || e.key === "ArrowRight") &&
+        !(e.target instanceof HTMLVideoElement)
+      ) {
         const paso = e.key === "ArrowLeft" ? -1 : 1;
-        setIndice((i) => (i + paso + total) % total);
+        if (ampliada && cantidadCapturas > 1) {
+          e.preventDefault();
+          setIndice((i) => siguienteCaptura(i, paso, offset, cantidadCapturas));
+        } else if (!ampliada && total > 1) {
+          e.preventDefault();
+          setIndice((i) => (i + paso + total) % total);
+        }
         return;
       }
 
@@ -85,10 +104,14 @@ export default function ProyectoModal({
 
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [onCerrar, ampliada, total]);
+  }, [onCerrar, ampliada, total, offset, cantidadCapturas]);
 
   function mover(paso: number) {
     setIndice((i) => (i + paso + total) % total);
+  }
+
+  function moverCaptura(paso: number) {
+    setIndice((i) => siguienteCaptura(i, paso, offset, cantidadCapturas));
   }
 
   return (
@@ -117,18 +140,22 @@ export default function ProyectoModal({
             llega a disparar y la imagen no aparece nunca. */}
         {total > 0 && (
           <div className="sg-slider">
-            <img
-              src={proyecto.imagenes[indice]}
-              alt={`Captura ${indice + 1} de ${total} de ${proyecto.titulo}`}
-              onClick={() => setAmpliada(true)}
-            />
+            {esVideo ? (
+              <VideoResponsivo video={video} titulo={proyecto.titulo} />
+            ) : (
+              <img
+                src={captura}
+                alt={`Captura ${numeroCaptura} de ${cantidadCapturas} de ${proyecto.titulo}`}
+                onClick={() => setAmpliada(true)}
+              />
+            )}
 
             {total > 1 && (
               <>
                 <button
                   type="button"
                   onClick={() => mover(-1)}
-                  aria-label="Captura anterior"
+                  aria-label="Anterior"
                   className="sg-slider-nav sg-slider-prev"
                 >
                   <ChevronLeft size={18} />
@@ -136,12 +163,13 @@ export default function ProyectoModal({
                 <button
                   type="button"
                   onClick={() => mover(1)}
-                  aria-label="Captura siguiente"
+                  aria-label="Siguiente"
                   className="sg-slider-nav sg-slider-next"
                 >
                   <ChevronRight size={18} />
                 </button>
-                <span className="sg-slider-contador">
+                {/* En el video va arriba para no tapar los controles del reproductor. */}
+                <span className={`sg-slider-contador${esVideo ? " sg-slider-contador-arriba" : ""}`}>
                   {indice + 1} / {total}
                 </span>
               </>
@@ -165,7 +193,7 @@ export default function ProyectoModal({
       {/* Fuera de .sg-modal para que ocupe la pantalla entera. El click se
           detiene acá: sin eso burbujearía al overlay y cerraría el modal
           completo en vez de solo la imagen. */}
-      {ampliada && total > 0 && (
+      {ampliada && captura && (
         <div
           className="sg-lightbox"
           onClick={(e) => {
@@ -174,20 +202,20 @@ export default function ProyectoModal({
           }}
         >
           <img
-            src={proyecto.imagenes[indice]}
-            alt={`Captura ${indice + 1} de ${total} de ${proyecto.titulo}, ampliada`}
+            src={captura}
+            alt={`Captura ${numeroCaptura} de ${cantidadCapturas} de ${proyecto.titulo}, ampliada`}
           />
 
           {/* Cada control detiene el click: sin eso, pasar de imagen cerraría
               la vista ampliada en el mismo gesto. Las flechas del teclado ya
               funcionaban acá, pero con el mouse no había forma. */}
-          {total > 1 && (
+          {cantidadCapturas > 1 && (
             <>
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  mover(-1);
+                  moverCaptura(-1);
                 }}
                 aria-label="Captura anterior"
                 className="sg-slider-nav sg-lightbox-prev"
@@ -198,7 +226,7 @@ export default function ProyectoModal({
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  mover(1);
+                  moverCaptura(1);
                 }}
                 aria-label="Captura siguiente"
                 className="sg-slider-nav sg-lightbox-next"
@@ -206,7 +234,7 @@ export default function ProyectoModal({
                 <ChevronRight size={22} />
               </button>
               <span className="sg-lightbox-contador">
-                {indice + 1} / {total}
+                {numeroCaptura} / {cantidadCapturas}
               </span>
             </>
           )}

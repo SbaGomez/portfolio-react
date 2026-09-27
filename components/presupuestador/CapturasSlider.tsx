@@ -2,20 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import VideoResponsivo from "@/components/ui/VideoResponsivo";
+import type { VideoProyecto } from "@/data/tipos";
+import { siguienteCaptura } from "@/lib/slider";
 
 export type Captura = { src: string; texto: string };
 
-/** Video que va como primera slide: el horizontal en pantallas grandes y el vertical en el celular. */
-export type VideoSlide = {
-  horizontal: { src: string; poster: string };
-  vertical: { src: string; poster: string };
-  texto: string;
-};
-
-/** Indice de la captura vecina, salteando el video (que ocupa los primeros `offset` lugares). */
-function siguienteCaptura(i: number, paso: number, offset: number, n: number) {
-  return ((i - offset + paso + n) % n) + offset;
-}
+/** Video que va como primera slide, con el texto que se muestra debajo. */
+export type VideoSlide = VideoProyecto & { texto: string };
 
 /**
  * Slider de capturas de la pagina del Presupuestador. Reusa los estilos del
@@ -96,33 +90,7 @@ export default function CapturasSlider({ capturas, video }: { capturas: Captura[
         }}
       >
         {esVideo ? (
-          // Los dos estan en el HTML y el CSS oculta uno; con preload="none"
-          // el oculto no baja nada y el visible solo trae la portada hasta
-          // que se le da play. Al cambiar de slide se desmontan y se cortan.
-          <>
-            <video
-              className="hidden aspect-video w-full md:block"
-              src={video.horizontal.src}
-              poster={video.horizontal.poster}
-              width={1920}
-              height={1080}
-              controls
-              playsInline
-              preload="none"
-              aria-label="Video de presentación de Presupuestador"
-            />
-            <video
-              className="block aspect-[9/16] w-full md:hidden"
-              src={video.vertical.src}
-              poster={video.vertical.poster}
-              width={1080}
-              height={1920}
-              controls
-              playsInline
-              preload="none"
-              aria-label="Video de presentación de Presupuestador"
-            />
-          </>
+          <VideoResponsivo video={video} titulo="Presupuestador" />
         ) : (
           actual && (
             <img

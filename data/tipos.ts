@@ -64,6 +64,12 @@ export type MetricasProyecto = {
   periodo: string;
 };
 
+/** Video de un proyecto: el horizontal se muestra en pantallas grandes y el vertical en el celular. */
+export type VideoProyecto = {
+  horizontal: { src: string; poster: string };
+  vertical: { src: string; poster: string };
+};
+
 export type Proyecto = {
   slug: string;
   titulo: string;
@@ -75,6 +81,8 @@ export type Proyecto = {
   destacados: string[];
   links: { demo?: string; repo?: string };
   imagenes: string[];
+  /** Si tiene, va como primera slide del slider de capturas. */
+  video?: VideoProyecto;
   anonimo: boolean;
   destacado: boolean;
 };

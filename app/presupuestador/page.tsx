@@ -16,6 +16,7 @@ import GlassCard from "@/components/ui/GlassCard";
 import CapturasSlider, { type VideoSlide } from "@/components/presupuestador/CapturasSlider";
 import { WhatsappIcon } from "@/components/ui/BrandIcons";
 import { contacto } from "@/data/contacto";
+import { proyectos } from "@/data/proyectos";
 
 // Pagina principal de la app para la pantalla de consentimiento de Google.
 // Google la revisa a mano: tiene que nombrar la app exactamente como en la
@@ -83,9 +84,10 @@ const CAPTURAS = [
   { src: "/proyectos/presupuestador-negocio.webp", texto: "Los datos de tu negocio y el diseño del PDF, cargados una sola vez" },
 ];
 
-const VIDEO: VideoSlide = {
-  horizontal: { src: "/presupuestador/video-horizontal.mp4", poster: "/presupuestador/video-horizontal.webp" },
-  vertical: { src: "/presupuestador/video-vertical.mp4", poster: "/presupuestador/video-vertical.webp" },
+// El video sale de la ficha del proyecto, para no repetir las rutas.
+const videoFicha = proyectos.find((p) => p.slug === "presupuestador")?.video;
+const VIDEO: VideoSlide | undefined = videoFicha && {
+  ...videoFicha,
   texto: "Presupuestador en uso, de punta a punta",
 };
 

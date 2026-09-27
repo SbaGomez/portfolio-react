@@ -1126,6 +1126,12 @@ html {
   right: 0.75rem;
 }
 
+/* Sin display: cual de los dos videos se ve lo deciden sus clases hidden
+   y md:block, y un display aca les ganaria por especificidad. */
+.sg-slider video {
+  background: #000;
+}
+
 .sg-slider-contador {
   position: absolute;
   right: 0.75rem;
@@ -1137,6 +1143,11 @@ html {
   font-size: 0.7rem;
   font-weight: 600;
   color: var(--color-text-muted);
+}
+
+.sg-slider-contador-arriba {
+  top: 0.75rem;
+  bottom: auto;
 }
 
 /* Portado de .rw-footer-input, sin el padding izquierdo que ahi deja lugar

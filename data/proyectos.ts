@@ -26,6 +26,7 @@ const fichas: Proyecto[] = [
       "/proyectos/presupuestador-editor.webp",
       "/proyectos/presupuestador-pdf.webp",
       "/proyectos/presupuestador-listado.webp",
+      "/proyectos/presupuestador-resumen.webp",
       "/proyectos/presupuestador-negocio.webp",
     ],
     anonimo: false,

@@ -13,7 +13,7 @@ import {
   Mail,
 } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
-import CapturasSlider from "@/components/presupuestador/CapturasSlider";
+import CapturasSlider, { type VideoSlide } from "@/components/presupuestador/CapturasSlider";
 import { WhatsappIcon } from "@/components/ui/BrandIcons";
 import { contacto } from "@/data/contacto";
 
@@ -76,11 +76,18 @@ const FUNCIONES = [
 ];
 
 const CAPTURAS = [
-  { src: "/proyectos/presupuestador-listado.webp", texto: "Historial con búsqueda, vista previa y envío por WhatsApp" },
+  { src: "/proyectos/presupuestador-listado.webp", texto: "Historial con estados, búsqueda, vista previa y envío por WhatsApp" },
   { src: "/proyectos/presupuestador-editor.webp", texto: "Editor con descuentos y totales en vivo" },
-  { src: "/proyectos/presupuestador-pdf.webp", texto: "Vista previa del PDF con tu logo" },
-  { src: "/proyectos/presupuestador-negocio.webp", texto: "Los datos de tu negocio, cargados una sola vez" },
+  { src: "/proyectos/presupuestador-pdf.webp", texto: "Vista previa del PDF con tu logo, lista para guardar o mandar" },
+  { src: "/proyectos/presupuestador-resumen.webp", texto: "Resumen del mes: lo presupuestado, lo aceptado y el % de cierre" },
+  { src: "/proyectos/presupuestador-negocio.webp", texto: "Los datos de tu negocio y el diseño del PDF, cargados una sola vez" },
 ];
+
+const VIDEO: VideoSlide = {
+  horizontal: { src: "/presupuestador/video-horizontal.mp4", poster: "/presupuestador/video-horizontal.webp" },
+  vertical: { src: "/presupuestador/video-vertical.mp4", poster: "/presupuestador/video-vertical.webp" },
+  texto: "Presupuestador en uso, de punta a punta",
+};
 
 export default function Presupuestador() {
   return (
@@ -116,6 +123,8 @@ export default function Presupuestador() {
           </p>
         </header>
 
+        <CapturasSlider capturas={CAPTURAS} video={VIDEO} />
+
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FUNCIONES.map(({ icono: Icono, titulo, texto }) => (
             <GlassCard key={titulo} className="p-6">
@@ -125,8 +134,6 @@ export default function Presupuestador() {
             </GlassCard>
           ))}
         </div>
-
-        <CapturasSlider capturas={CAPTURAS} />
 
         <GlassCard className="p-6 sm:p-8">
           <div className="flex flex-col gap-4 text-sm leading-relaxed text-[var(--color-text-muted)]">

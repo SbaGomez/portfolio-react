@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 import CapturasSlider from "@/components/presupuestador/CapturasSlider";
+import VideoPromo from "@/components/presupuestador/VideoPromo";
 import { WhatsappIcon } from "@/components/ui/BrandIcons";
 import { contacto } from "@/data/contacto";
 
@@ -76,10 +77,11 @@ const FUNCIONES = [
 ];
 
 const CAPTURAS = [
-  { src: "/proyectos/presupuestador-listado.webp", texto: "Historial con búsqueda, vista previa y envío por WhatsApp" },
+  { src: "/proyectos/presupuestador-listado.webp", texto: "Historial con estados, búsqueda, vista previa y envío por WhatsApp" },
   { src: "/proyectos/presupuestador-editor.webp", texto: "Editor con descuentos y totales en vivo" },
-  { src: "/proyectos/presupuestador-pdf.webp", texto: "Vista previa del PDF con tu logo" },
-  { src: "/proyectos/presupuestador-negocio.webp", texto: "Los datos de tu negocio, cargados una sola vez" },
+  { src: "/proyectos/presupuestador-pdf.webp", texto: "Vista previa del PDF con tu logo, lista para guardar o mandar" },
+  { src: "/proyectos/presupuestador-resumen.webp", texto: "Resumen del mes: lo presupuestado, lo aceptado y el % de cierre" },
+  { src: "/proyectos/presupuestador-negocio.webp", texto: "Los datos de tu negocio y el diseño del PDF, cargados una sola vez" },
 ];
 
 export default function Presupuestador() {
@@ -115,6 +117,8 @@ export default function Presupuestador() {
             u 11 de 64 bits, sin permisos de administrador.
           </p>
         </header>
+
+        <VideoPromo />
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FUNCIONES.map(({ icono: Icono, titulo, texto }) => (

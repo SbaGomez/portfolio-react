@@ -10,6 +10,7 @@
     "start": "next start",
     "test": "vitest run",
     "fondo": "node scripts/generar-fondo.mjs",
+    "icono-claro": "node scripts/generar-icono-claro.mjs",
     "iconos": "node scripts/generar-iconos.mjs"
   },
   "dependencies": {

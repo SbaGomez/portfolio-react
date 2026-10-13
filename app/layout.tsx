@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
-import { COLOR_BARRA, SCRIPT_TEMA } from "@/lib/tema";
+import { COLOR_BARRA, ICONO, SCRIPT_TEMA } from "@/lib/tema";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -24,6 +24,13 @@ export const metadata: Metadata = {
     title: "Sebastian Gomez — Full Stack Developer",
     description: "Desarrollador Full Stack con experiencia en web, backend, mobile y escritorio.",
   },
+  // Sale el del tema claro, que es el default; si el visitante eligio el
+  // oscuro, SCRIPT_TEMA lo cambia. Por eso el .ico no esta en app/: Next lo
+  // publicaria como un segundo <link rel="icon"> y el navegador elegiria uno
+  // de los dos por su cuenta. Va sin type a proposito: el mismo <link> pasa a
+  // apuntar al .ico, y un type="image/png" que no coincide hace que algunos
+  // navegadores lo ignoren.
+  icons: { icon: ICONO.light },
 };
 
 export const viewport = {

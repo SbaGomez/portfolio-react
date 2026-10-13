@@ -1,7 +1,7 @@
 "use client";
 
 import { Moon, Sun } from "lucide-react";
-import { COLOR_BARRA, guardarTema, type Tema } from "@/lib/tema";
+import { COLOR_BARRA, ICONO, guardarTema, type Tema } from "@/lib/tema";
 
 // Sin estado propio: el tema vive en el atributo data-theme del <html>, que
 // el script de app/layout.tsx fija antes del primer pintado. El icono lo
@@ -13,6 +13,7 @@ export default function ThemeToggle() {
     const nuevo: Tema = actual === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = nuevo;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", COLOR_BARRA[nuevo]);
+    document.querySelector('link[rel="icon"]')?.setAttribute("href", ICONO[nuevo]);
     guardarTema(nuevo);
   }
 

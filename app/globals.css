@@ -631,9 +631,19 @@ html {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.5rem 1rem;
+  /* Mobile-first, mas angostas: en mobile la pastilla es solo el icono, y
+     con el padding de escritorio el logo, las cuatro pastillas y el boton de
+     tema no entraban en una linea en un telefono de ~390px (iPhone 16/17 Pro):
+     los iconos se caian abajo del logo. */
+  padding: 0.5rem 0.7rem;
   border-radius: 999px;
   transition: background 150ms, color 150ms;
+}
+
+@media (min-width: 640px) {
+  .sg-nav-pill {
+    padding: 0.5rem 1rem;
+  }
 }
 
 .sg-nav-pill:hover {

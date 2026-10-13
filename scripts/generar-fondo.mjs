@@ -26,6 +26,23 @@ const DOS_POLOS = {
   ],
 };
 
+/**
+ * La misma composicion de dos polos para el tema claro, en la paleta de la
+ * tarjeta de SG.dev: crema de base, pizarra arriba a la izquierda y durazno
+ * abajo a la derecha. Sin viñeta: render() la aplica multiplicando, y sobre
+ * un fondo claro eso no disuelve hacia el fondo sino que ensucia de gris.
+ */
+const CLARO = {
+  base: "#f3eee8",
+  seed: 20260913,
+  noiseScale: 2.6,
+  vignette: 0,
+  glows: [
+    { x: 0.22, y: 0.09, rx: 0.72, ry: 0.65, color: "#8fa5b0", intensity: 0.42 },
+    { x: 0.83, y: 0.78, rx: 0.58, ry: 0.67, color: "#e6bb9b", intensity: 0.5 },
+  ],
+};
+
 // ---------- Ruido de valor (nubes orgánicas) ----------
 function makeNoise(seed) {
   let s = seed >>> 0;
@@ -117,8 +134,8 @@ function render(width, height, opts) {
   return out;
 }
 
-async function escribir(width, height, salida) {
-  const rgb = render(width, height, DOS_POLOS);
+async function escribir(width, height, salida, variante = DOS_POLOS) {
+  const rgb = render(width, height, variante);
   await sharp(rgb, { raw: { width, height, channels: 3 } })
     .webp({ quality: 82 })
     .toFile(salida);
@@ -127,4 +144,6 @@ async function escribir(width, height, salida) {
 mkdirSync("public", { recursive: true });
 await escribir(1672, 941, "public/fondo.webp");
 await escribir(900, 506, "public/fondo-mobile.webp");
+await escribir(1672, 941, "public/fondo-claro.webp", CLARO);
+await escribir(900, 506, "public/fondo-claro-mobile.webp", CLARO);
 console.log("Fondo generado.");

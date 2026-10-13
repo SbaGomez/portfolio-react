@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Home, User, FolderGit2, Mail } from "lucide-react";
 import Wordmark from "@/components/ui/Wordmark";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const LINKS = [
   { href: "/", label: "Inicio", Icon: Home },
@@ -49,6 +50,7 @@ export default function Nav() {
             </Link>
           );
         })}
+        <ThemeToggle />
       </div>
     </nav>
   );

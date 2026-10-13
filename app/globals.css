@@ -8,15 +8,92 @@
   --color-accent-light: #93c5fd;
   --color-text: #e8edf7;
   --color-text-muted: #8b96ad;
-  --color-border: rgba(59, 130, 246, 0.18);
+  --color-border: rgba(var(--accent-rgb), 0.18);
   /* Borde de hover. Existe como token porque antes cada regla saltaba del 18%
      del reposo al acento pleno, y ese salto de casi seis veces era un golpe de
      atencion desproporcionado para algo que solo dice "esto se puede tocar".
      NO se usa en los :focus: el foco del teclado tiene que gritar, y ahi el
      acento pleno esta bien puesto. */
-  --color-border-hover: rgba(59, 130, 246, 0.45);
+  --color-border-hover: rgba(var(--accent-rgb), 0.45);
   --gradient-accent: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+  --gradient-wordmark: linear-gradient(100deg, #93c5fd, #3b82f6 55%, #a78bfa 100%);
+  --color-bg-card-hover: #141f36;
+  /* El segundo color del sistema: violeta en oscuro, durazno en claro. */
+  --color-violet: #a78bfa;
+  --color-violet-text: #c4b5fd;
+  --color-violet-text-hover: #ddd6fe;
+  --color-success: #4ade80;
+  --color-danger: #ef4444;
+  --color-danger-text: #f87171;
+  --color-warning: #f59e0b;
+  --color-enviar-fin: #d9455f;
+  --shadow-modal: 0 24px 80px -24px rgba(0, 0, 0, 0.7);
+  /* Ternas RGB para los rgba() con opacidad propia de cada regla, igual que
+     --anio-rgb en las tarjetas de proyecto. Las que cambian de tema son las
+     que hacen que el resto del archivo no tenga que saber cual esta activo. */
+  --accent-rgb: 59, 130, 246;
+  --accent-light-rgb: 147, 197, 253;
+  --bg-rgb: 10, 14, 26;
+  --card-rgb: 17, 26, 46;
+  --violet-rgb: 167, 139, 250;
+  --glow2-rgb: 109, 91, 208;
+  /* Lo que contrasta con el fondo: blanco sobre el oscuro, pizarra sobre el
+     claro. Lo usan los divisores y el velo del modal. */
+  --contrast-rgb: 255, 255, 255;
+  --danger-rgb: 239, 68, 68;
+  --warning-rgb: 245, 158, 11;
+  --success-rgb: 74, 222, 128;
+  --fondo: url("/fondo-mobile.webp");
   color-scheme: dark;
+}
+
+/* Tema claro: la paleta de la tarjeta de SG.dev -- crema de fondo, gris
+   pizarra como acento y durazno donde el oscuro usa el violeta. El pizarra y
+   el durazno de la tarjeta son demasiado palidos para texto sobre crema, asi
+   que los tokens de texto van un par de escalones mas oscuros; los tonos
+   originales quedan para bordes, glows y degradados. */
+:root[data-theme="light"] {
+  --color-bg: #f3eee8;
+  --color-bg-card: #fbf8f4;
+  --color-bg-card-hover: #ffffff;
+  --color-accent: #6f8c9a;
+  --color-accent-hover: #5d7987;
+  --color-accent-light: #56717e;
+  --color-text: #34444c;
+  --color-text-muted: #627680;
+  --gradient-accent: linear-gradient(135deg, #6f8c9a, #c98a62);
+  --gradient-wordmark: linear-gradient(100deg, #8fa5b0, #6f8c9a 50%, #e0a983 100%);
+  --color-violet: #c98a62;
+  --color-violet-text: #a86a44;
+  --color-violet-text-hover: #8c5534;
+  --color-success: #3e8e5a;
+  --color-danger: #c2453f;
+  --color-danger-text: #b23a35;
+  --color-warning: #b7791f;
+  --color-enviar-fin: #c98a62;
+  --shadow-modal: 0 24px 80px -24px rgba(52, 68, 76, 0.35);
+  --accent-rgb: 111, 140, 154;
+  --accent-light-rgb: 143, 165, 176;
+  --bg-rgb: 243, 238, 232;
+  --card-rgb: 251, 248, 244;
+  --violet-rgb: 201, 138, 98;
+  --glow2-rgb: 230, 187, 155;
+  --contrast-rgb: 52, 68, 76;
+  --danger-rgb: 194, 69, 63;
+  --warning-rgb: 183, 121, 31;
+  --success-rgb: 62, 142, 90;
+  --fondo: url("/fondo-claro-mobile.webp");
+  color-scheme: light;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --fondo: url("/fondo.webp");
+  }
+
+  :root[data-theme="light"] {
+    --fondo: url("/fondo-claro.webp");
+  }
 }
 
 body {
@@ -35,7 +112,7 @@ body {
    modal y cualquier otra caja con overflow la reciben sin repetirla. */
 html {
   scrollbar-width: thin;
-  scrollbar-color: rgba(147, 197, 253, 0.22) transparent;
+  scrollbar-color: rgba(var(--accent-light-rgb), 0.22) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -48,12 +125,12 @@ html {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: rgba(147, 197, 253, 0.22);
+  background: rgba(var(--accent-light-rgb), 0.22);
   border-radius: 999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: rgba(147, 197, 253, 0.4);
+  background: rgba(var(--accent-light-rgb), 0.4);
 }
 
 /* Las flechas de los extremos son lo que mas delata a la barra del sistema:
@@ -66,17 +143,12 @@ html {
   position: fixed;
   inset: 0;
   z-index: -2;
-  /* Mobile-first: la plancha grande solo se pide a partir de 640px. */
-  background-image: url("/fondo-mobile.webp");
+  /* Mobile-first: la plancha grande solo se pide a partir de 640px (ver
+     --fondo en :root). */
+  background-image: var(--fondo);
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-}
-
-@media (min-width: 640px) {
-  .sg-page-bg {
-    background-image: url("/fondo.webp");
-  }
 }
 
 .sg-page-bg::after {
@@ -84,11 +156,11 @@ html {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(59, 130, 246, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(var(--accent-rgb), 0.15), transparent),
     linear-gradient(
       to bottom,
-      rgba(10, 14, 26, 0.08) 0%,
-      rgba(10, 14, 26, 0.4) 45%,
+      rgba(var(--bg-rgb), 0.08) 0%,
+      rgba(var(--bg-rgb), 0.4) 45%,
       var(--color-bg) 90%
     );
 }
@@ -98,8 +170,8 @@ html {
   inset: 0;
   z-index: -1;
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(var(--accent-rgb), 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.05) 1px, transparent 1px);
   background-size: 48px 48px;
   -webkit-mask-image: linear-gradient(to bottom, black, transparent 1400px);
   mask-image: linear-gradient(to bottom, black, transparent 1400px);
@@ -129,7 +201,7 @@ html {
   gap: 0.5rem;
   padding: 0.4rem 1rem;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(var(--accent-rgb), 0.12);
   border: 1px solid var(--color-border);
   font-size: 0.75rem;
   font-weight: 600;
@@ -147,11 +219,11 @@ html {
   flex-shrink: 0;
   border-radius: 999px;
   background: currentColor;
-  color: #4ade80;
+  color: var(--color-success);
 }
 
 .sg-badge-pill-accent {
-  color: #a78bfa;
+  color: var(--color-violet);
 }
 
 .sg-button-outline {
@@ -168,7 +240,7 @@ html {
 }
 
 .sg-button-outline:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(var(--accent-rgb), 0.1);
 }
 
 .sg-button-outline:disabled {
@@ -193,14 +265,14 @@ html {
   font-weight: 700;
   padding: 0.85rem 1.85rem;
   border-radius: 14px;
-  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.35), 0 8px 24px -8px rgba(59, 130, 246, 0.65);
+  box-shadow: 0 0 0 1px rgba(var(--accent-light-rgb), 0.35), 0 8px 24px -8px rgba(var(--accent-rgb), 0.65);
   transition: filter 150ms, transform 150ms, box-shadow 150ms;
 }
 
 .sg-button:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
-  box-shadow: 0 0 0 1px rgba(147, 197, 253, 0.5), 0 10px 28px -6px rgba(59, 130, 246, 0.8);
+  box-shadow: 0 0 0 1px rgba(var(--accent-light-rgb), 0.5), 0 10px 28px -6px rgba(var(--accent-rgb), 0.8);
 }
 
 .sg-button:disabled {
@@ -228,8 +300,8 @@ html {
    al 100% era un golpe de atencion desproporcionado para un hover. Lo que
    compensa la señal es el fondo, que aclara un escalon. */
 .sg-step-card:hover {
-  border-color: rgba(59, 130, 246, 0.3);
-  background: #141f36;
+  border-color: rgba(var(--accent-rgb), 0.3);
+  background: var(--color-bg-card-hover);
   transform: translateY(-2px);
 }
 
@@ -266,7 +338,7 @@ html {
    ademas distingue: "Ver online" es el unico que te saca del sitio. */
 .sg-card-actions {
   display: flex;
-  border: 1px solid rgba(167, 139, 250, 0.26);
+  border: 1px solid rgba(var(--violet-rgb), 0.26);
   border-radius: 10px;
 }
 
@@ -284,7 +356,7 @@ html {
   padding: 0.6rem 0.9rem;
   font-size: 0.8rem;
   font-weight: 700;
-  color: #c4b5fd;
+  color: var(--color-violet-text);
   transition: background 150ms, color 150ms;
 }
 
@@ -296,12 +368,12 @@ html {
    en las tarjetas que no tienen demo, sin un elemento aparte ni una condicion
    en el JSX. */
 .sg-card-action + .sg-card-action {
-  border-left: 1px solid rgba(167, 139, 250, 0.26);
+  border-left: 1px solid rgba(var(--violet-rgb), 0.26);
 }
 
 .sg-card-action:hover {
-  background: rgba(167, 139, 250, 0.2);
-  color: #ddd6fe;
+  background: rgba(var(--violet-rgb), 0.2);
+  color: var(--color-violet-text-hover);
 }
 
 /* Metricas de la tarjeta. Una manda y las otras dos acompañan: el tamaño del
@@ -355,7 +427,7 @@ html {
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.9;
-  background: linear-gradient(135deg, var(--color-accent-light), #c4b5fd);
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-violet-text));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -390,7 +462,7 @@ html {
   width: 3rem;
   height: 3rem;
   border-radius: 12px;
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(var(--accent-rgb), 0.1);
   border: 1px solid var(--color-border);
   color: var(--color-accent-light);
 }
@@ -440,18 +512,12 @@ html {
   inset: -24px;
   z-index: 0;
   pointer-events: none;
-  background-image: url("/fondo-mobile.webp");
+  background-image: var(--fondo);
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
   filter: blur(10px);
   opacity: 0.4;
-}
-
-@media (min-width: 640px) {
-  .sg-glass-card-bg {
-    background-image: url("/fondo.webp");
-  }
 }
 
 /* Fallback de iOS Safari: background-attachment: fixed tiene un bug de
@@ -470,8 +536,8 @@ html {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(59, 130, 246, 0.2), transparent 70%),
-    linear-gradient(to bottom, rgba(10, 14, 26, 0.35) 0%, var(--color-bg) 85%);
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(var(--accent-rgb), 0.2), transparent 70%),
+    linear-gradient(to bottom, rgba(var(--bg-rgb), 0.35) 0%, var(--color-bg) 85%);
 }
 
 .sg-reveal {
@@ -496,7 +562,7 @@ html {
   width: 52px;
   height: 52px;
   border-radius: 999px;
-  background: rgba(10, 14, 26, 0.7);
+  background: rgba(var(--bg-rgb), 0.7);
   backdrop-filter: blur(6px);
   border: none;
   cursor: pointer;
@@ -552,7 +618,7 @@ html {
 .sg-nav-scrolled {
   /* Opacidad baja compensada con mas blur: el fondo tapa menos, pero lo que
      pasa por detras llega difuminado y el texto del nav sigue legible. */
-  background: rgba(10, 14, 26, 0.6);
+  background: rgba(var(--bg-rgb), 0.6);
   /* El prefijo va PRIMERO: Lightning CSS trata ambas como la misma
      propiedad y conserva solo la ultima, y la estandar es la que necesita
      Firefox. Ver .sg-cta-band y .sg-modal-overlay. */
@@ -571,12 +637,12 @@ html {
 }
 
 .sg-nav-pill:hover {
-  background: rgba(59, 130, 246, 0.14);
+  background: rgba(var(--accent-rgb), 0.14);
   color: var(--color-text);
 }
 
 .sg-nav-pill.sg-nav-pill-active {
-  background: rgba(59, 130, 246, 0.14);
+  background: rgba(var(--accent-rgb), 0.14);
   color: var(--color-accent-light);
   font-weight: 700;
 }
@@ -593,21 +659,15 @@ html {
   inset: -24px;
   z-index: 0;
   pointer-events: none;
-  /* Mismo fondo-mobile.webp/fondo.webp que .sg-page-bg y .sg-glass-card-bg
-     -- acá va detrás de un blur(10px)+opacity:0.4, así que la versión
-     grande no se nota, pero se deja el mismo swap por consistencia. */
-  background-image: url("/fondo-mobile.webp");
+  /* Mismo --fondo que .sg-page-bg y .sg-glass-card-bg -- acá va detrás de
+     un blur(10px)+opacity:0.4, así que la versión grande no se nota, pero se
+     deja el mismo swap por consistencia. */
+  background-image: var(--fondo);
   background-size: cover;
   background-position: center top;
   background-attachment: fixed;
   filter: blur(10px);
   opacity: 0.4;
-}
-
-@media (min-width: 640px) {
-  .sg-footer-bg {
-    background-image: url("/fondo.webp");
-  }
 }
 
 /* Fallback de iOS Safari, igual que en .sg-glass-card-bg: background-attachment:
@@ -625,8 +685,8 @@ html {
   z-index: 1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(59, 130, 246, 0.2), transparent 70%),
-    linear-gradient(to bottom, rgba(10, 14, 26, 0.35) 0%, var(--color-bg) 85%);
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(var(--accent-rgb), 0.2), transparent 70%),
+    linear-gradient(to bottom, rgba(var(--bg-rgb), 0.35) 0%, var(--color-bg) 85%);
 }
 
 .sg-footer-link {
@@ -763,6 +823,40 @@ html {
   border-color: var(--color-red-claro, var(--color-border-hover));
 }
 
+/* En el tema claro se invierte: los tonos claros de marca se pierden sobre
+   la crema, y el que se lee es el original. */
+:root[data-theme="light"] .sg-social-icon-marca {
+  color: var(--color-red, var(--color-text-muted));
+}
+
+:root[data-theme="light"] .sg-social-icon-marca:hover {
+  color: var(--color-red, var(--color-text));
+  border-color: var(--color-red, var(--color-border-hover));
+}
+
+/* Boton de tema del nav. Cual icono se ve lo decide el atributo del <html>
+   y no estado de React: asi el server no tiene que adivinar el tema y no hay
+   un parpadeo del icono equivocado al hidratar. */
+.sg-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  color: var(--color-text-muted);
+  transition: background 150ms, color 150ms;
+}
+
+.sg-theme-toggle:hover {
+  background: rgba(var(--accent-rgb), 0.14);
+  color: var(--color-text);
+}
+
+.sg-theme-icon-sol { display: none; }
+:root[data-theme="light"] .sg-theme-icon-sol { display: block; }
+:root[data-theme="light"] .sg-theme-icon-luna { display: none; }
+
 .sg-skip-link {
   position: absolute;
   left: -9999px;
@@ -786,7 +880,7 @@ html {
 }
 
 .sg-wordmark-dev {
-  background: linear-gradient(100deg, #93c5fd, #3b82f6 55%, #a78bfa 100%);
+  background: var(--gradient-wordmark);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -835,7 +929,7 @@ html {
   gap: 0.4rem;
   padding: 0.38rem 0.8rem;
   border-radius: 999px;
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(var(--accent-rgb), 0.12);
   border: 1px solid var(--color-border);
   font-size: 0.8rem;
   font-weight: 600;
@@ -857,10 +951,10 @@ html {
 
      Muy bajo a proposito: el divisor tiene que insinuarse, no dibujarse. Mas
      arriba, las tres lineas blancas se leian antes que los numeros. */
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(var(--contrast-rgb), 0.05);
   /* Apenas visible. Con un borde marcado la barra quedaba recuadrada y saltaba
      por encima del hero; la forma se la da el desenfoque, no el contorno. */
-  border: 1px solid rgba(147, 197, 253, 0.1);
+  border: 1px solid rgba(var(--accent-light-rgb), 0.1);
   border-radius: 16px;
   overflow: hidden;
   /* El prefijo va PRIMERO y la estandar ultima: el build trata a las dos como
@@ -873,7 +967,7 @@ html {
 /* Translucidas, para que el fondo de la pagina se vea a traves. El desenfoque
    lo hace el contenedor: alcanza con que lo declare una vez. */
 .sg-stats-container > div {
-  background: rgba(10, 14, 26, 0.22);
+  background: rgba(var(--bg-rgb), 0.22);
 }
 
 /* Portado de .rw-cta-band tal cual, con el flex que la referencia resolvia
@@ -886,10 +980,10 @@ html {
   gap: 1rem;
   padding: 3rem 2rem;
   border-radius: 20px;
-  border: 1px solid rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(var(--accent-rgb), 0.05);
   background:
-    radial-gradient(ellipse 80% 120% at 50% 0%, rgba(109, 91, 208, 0.28), transparent 70%),
-    rgba(17, 26, 46, 0.55);
+    radial-gradient(ellipse 80% 120% at 50% 0%, rgba(var(--glow2-rgb), 0.28), transparent 70%),
+    rgba(var(--card-rgb), 0.55);
   /* Prefijo primero: el build conserva solo la ultima declarada. */
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
@@ -962,7 +1056,7 @@ html {
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(var(--contrast-rgb), 0.1);
   /* Prefijo primero: el build conserva solo la ultima declarada. */
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
@@ -989,7 +1083,7 @@ html {
   border-radius: 16px;
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  box-shadow: 0 24px 80px -24px rgba(0, 0, 0, 0.7);
+  box-shadow: var(--shadow-modal);
 }
 
 .sg-modal-cerrar {
@@ -1053,7 +1147,7 @@ html {
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  background: rgba(10, 14, 26, 0.92);
+  background: rgba(var(--bg-rgb), 0.92);
   cursor: zoom-out;
 }
 
@@ -1089,7 +1183,7 @@ html {
   transform: translateX(-50%);
   padding: 0.3rem 0.9rem;
   border-radius: 999px;
-  background: rgba(10, 14, 26, 0.75);
+  background: rgba(var(--bg-rgb), 0.75);
   border: 1px solid var(--color-border);
   font-size: 0.75rem;
   font-weight: 600;
@@ -1107,7 +1201,7 @@ html {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 999px;
-  background: rgba(10, 14, 26, 0.75);
+  background: rgba(var(--bg-rgb), 0.75);
   border: 1px solid var(--color-border);
   color: var(--color-text);
   transition: border-color 150ms, background 150ms;
@@ -1115,7 +1209,7 @@ html {
 
 .sg-slider-nav:hover {
   border-color: var(--color-border-hover);
-  background: rgba(10, 14, 26, 0.9);
+  background: rgba(var(--bg-rgb), 0.9);
 }
 
 .sg-slider-prev {
@@ -1138,7 +1232,7 @@ html {
   bottom: 0.75rem;
   padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  background: rgba(10, 14, 26, 0.75);
+  background: rgba(var(--bg-rgb), 0.75);
   border: 1px solid var(--color-border);
   font-size: 0.7rem;
   font-weight: 600;
@@ -1158,7 +1252,7 @@ html {
   /* Traslúcido sobre desenfoque: deja ver el fondo de la página a través del
      campo. El prefijo va PRIMERO y la estándar última, porque el build
      conserva solo la última declarada (ver .sg-nav-scrolled). */
-  background: rgba(17, 26, 46, 0.55);
+  background: rgba(var(--card-rgb), 0.55);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   border: 1px solid var(--color-border);
@@ -1176,8 +1270,8 @@ html {
 /* El estado no se comunica solo con el borde: tambien tiñe el fondo, que es
    lo que hace que el campo con error se lea de un vistazo en un formulario
    largo. */
-.sg-input-error { border-color: #ef4444; background: rgba(239, 68, 68, 0.07); }
-.sg-input-warning { border-color: #f59e0b; background: rgba(245, 158, 11, 0.06); }
+.sg-input-error { border-color: var(--color-danger); background: rgba(var(--danger-rgb), 0.07); }
+.sg-input-warning { border-color: var(--color-warning); background: rgba(var(--warning-rgb), 0.06); }
 
 /* Icono adelante del campo. El padding-left del input le reserva el lugar;
    el icono no recibe eventos para no robarle el click al input. */
@@ -1216,7 +1310,7 @@ html {
   background: var(--color-bg-card);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #4ade80;
+  color: var(--color-success);
 }
 
 /* La ayuda solo se muestra con el campo enfocado: tenerla siempre visible
@@ -1236,15 +1330,15 @@ html {
 }
 
 .sg-field-msg-error {
-  border-color: rgba(239, 68, 68, 0.45);
-  background: rgba(239, 68, 68, 0.08);
-  color: #f87171;
+  border-color: rgba(var(--danger-rgb), 0.45);
+  background: rgba(var(--danger-rgb), 0.08);
+  color: var(--color-danger-text);
 }
 
 .sg-field-msg-warning {
-  border-color: rgba(245, 158, 11, 0.45);
-  background: rgba(245, 158, 11, 0.08);
-  color: #f59e0b;
+  border-color: rgba(var(--warning-rgb), 0.45);
+  background: rgba(var(--warning-rgb), 0.08);
+  color: var(--color-warning);
 }
 
 /* Modificador del boton principal para el envio: ancho completo y degradado
@@ -1253,7 +1347,7 @@ html {
 .sg-button-enviar {
   width: 100%;
   justify-content: center;
-  background: linear-gradient(90deg, var(--color-accent), #d9455f);
+  background: linear-gradient(90deg, var(--color-accent), var(--color-enviar-fin));
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1268,8 +1362,8 @@ html {
   border: 1px solid;
 }
 
-.sg-alert-ok { color: #4ade80; border-color: rgba(74, 222, 128, 0.35); background: rgba(74, 222, 128, 0.1); }
-.sg-alert-error { color: #f87171; border-color: rgba(239, 68, 68, 0.35); background: rgba(239, 68, 68, 0.1); }
+.sg-alert-ok { color: var(--color-success); border-color: rgba(var(--success-rgb), 0.35); background: rgba(var(--success-rgb), 0.1); }
+.sg-alert-error { color: var(--color-danger-text); border-color: rgba(var(--danger-rgb), 0.35); background: rgba(var(--danger-rgb), 0.1); }
 
 .sg-progress-track {
   width: 100%;
@@ -1303,13 +1397,13 @@ html {
   padding: 0.75rem 0.9rem;
   border-radius: 10px;
   border: 1px solid var(--color-border);
-  background: rgba(59, 130, 246, 0.06);
+  background: rgba(var(--accent-rgb), 0.06);
   transition: border-color 150ms, background 150ms;
 }
 
 a.sg-medio:hover {
   border-color: var(--color-border-hover);
-  background: rgba(59, 130, 246, 0.12);
+  background: rgba(var(--accent-rgb), 0.12);
 }
 
 /* Estado de disponibilidad, arriba de la columna de contacto. Es un
@@ -1331,9 +1425,9 @@ a.sg-medio:hover {
 /* El anillo se dibuja con box-shadow y no con un pseudo-elemento escalado:
    asi no ocupa lugar ni puede correr al texto de al lado mientras crece. */
 @keyframes sg-pulso {
-  0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
-  70% { box-shadow: 0 0 0 7px rgba(74, 222, 128, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(var(--success-rgb), 0.5); }
+  70% { box-shadow: 0 0 0 7px rgba(var(--success-rgb), 0); }
+  100% { box-shadow: 0 0 0 0 rgba(var(--success-rgb), 0); }
 }
 
 /* El pulso se cuelga del punto DENTRO de esta pastilla y no de

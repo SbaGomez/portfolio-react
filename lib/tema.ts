@@ -10,10 +10,10 @@ export const COLOR_BARRA: Record<Tema, string> = {
 };
 
 // Corre inline en el <head>, antes de que se pinte nada: sin esto quien eligio
-// el claro veria un destello del oscuro en cada carga. Sin preferencia
-// guardada sigue la del sistema operativo. El try cubre el localStorage
-// bloqueado (modo privado, cookies deshabilitadas).
-export const SCRIPT_TEMA = `(function(){try{var t=localStorage.getItem("${CLAVE}");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="light"?"${COLOR_BARRA.light}":"${COLOR_BARRA.dark}")}catch(e){}})()`;
+// el oscuro veria un destello del claro en cada carga. Sin preferencia
+// guardada queda el claro, que es el que sale del server. El try cubre el
+// localStorage bloqueado (modo privado, cookies deshabilitadas).
+export const SCRIPT_TEMA = `(function(){try{var t=localStorage.getItem("${CLAVE}");if(t!=="light"&&t!=="dark")t="light";document.documentElement.dataset.theme=t;var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content",t==="light"?"${COLOR_BARRA.light}":"${COLOR_BARRA.dark}")}catch(e){}})()`;
 
 export function guardarTema(tema: Tema) {
   try {

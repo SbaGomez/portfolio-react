@@ -27,17 +27,17 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  // El del tema oscuro, que es el que sale del server. Si el visitante usa el
-  // claro, SCRIPT_TEMA lo corrige antes de pintar.
-  themeColor: COLOR_BARRA.dark,
+  // El del tema claro, que es el que sale del server. Si el visitante eligio
+  // el oscuro, SCRIPT_TEMA lo corrige antes de pintar.
+  themeColor: COLOR_BARRA.light,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    // data-theme sale en oscuro y SCRIPT_TEMA lo pisa en el cliente antes del
+    // data-theme sale en claro y SCRIPT_TEMA lo pisa en el cliente antes del
     // primer pintado: el suppressHydrationWarning es para que React no se
     // queje de esa diferencia, y solo alcanza a los atributos del <html>.
-    <html lang="es" data-theme="dark" suppressHydrationWarning>
+    <html lang="es" data-theme="light" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
       </head>

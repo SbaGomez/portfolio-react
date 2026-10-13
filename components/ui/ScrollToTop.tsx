@@ -45,7 +45,7 @@ export default function ScrollToTop() {
           cy={SIZE / 2}
           r={RADIUS}
           fill="none"
-          stroke="rgba(255,255,255,0.12)"
+          style={{ stroke: "rgba(var(--contrast-rgb), 0.12)" }}
           strokeWidth={STROKE}
         />
         <circle
@@ -63,8 +63,8 @@ export default function ScrollToTop() {
         />
         <defs>
           <linearGradient id="sg-scroll-top-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6d5bd0" />
-            <stop offset="100%" stopColor="var(--color-accent-light)" />
+            <stop offset="0%" style={{ stopColor: "rgb(var(--glow2-rgb))" }} />
+            <stop offset="100%" style={{ stopColor: "var(--color-accent-light)" }} />
           </linearGradient>
         </defs>
       </svg>

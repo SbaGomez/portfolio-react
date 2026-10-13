@@ -195,7 +195,7 @@ export default function Presupuestador() {
               está vinculada y para consultar el estado de tu licencia.
             </p>
             <p className="flex items-start gap-2">
-              <ShieldCheck size={18} className="mt-0.5 shrink-0 text-[#4ade80]" aria-hidden="true" />
+              <ShieldCheck size={18} className="mt-0.5 shrink-0 text-[var(--color-success)]" aria-hidden="true" />
               <span>
                 Sin publicidad ni analítica. Tus presupuestos viajan solo entre tu computadora y
                 Google; al servidor de licencias llega únicamente tu email. Podés desvincular la

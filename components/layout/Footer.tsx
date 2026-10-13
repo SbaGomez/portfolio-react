@@ -95,7 +95,7 @@ export default function Footer() {
           <button type="button" onClick={copiar} className="sg-footer-connect">
             <span className="truncate text-sm">{contacto.email}</span>
             {copiado ? (
-              <Check size={16} className="shrink-0 text-[#4ade80]" aria-hidden="true" />
+              <Check size={16} className="shrink-0 text-[var(--color-success)]" aria-hidden="true" />
             ) : (
               <Copy size={16} className="shrink-0" aria-hidden="true" />
             )}

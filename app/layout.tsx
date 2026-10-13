@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { COLOR_BARRA, SCRIPT_TEMA } from "@/lib/tema";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,13 +27,20 @@ export const metadata: Metadata = {
 };
 
 export const viewport = {
-  themeColor: "#0a0e1a",
-  colorScheme: "dark" as const,
+  // El del tema oscuro, que es el que sale del server. Si el visitante usa el
+  // claro, SCRIPT_TEMA lo corrige antes de pintar.
+  themeColor: COLOR_BARRA.dark,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    // data-theme sale en oscuro y SCRIPT_TEMA lo pisa en el cliente antes del
+    // primer pintado: el suppressHydrationWarning es para que React no se
+    // queje de esa diferencia, y solo alcanza a los atributos del <html>.
+    <html lang="es" data-theme="dark" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SCRIPT_TEMA }} />
+      </head>
       <body>
         <div className="sg-page-bg" />
         <div className="sg-hero-grid" />

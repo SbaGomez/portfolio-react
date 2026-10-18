@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GymUP · Tu gimnasio en el celular</title>
+<meta name="description" content="GymUP: el gimnasio da de alta a sus alumnos, arma rutinas con una biblioteca de 1.324 ejercicios y cada alumno entrena y ve su progreso desde el celular.">
+<meta name="theme-color" content="#111315">
+<meta property="og:title" content="GymUP · Tu gimnasio en el celular">
+<meta property="og:description" content="Alumnos, entrenadores, rutinas, cuotas y progreso. Todo en una app para Android e iPhone.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 456 456'%3E%3Crect width='456' height='456' rx='100' fill='%23C6F432'/%3E%3Cpath d='M 291.4 164.6 A 89.6 89.6 0 1 0 317.6 228 L 234.4 228' fill='none' stroke='%23111315' stroke-width='41.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0C0D;
+  --grafito:#111315;
+  --surface:#16191C;
+  --card:#1C2024;
+  --line:#2A2F35;
+  --lima:#C6F432;
+  --lima-tenue:rgba(198,244,50,.12);
+  --text:#F2F4F5;
+  --muted:#9AA1A8;
+  --ambar:#F5C451;
+  --rojo:#F2766B;
+  --radius:22px;
+  --wrap:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:"Barlow",system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 20px}
+.display{font-family:"Barlow Condensed",sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:-.01em;line-height:.92}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--lima)}
+.lima{color:var(--lima)}
+
+/* Botones */
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 24px;border-radius:999px;font-weight:700;font-size:16px;transition:transform .2s,background .2s,box-shadow .2s;white-space:nowrap}
+.btn svg{width:20px;height:20px}
+.btn-lima{background:var(--lima);color:var(--grafito)}
+.btn-lima:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(198,244,50,.25)}
+.btn-ghost{border:1px solid var(--line);color:var(--text)}
+.btn-ghost:hover{border-color:var(--muted)}
+
+/* Nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,12,13,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.05)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Barlow Condensed";font-weight:800;font-size:26px;letter-spacing:.01em}
+.logo-mark{width:34px;height:34px;border-radius:10px;background:var(--lima);display:grid;place-items:center}
+.logo-mark svg{width:24px;height:24px}
+.nav-links{display:flex;gap:30px;font-weight:500;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.nav .btn{height:42px;padding:0 18px;font-size:15px}
+
+/* Hero */
+.hero{position:relative;padding:72px 0 40px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:720px;height:720px;background:radial-gradient(circle,rgba(198,244,50,.16),transparent 62%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 6px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:14px;color:var(--muted);margin-bottom:26px}
+.badge b{background:var(--lima);color:var(--grafito);padding:3px 10px;border-radius:999px;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.hero h1{font-size:clamp(64px,9vw,128px)}
+.hero h1 .lima{display:block}
+.hero p.lead{margin:26px 0 34px;font-size:20px;color:var(--muted);max-width:520px}
+.hero p.lead strong{color:var(--text);font-weight:600}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.plataformas{display:flex;gap:18px;margin-top:28px;color:var(--muted);font-size:14px;align-items:center;flex-wrap:wrap}
+.plataformas span{display:flex;align-items:center;gap:7px}
+.plataformas svg{width:18px;height:18px}
+
+/* Teléfono */
+.phone-stage{position:relative;display:flex;justify-content:center;padding:30px 0}
+.phone{position:relative;width:300px;aspect-ratio:9/19.2;border-radius:46px;background:#000;padding:11px;box-shadow:0 0 0 2px #2b3036,0 40px 80px rgba(0,0,0,.6),0 0 120px rgba(198,244,50,.08)}
+.phone::after{content:"";position:absolute;top:20px;left:50%;transform:translateX(-50%);width:92px;height:26px;border-radius:20px;background:#000;z-index:3}
+.screen{position:relative;height:100%;border-radius:36px;background:var(--grafito);overflow:hidden;padding:46px 18px 18px;font-size:13px}
+.statusbar{position:absolute;top:16px;left:28px;right:24px;display:flex;justify-content:space-between;font-weight:600;font-size:13px}
+.statusbar i{display:flex;gap:5px;align-items:center}
+.statusbar i b{display:block;width:16px;height:9px;border-radius:2px;border:1.5px solid var(--text);position:relative}
+.statusbar i b::after{content:"";position:absolute;inset:1px;right:4px;background:var(--text);border-radius:1px}
+.s-fecha{font-size:10px;letter-spacing:.14em;color:var(--muted);font-weight:600;margin-top:10px}
+.s-hola{font-weight:700;font-size:26px;margin:4px 0 8px;letter-spacing:-.01em}
+.chip{display:inline-block;padding:4px 10px;border-radius:999px;background:#1F2610;color:var(--lima);font-weight:600;font-size:11px}
+.rutina-card{margin-top:14px;background:var(--lima);color:var(--grafito);border-radius:20px;padding:15px 16px;position:relative}
+.rutina-card small{font-size:9.5px;letter-spacing:.14em;font-weight:700}
+.rutina-card h4{font-size:19px;line-height:1.1;margin:4px 0 2px}
+.rutina-card p{font-size:11.5px;font-weight:600;opacity:.75}
+.rutina-card .go{position:absolute;right:14px;bottom:14px;width:34px;height:34px;border-radius:50%;background:var(--grafito);display:grid;place-items:center}
+.rutina-card .go svg{width:14px;height:14px}
+.racha{margin-top:10px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
+.racha b{font-size:20px;white-space:nowrap}
+.racha small{display:block;color:var(--muted);font-size:10.5px}
+.semanas{display:flex;gap:4px}
+.semanas i{width:9px;height:24px;border-radius:4px;background:var(--lima)}
+.semanas i.off{background:#2A2F35}
+.ej-list{margin-top:10px;display:grid;gap:7px}
+.ej{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:14px;padding:9px 11px}
+.ej .ico{width:30px;height:30px;border-radius:9px;background:#252A2F;display:grid;place-items:center;flex:none}
+.ej .ico svg{width:16px;height:16px}
+.ej div{flex:1;min-width:0}
+.ej b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ej small{color:var(--muted);font-size:10.5px}
+.check{width:20px;height:20px;border-radius:50%;border:1.5px solid #3A4047;flex:none;display:grid;place-items:center}
+.check.ok{background:var(--lima);border-color:var(--lima)}
+.check.ok svg{width:11px;height:11px}
+
+/* Notificaciones */
+.notifs{position:absolute;top:58px;left:50%;transform:translateX(-50%);width:340px;z-index:5;display:grid;gap:8px;pointer-events:none}
+.notif{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border-radius:18px;background:rgba(36,40,45,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.07);box-shadow:0 14px 34px rgba(0,0,0,.45);animation:entra .55s cubic-bezier(.2,.9,.3,1.2) both}
+.notif.sale{animation:sale .4s ease forwards}
+.notif .n-ico{width:34px;height:34px;border-radius:9px;background:var(--lima);display:grid;place-items:center;flex:none}
+.notif .n-ico svg{width:22px;height:22px}
+.notif .n-top{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:500}
+.notif b{display:block;font-size:13.5px;line-height:1.25;margin-top:1px}
+.notif p{font-size:12.5px;color:#C8CDD2;line-height:1.3}
+@keyframes entra{from{opacity:0;transform:translateY(-16px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes sale{to{opacity:0;transform:scale(.92);height:0;padding:0;margin:0}}
+
+/* Marquesina */
+.marquee{padding:30px 0 10px;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:12px;width:max-content;animation:desliza 60s linear infinite}
+.marquee.rev .track{animation-direction:reverse;animation-duration:70s}
+.marquee + .marquee{padding-top:0}
+.track span{display:flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-weight:600;white-space:nowrap;color:#D5DADE}
+.track span i{width:7px;height:7px;border-radius:50%;background:var(--lima)}
+@keyframes desliza{to{transform:translateX(-50%)}}
+
+/* Secciones */
+section{padding:110px 0}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head h2{font-size:clamp(46px,6vw,80px);margin:14px 0 18px}
+.sec-head p{color:var(--muted);font-size:19px}
+
+/* Roles */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.rol{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:18px;transition:border-color .3s,transform .3s}
+.rol:hover{border-color:rgba(198,244,50,.45);transform:translateY(-4px)}
+.rol .tag{align-self:flex-start;padding:5px 12px;border-radius:999px;background:var(--lima-tenue);color:var(--lima);font-size:13px;font-weight:700;letter-spacing:.04em}
+.rol h3{font-family:"Barlow Condensed";font-weight:700;font-size:32px;text-transform:uppercase;line-height:1}
+.rol ul{list-style:none;display:grid;gap:10px;color:#C8CDD2}
+.rol li{display:flex;gap:10px}
+.rol li::before{content:"";flex:none;width:6px;height:6px;margin-top:10px;border-radius:50%;background:var(--lima)}
+.mini{margin-top:auto;background:var(--grafito);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:8px;font-size:13px}
+.mini-row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:12px;padding:9px 11px}
+.av{width:30px;height:30px;border-radius:50%;background:#2A2F35;display:grid;place-items:center;font-weight:700;color:#AEB4BA;flex:none;font-size:13px}
+.mini-row div{flex:1;min-width:0}
+.mini-row b{display:block;font-size:13px}
+.mini-row small{color:var(--lima);font-size:11.5px}
+.pill{padding:3px 9px;border-radius:999px;font-size:11px;font-weight:600}
+.pill.amb{background:rgba(245,196,81,.14);color:var(--ambar)}
+.pill.ok{background:var(--lima-tenue);color:var(--lima)}
+.pill.no{background:rgba(242,118,107,.14);color:var(--rojo)}
+
+/* Bloques de función */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.feature.flip .feature-text{order:2}
+.feature-text h2{font-size:clamp(46px,5.6vw,76px);margin:14px 0 20px}
+.feature-text p{color:var(--muted);font-size:19px;margin-bottom:26px}
+.puntos{display:grid;gap:14px}
+.punto{display:flex;gap:14px;align-items:flex-start}
+.punto .pi{width:40px;height:40px;border-radius:12px;background:var(--lima-tenue);display:grid;place-items:center;flex:none}
+.punto .pi svg{width:20px;height:20px;stroke:var(--lima)}
+.punto b{display:block;font-size:17px}
+.punto span{color:var(--muted);font-size:15.5px}
+.hashtags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.hashtags span{padding:6px 13px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:14px;font-weight:600}
+
+/* Editor de rutina */
+.dia{background:var(--card);border-radius:16px;padding:11px 12px;margin-top:9px}
+.dia-head{display:flex;justify-content:space-between;align-items:center}
+.dia-head b{font-size:13.5px}
+.dia-head small{color:var(--muted);font-size:11px}
+.dia-head svg{width:14px;height:14px;stroke:var(--muted)}
+.dia .ej{background:#23282D;margin-top:7px}
+.drag{display:grid;grid-template-columns:repeat(2,3px);gap:3px;flex:none}
+.drag i{width:3px;height:3px;border-radius:50%;background:#59616A}
+.ej.arrastrando{transform:rotate(-2deg) scale(1.04);box-shadow:0 12px 28px rgba(0,0,0,.5);outline:1.5px solid var(--lima);background:#2A3036}
+.asignar{margin-top:12px;height:40px;border-radius:12px;background:var(--lima);color:var(--grafito);font-weight:700;display:grid;place-items:center;font-size:13px}
+.s-titulo{font-weight:700;font-size:22px;margin:8px 0 2px}
+.s-sub{color:var(--muted);font-size:11.5px}
+
+/* Progreso */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px}
+.cal i{aspect-ratio:1;border-radius:6px;background:#22272C}
+.cal i.on{background:var(--lima)}
+.cal i.mid{background:rgba(198,244,50,.45)}
+.cal-dias{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;font-size:9.5px;color:var(--muted);text-align:center;margin-top:10px;font-weight:600}
+.panel{background:var(--card);border-radius:16px;padding:12px 13px;margin-top:9px}
+.panel-head{display:flex;justify-content:space-between;align-items:baseline}
+.panel-head b{font-size:12.5px}
+.panel-head small{color:var(--muted);font-size:10.5px}
+.peso-num{font-size:24px;font-weight:700;margin-top:2px}
+.peso-num small{font-size:11px;color:var(--lima);font-weight:600;margin-left:6px}
+.chart path.linea{stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 2s ease}
+.visible .chart path.linea{stroke-dashoffset:0}
+
+/* Grilla de funciones */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;transition:border-color .3s}
+.card:hover{border-color:rgba(198,244,50,.4)}
+.card .pi{width:44px;height:44px;border-radius:13px;background:var(--lima-tenue);display:grid;place-items:center;margin-bottom:18px}
+.card .pi svg{width:22px;height:22px;stroke:var(--lima)}
+.card h3{font-size:18px;margin-bottom:6px}
+.card p{color:var(--muted);font-size:15px;line-height:1.5}
+.card.grande{grid-column:span 2;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(135deg,#1A2108,#151A0A 60%,var(--surface));border-color:rgba(198,244,50,.25)}
+.card.grande .num{font-family:"Barlow Condensed";font-weight:800;font-size:96px;line-height:.9;color:var(--lima)}
+
+/* Pasos */
+.pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:paso}
+.paso{position:relative;padding:30px 28px;border-radius:var(--radius);border:1px solid var(--line);background:var(--surface)}
+.paso::before{counter-increment:paso;content:"0" counter(paso);font-family:"Barlow Condensed";font-weight:800;font-size:64px;line-height:1;color:transparent;-webkit-text-stroke:1.5px var(--lima);display:block;margin-bottom:16px}
+.paso h3{font-size:21px;margin-bottom:8px}
+.paso p{color:var(--muted);font-size:16px}
+
+/* CTA final */
+.final{padding:40px 0 110px}
+.final-box{position:relative;overflow:hidden;border-radius:32px;background:var(--lima);color:var(--grafito);padding:80px 60px;text-align:center}
+.final-box::before,.final-box::after{content:"";position:absolute;border-radius:50%;border:2px solid rgba(17,19,21,.12)}
+.final-box::before{width:520px;height:520px;left:-200px;top:-260px}
+.final-box::after{width:420px;height:420px;right:-160px;bottom:-240px}
+.final-box h2{font-size:clamp(52px,8vw,110px);position:relative}
+.final-box p{font-size:20px;font-weight:500;max-width:560px;margin:22px auto 34px;position:relative;opacity:.85}
+.final-box .cta-row{justify-content:center;position:relative}
+.btn-dark{background:var(--grafito);color:var(--lima)}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.btn-line{border:2px solid var(--grafito);color:var(--grafito)}
+.btn-line:hover{background:rgba(17,19,21,.08)}
+
+/* Footer */
+footer{border-top:1px solid var(--line);padding:50px 0 40px;color:var(--muted);font-size:15px}
+.foot{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.foot-cols{display:flex;gap:60px;flex-wrap:wrap}
+.foot h4{color:var(--text);font-size:14px;margin-bottom:12px;letter-spacing:.08em;text-transform:uppercase}
+.foot ul{list-style:none;display:grid;gap:8px}
+.foot a:hover{color:var(--lima)}
+.foot-bottom{margin-top:40px;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:14px}
+
+/* Aparición al scrollear */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .hero .wrap,.feature{grid-template-columns:1fr;gap:50px}
+  .feature.flip .feature-text{order:0}
+  .roles,.pasos{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  section{padding:80px 0}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .hero{padding-top:44px}
+  .grid{grid-template-columns:1fr}
+  .card.grande{grid-column:auto}
+  .phone{width:270px}
+  .notifs{width:300px}
+  .final-box{padding:60px 22px;border-radius:24px}
+  .nav .btn span{display:none}
+  .nav .btn{width:42px;padding:0;justify-content:center}
+  .cta-row .btn{flex:1;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Íconos reutilizables -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="g" viewBox="0 0 456 456"><path d="M 291.4 164.6 A 89.6 89.6 0 1 0 317.6 228 L 234.4 228" fill="none" stroke="currentColor" stroke-width="41.6"/></symbol>
+    <symbol id="wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4C2.7 15.6 2.2 13.8 2.2 12 2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9 1.8 1.8 2.9 4.3 2.9 6.9 0 5.4-4.4 9.8-9.8 9.8m8.4-18.2C18.2 1.3 15.2.1 12 .1 5.5.1.2 5.4.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 23.9l6.3-1.6c1.7.9 3.7 1.4 5.6 1.4 6.5 0 11.8-5.3 11.8-11.8 0-3.2-1.2-6.1-3.4-8.3"/></symbol>
+    <symbol id="pesa" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6.5 6.5l11 11M3 9l6-6M15 21l6-6M4.5 4.5l2-2M17.5 21.5l2-2M2.5 6.5l4-4M17.5 21.5l4-4"/></symbol>
+    <symbol id="tilde" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="flecha" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="chev" viewBox="0 0 24 24"><path fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="android" viewBox="0 0 24 24"><path fill="currentColor" d="M17.6 9.5l1.8-3.2a.4.4 0 00-.7-.4l-1.9 3.3a11 11 0 00-9.6 0L5.3 5.9a.4.4 0 00-.7.4l1.8 3.2A10.6 10.6 0 001 18h22a10.6 10.6 0 00-5.4-8.5M7 15.3a1 1 0 110-2 1 1 0 010 2m10 0a1 1 0 110-2 1 1 0 010 2"/></symbol>
+    <symbol id="apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1-2.8-4M13.8 4.9c.7-.9 1.2-2 1-3.2-1 0-2.2.7-3 1.5-.6.7-1.2 1.9-1.1 3.1 1.2.1 2.3-.6 3.1-1.4"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="logo" aria-label="GymUP, inicio">
+      <span class="logo-mark"><svg style="color:var(--grafito)"><use href="#g"/></svg></span>
+      GymUP
+    </a>
+    <nav class="nav-links">
+      <a href="#roles">Para quién</a>
+      <a href="#rutinas">Rutinas</a>
+      <a href="#progreso">Progreso</a>
+      <a href="#funciones">Funciones</a>
+    </nav>
+    <a class="btn btn-lima" href="https://wa.me/542255413090?text=Hola!%20Quiero%20GymUP%20para%20mi%20gimnasio." target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Quiero GymUP</span></a>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="badge"><b>Nuevo</b> Biblioteca de 1.324 ejercicios con animación</div>
+        <h1 class="display">Tu gimnasio <span class="lima">en el celular</span></h1>
+        <p class="lead">El gimnasio da de alta a sus alumnos, les arma la rutina y controla la cuota. <strong>Cada alumno entra con su cuenta de Google o Apple</strong> y entrena con la app en la mano.</p>
+        <div class="cta-row">
+          <a class="btn btn-lima" href="https://wa.me/542255413090?text=Hola!%20Quiero%20GymUP%20para%20mi%20gimnasio." target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Pedilo para tu gimnasio</a>
+          <a class="btn btn-ghost" href="#roles">Ver cómo funciona</a>
+        </div>
+        <div class="plataformas">
+          <span><svg><use href="#android"/></svg>Android 6.0+</span>
+          <span><svg><use href="#apple"/></svg>iPhone · iOS 15+</span>
+          <span>🌙 Modo oscuro</span>
+        </div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="notifs" id="notifs" aria-hidden="true"></div>
+        <div class="phone">
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><i><b></b></i></div>
+            <div class="s-fecha">LUNES 5 DE OCTUBRE</div>
+            <div class="s-hola">Hola, Ana</div>
+            <span class="chip">Gimnasio Centro</span>
+            <div class="rutina-card">
+              <small>TU RUTINA DE HOY</small>
+              <h4>Día 2 · Tren superior</h4>
+              <p>6 ejercicios · ~50 min</p>
+              <span class="go"><svg style="color:var(--lima)"><use href="#flecha"/></svg></span>
+            </div>
+            <div class="racha">
+              <div><b>7 semanas</b><small>de racha seguida 🔥</small></div>
+              <div class="semanas"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="off"></i></div>
+            </div>
+            <div class="ej-list">
+              <div class="ej"><span class="ico"><svg style="color:var(--lima)"><use href="#pesa"/></svg></span><div><b>Press de banca</b><small>4 × 10 · 40 kg</small></div><span class="check ok"><svg style="color:var(--grafito)"><use href="#tilde"/></svg></span></div>
+              <div class="ej"><span class="ico"><svg style="color:var(--lima)"><use href="#pesa"/></svg></span><div><b>Remo con mancuerna</b><small>4 × 12 · 16 kg</small></div><span class="check ok"><svg style="color:var(--grafito)"><use href="#tilde"/></svg></span></div>
+              <div class="ej"><span class="ico"><svg style="color:var(--lima)"><use href="#pesa"/></svg></span><div><b>Press militar</b><small>3 × 10 · 20 kg</small></div><span class="check"></span></div>
+              <div class="ej"><span class="ico"><svg style="color:var(--lima)"><use href="#pesa"/></svg></span><div><b>Dominadas asistidas</b><small>3 × 8</small></div><span class="check"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquesinas de ejercicios -->
+  <div class="marquee" aria-hidden="true"><div class="track" data-items="Sentadilla con barra|Peso muerto|Press de banca|Hip thrust|Remo con barra|Zancadas|Press militar|Dominadas|Prensa 45°|Curl de bíceps|Fondos en paralelas|Plancha abdominal|Sentadilla búlgara|Jalón al pecho"></div></div>
+  <div class="marquee rev" aria-hidden="true"><div class="track" data-items="Rutina nueva|Racha de 7 semanas|Cuota al día|Día 1 · Piernas|Nuevo récord en sentadilla|Meta de peso|Entrenamiento guardado sin señal|Rutina actualizada|Día 3 · Full body|Invitación aceptada"></div></div>
+
+  <!-- Roles -->
+  <section id="roles">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Una app, tres miradas</span>
+        <h2 class="display">Cada uno ve <span class="lima">lo suyo</span></h2>
+        <p>El administrador maneja el gimnasio, los entrenadores siguen a los alumnos y cada alumno tiene su rutina en el bolsillo. Ningún gimnasio ve lo de otro.</p>
+      </div>
+      <div class="roles">
+        <article class="rol reveal">
+          <span class="tag">ADMINISTRADOR</span>
+          <h3>El gimnasio</h3>
+          <ul>
+            <li>Da de alta alumnos y les manda la invitación por WhatsApp</li>
+            <li>Invita a sus entrenadores</li>
+            <li>Registra pagos y controla vencimientos de cuota</li>
+          </ul>
+          <div class="mini">
+            <div class="mini-row"><span class="av">B</span><div><b>Beto</b><small>Código BETCE2</small></div><span class="pill amb">Pendiente</span></div>
+            <div class="mini-row"><span class="av">C</span><div><b>Carla</b><small>Cuota al día</small></div><span class="pill ok">Activa</span></div>
+            <div class="mini-row"><span class="av">A</span><div><b>Ana</b><small style="color:var(--muted)">ana@centro.com</small></div><span class="pill no">De baja</span></div>
+          </div>
+        </article>
+        <article class="rol reveal">
+          <span class="tag">ENTRENADORES</span>
+          <h3>Los profes</h3>
+          <ul>
+            <li>Arman rutinas por días con la biblioteca de ejercicios</li>
+            <li>Ven la ficha de cada alumno: objetivo, lesiones, emergencia</li>
+            <li>Siguen cada entrenamiento y la evolución de cargas</li>
+          </ul>
+          <div class="mini">
+            <div class="mini-row"><span class="av">N</span><div><b>Nico · Hipertrofia</b><small>Entrenó hoy · 6/6 ejercicios</small></div></div>
+            <div class="mini-row"><span class="av">S</span><div><b>Sol · Bajar de peso</b><small>−3,2 kg en 2 meses</small></div></div>
+            <div class="mini-row"><span class="av">P</span><div><b>Pablo · Rodilla</b><small style="color:var(--ambar)">Lesión: menisco izq.</small></div></div>
+          </div>
+        </article>
+        <article class="rol reveal">
+          <span class="tag">ALUMNOS</span>
+          <h3>Los que entrenan</h3>
+          <ul>
+            <li>Ven su rutina del día y registran cada serie</li>
+            <li>Entrenan sin señal: se sube solo después</li>
+            <li>Siguen su racha, su peso y sus récords</li>
+          </ul>
+          <div class="mini">
+            <div class="mini-row"><span class="av" style="background:var(--lima);color:var(--grafito)">✓</span><div><b>Sentadilla · Serie 4</b><small>12 reps · 60 kg</small></div></div>
+            <div class="mini-row"><span class="av">🔥</span><div><b>Racha de 7 semanas</b><small>Tu mejor marca</small></div></div>
+            <div class="mini-row"><span class="av">🔔</span><div><b>Rutina actualizada</b><small style="color:var(--muted)">Tu entrenador cambió el Día 3</small></div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rutinas -->
+  <section id="rutinas" style="padding-top:20px">
+    <div class="wrap feature">
+      <div class="feature-text reveal">
+        <span class="eyebrow">Rutinas</span>
+        <h2 class="display">Armadas en minutos, <span class="lima">a medida</span></h2>
+        <p>El gimnasio arma rutinas por días con ejercicios de la biblioteca y se las asigna a cada alumno. Los días se pliegan y todo se reordena arrastrando.</p>
+        <div class="puntos">
+          <div class="punto"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><div><b>1.324 ejercicios en español</b><span>Con animación, mapa del cuerpo, búsqueda y filtros. El gimnasio puede sumar los suyos.</span></div></div>
+          <div class="punto"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4.5-6 8-6s7 2 8 6"/></svg></span><div><b>Rutina personal</b><span>Desde la ficha del alumno, una rutina solo para él que queda guardada aunque se le asigne otra.</span></div></div>
+          <div class="punto"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 01-3.4 0"/></svg></span><div><b>Aviso al instante</b><span>Al alumno le llega “Rutina nueva” o “Rutina actualizada” al celular.</span></div></div>
+        </div>
+      </div>
+      <div class="phone-stage reveal">
+        <div class="phone">
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><i><b></b></i></div>
+            <div class="s-titulo">Fuerza · 3 días</div>
+            <div class="s-sub">Asignada a 14 alumnos</div>
+            <div class="dia">
+              <div class="dia-head"><div><b>Día 1 · Piernas</b><br><small>5 ejercicios</small></div><svg><use href="#chev"/></svg></div>
+              <div class="ej"><span class="drag"><i></i><i></i><i></i><i></i><i></i><i></i></span><div><b>Sentadilla con barra</b><small>4 × 8 · desc. 2 min</small></div></div>
+              <div class="ej arrastrando"><span class="drag"><i></i><i></i><i></i><i></i><i></i><i></i></span><div><b>Hip thrust</b><small>4 × 10 · desc. 90 s</small></div></div>
+              <div class="ej"><span class="drag"><i></i><i></i><i></i><i></i><i></i><i></i></span><div><b>Prensa 45°</b><small>3 × 12</small></div></div>
+              <div class="ej"><span class="drag"><i></i><i></i><i></i><i></i><i></i><i></i></span><div><b>Zancadas caminando</b><small>3 × 20 pasos</small></div></div>
+            </div>
+            <div class="dia"><div class="dia-head"><div><b>Día 2 · Tren superior</b><br><small>6 ejercicios</small></div><svg style="transform:rotate(-90deg)"><use href="#chev"/></svg></div></div>
+            <div class="dia"><div class="dia-head"><div><b>Día 3 · Full body</b><br><small>7 ejercicios</small></div><svg style="transform:rotate(-90deg)"><use href="#chev"/></svg></div></div>
+            <div class="asignar">Asignar a un alumno</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Progreso -->
+  <section id="progreso" style="padding-top:20px">
+    <div class="wrap feature flip">
+      <div class="feature-text reveal">
+        <span class="eyebrow">Progreso</span>
+        <h2 class="display">Que vean <span class="lima">cuánto avanzaron</span></h2>
+        <p>Racha de semanas, calendario de entrenamientos, peso corporal con meta y la evolución de cada ejercicio. El alumno se motiva y el entrenador lo ve todo desde la ficha.</p>
+        <div class="hashtags"><span>#RachaSemanal</span><span>#NuevoRécord</span><span>#MetaDePeso</span><span>#SinSeñalTambién</span></div>
+      </div>
+      <div class="phone-stage reveal">
+        <div class="phone">
+          <div class="screen">
+            <div class="statusbar"><span>9:41</span><i><b></b></i></div>
+            <div class="s-titulo">Mi progreso</div>
+            <div class="s-sub">Gimnasio Centro</div>
+            <div class="panel">
+              <div class="panel-head"><b>Octubre</b><small>14 entrenamientos</small></div>
+              <div class="cal-dias"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div>
+              <div class="cal" id="cal"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><b>Peso corporal</b><small>Meta 68 kg</small></div>
+              <div class="peso-num">70,4 kg<small>−3,6 kg</small></div>
+              <svg class="chart" viewBox="0 0 240 80" width="100%" height="80">
+                <line x1="0" y1="66" x2="240" y2="66" stroke="#C6F432" stroke-width="1" stroke-dasharray="4 4" opacity=".5"/>
+                <path d="M0 14 L30 18 L60 17 L90 28 L120 31 L150 38 L180 44 L210 46 L240 52 L240 80 L0 80Z" fill="rgba(198,244,50,.1)"/>
+                <path class="linea" d="M0 14 L30 18 L60 17 L90 28 L120 31 L150 38 L180 44 L210 46 L240 52" fill="none" stroke="#C6F432" stroke-width="2.5" stroke-linejoin="round"/>
+                <circle cx="240" cy="52" r="4" fill="#C6F432"/>
+              </svg>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><b>Sentadilla</b><small>Récord 🏆</small></div>
+              <div class="peso-num">75 kg<small>+15 kg desde agosto</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Funciones -->
+  <section id="funciones" style="padding-top:40px">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Todo incluido</span>
+        <h2 class="display">Pensada para el <span class="lima">día a día</span> del gym</h2>
+      </div>
+      <div class="grid">
+        <div class="card grande reveal">
+          <div class="num">1.324</div>
+          <div><h3>Ejercicios listos para usar</h3><p>En español, con animación y mapa del cuerpo. Buscá por nombre, músculo o elemento.</p></div>
+        </div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></span><h3>Ingreso seguro</h3><p>Con Google o Apple. Solo entra quien dio de alta su gimnasio.</p></div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><h3>Invitación por WhatsApp</h3><p>Cada alta tiene un código de 8 caracteres para vincularse.</p></div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></span><h3>Cuotas</h3><p>Aviso 5 días antes del vencimiento. Vencida, la rutina se pausa hasta que se registra el pago.</p></div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M1 1l22 22M16.7 11.1A11 11 0 0119 12.6M5 12.6a11 11 0 015.2-2.5M10.7 5.1A16 16 0 0122.6 9M1.4 9a16 16 0 014.3-2.8M8.5 16.1a6 6 0 017 0M12 20h.01"/></svg></span><h3>Funciona sin señal</h3><p>El alumno registra sus series en el sótano del gym y se suben solas después.</p></div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg></span><h3>Varios gimnasios</h3><p>Un alumno puede estar en más de uno y elige desde el menú.</p></div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><h3>Datos aislados</h3><p>Cada gimnasio ve solo lo suyo, garantizado por las reglas de la base de datos.</p></div>
+        <div class="card reveal"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6M9 13h6M9 17h6"/></svg></span><h3>Ficha del alumno</h3><p>Objetivo, altura, peso, lesiones y contacto de emergencia. Solo la ve el personal.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pasos -->
+  <section style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Cómo se arranca</span>
+        <h2 class="display">En marcha <span class="lima">en un día</span></h2>
+      </div>
+      <div class="pasos">
+        <div class="paso reveal"><h3>Damos de alta tu gimnasio</h3><p>Creamos el gimnasio con su administrador y te llega el acceso.</p></div>
+        <div class="paso reveal"><h3>Cargás alumnos y profes</h3><p>A cada uno le mandás la invitación por WhatsApp con un toque.</p></div>
+        <div class="paso reveal"><h3>Entran y entrenan</h3><p>Descargan la app, entran con Google o Apple y ya ven su rutina.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA final -->
+  <div class="final">
+    <div class="wrap">
+      <div class="final-box reveal">
+        <h2 class="display">Llevá tu gym al siguiente nivel</h2>
+        <p>Escribime y te muestro la app funcionando con un gimnasio de prueba.</p>
+        <div class="cta-row">
+          <a class="btn btn-dark" href="https://wa.me/542255413090?text=Hola!%20Quiero%20GymUP%20para%20mi%20gimnasio." target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Escribime por WhatsApp</a>
+          <a class="btn btn-line" href="mailto:contacto@sebastiangomez.com.ar?subject=GymUP">contacto@sebastiangomez.com.ar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#" class="logo"><span class="logo-mark"><svg style="color:var(--grafito)"><use href="#g"/></svg></span>GymUP</a>
+        <p style="margin-top:14px;max-width:320px">Tu gimnasio en el celular. Para Android e iPhone.</p>
+      </div>
+      <div class="foot-cols">
+        <div><h4>Navegación</h4><ul><li><a href="#roles">Para quién</a></li><li><a href="#rutinas">Rutinas</a></li><li><a href="#progreso">Progreso</a></li><li><a href="#funciones">Funciones</a></li></ul></div>
+        <div><h4>Contacto</h4><ul><li><a href="https://wa.me/542255413090" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:contacto@sebastiangomez.com.ar">Email</a></li><li><a href="https://sebastiangomez.com.ar" target="_blank" rel="noopener">sebastiangomez.com.ar</a></li></ul></div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="anio">2026</span> GymUP</span>
+      <span>Hecho por <a href="https://sebastiangomez.com.ar" class="lima">Sebastián Gómez</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Marquesinas: se duplica el contenido para que el loop sea continuo
+document.querySelectorAll('.track').forEach(function (t) {
+  var html = t.dataset.items.split('|').map(function (s) { return '<span><i></i>' + s + '</span>'; }).join('');
+  t.innerHTML = html + html;
+});
+
+// Calendario de progreso
+(function () {
+  var cal = document.getElementById('cal');
+  var dias = '00ab0a0' + 'a0a0ab0' + 'aa0a0b0' + 'a0aa000' + 'a';
+  for (var i = 0; i < dias.length; i++) {
+    var c = document.createElement('i');
+    if (dias[i] === 'a') c.className = 'on';
+    if (dias[i] === 'b') c.className = 'mid';
+    cal.appendChild(c);
+  }
+})();
+
+// Notificaciones que van apareciendo sobre el teléfono
+(function () {
+  var cont = document.getElementById('notifs');
+  var avisos = [
+    ['Rutina nueva', 'Tu entrenador te asignó “Fuerza · 3 días”.'],
+    ['Tu cuota vence mañana', 'Pasá por recepción o avisale a tu gimnasio.'],
+    ['¡Nuevo récord! 🏆', 'Sentadilla: 75 kg. Superaste tu marca anterior.'],
+    ['Rutina actualizada', 'Cambiaron el Día 3 · Full body.'],
+    ['Racha de 7 semanas 🔥', 'No cortes ahora, hoy toca Tren superior.'],
+    ['Invitación de Gimnasio Norte', 'Aceptala para ver tus rutinas de ahí también.']
+  ];
+  var i = 0;
+  var reducir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function nueva() {
+    var a = avisos[i++ % avisos.length];
+    var n = document.createElement('div');
+    n.className = 'notif';
+    n.innerHTML = '<span class="n-ico"><svg style="color:#111315"><use href="#g"/></svg></span><div style="flex:1;min-width:0"><div class="n-top"><span>GymUP</span><span>ahora</span></div><b>' + a[0] + '</b><p>' + a[1] + '</p></div>';
+    cont.prepend(n);
+    var todas = cont.querySelectorAll('.notif:not(.sale)');
+    if (todas.length > 2) {
+      var ultima = todas[todas.length - 1];
+      ultima.classList.add('sale');
+      setTimeout(function () { ultima.remove(); }, 400);
+    }
+  }
+  nueva();
+  if (!reducir) setInterval(nueva, 3200);
+})();
+
+// Aparición al scrollear
+(function () {
+  var obs = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.reveal').forEach(function (el) { obs.observe(el); });
+})();
+
+document.getElementById('anio').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

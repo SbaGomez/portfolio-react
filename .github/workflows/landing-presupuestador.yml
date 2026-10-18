@@ -1,0 +1,35 @@
+name: Landing Presupuestador
+
+# Misma regla que produccion.yml: se despliega al pushear sobre produccion
+# (o sea al mergear el PR), nunca desde el PR. El filtro de paths evita
+# resubir la landing en cada cambio del portfolio y viceversa.
+on:
+  push:
+    branches: [produccion]
+    paths:
+      - "landings/presupuestador/**"
+      - ".github/workflows/landing-presupuestador.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: landing-presupuestador
+  cancel-in-progress: false
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Es HTML estatico: no hay build, se sube la carpeta tal cual.
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./landings/presupuestador/
+          # NO usar ./presupuestador/: esa carpeta ya es la ruta
+          # /presupuestador del portfolio y los dos deploys se pisarian.
+          # En Ferozo el subdominio presupuestador apunta a esta carpeta.
+          server-dir: ./landing-presupuestador/

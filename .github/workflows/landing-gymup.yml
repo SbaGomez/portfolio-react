@@ -1,0 +1,36 @@
+name: Landing GymUP
+
+# Misma regla que produccion.yml: se despliega al pushear sobre produccion
+# (o sea al mergear el PR), nunca desde el PR. El filtro de paths evita
+# resubir la landing en cada cambio del portfolio y viceversa.
+on:
+  push:
+    branches: [produccion]
+    paths:
+      - "landings/gymup/**"
+      - ".github/workflows/landing-gymup.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: landing-gymup
+  cancel-in-progress: false
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Es HTML estatico: no hay build, se sube la carpeta tal cual.
+      - uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./landings/gymup/
+          # El usuario FTP entra en public_html, y en Ferozo el subdominio
+          # gymapp apunta a esta carpeta. No puede ser una que use el
+          # portfolio (cada ruta de Next es una carpeta en public_html),
+          # porque los dos deploys se pisarian.
+          server-dir: ./landing-gymup/

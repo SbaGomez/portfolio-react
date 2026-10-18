@@ -32,4 +32,4 @@ jobs:
           # NO usar ./presupuestador/: esa carpeta ya es la ruta
           # /presupuestador del portfolio y los dos deploys se pisarian.
           # En Ferozo el subdominio presupuestador apunta a esta carpeta.
-          server-dir: ./landing-presupuestador/
+          server-dir: ./landings-presupuestador/

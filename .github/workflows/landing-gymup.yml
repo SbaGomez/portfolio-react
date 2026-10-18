@@ -30,7 +30,7 @@ jobs:
           protocol: ftps
           local-dir: ./landings/gymup/
           # El usuario FTP entra en public_html, y en Ferozo el subdominio
-          # gymapp apunta a esta carpeta. No puede ser una que use el
+          # gymup apunta a esta carpeta. No puede ser una que use el
           # portfolio (cada ruta de Next es una carpeta en public_html),
           # porque los dos deploys se pisarian.
-          server-dir: ./landing-gymup/
+          server-dir: ./landings-gymup/

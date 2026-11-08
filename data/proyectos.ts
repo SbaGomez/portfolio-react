@@ -2,6 +2,31 @@ import type { Proyecto } from "./tipos";
 
 const fichas: Proyecto[] = [
   {
+    slug: "gymup",
+    titulo: "GymUP",
+    anio: "2026",
+    resumen:
+      "App móvil para gimnasios: el gimnasio da de alta a sus alumnos, les arma rutinas y cada uno entrena y ve su progreso desde el celular.",
+    descripcion: [
+      "Plataforma multi-gimnasio para Android e iPhone. Cada gimnasio da de alta a sus alumnos y entrenadores, arma rutinas por días con una biblioteca de 1.324 ejercicios en español y controla el vencimiento de las cuotas. El alumno entra con Google o Apple, registra cada serie y sigue su racha, su peso y la evolución de cada ejercicio.",
+      "Corre sobre el plan gratuito de Firebase, sin servidor propio: la app habla con Auth y Firestore por REST y el aislamiento entre gimnasios lo garantizan las reglas de Firestore, no la app, con tests propios contra el emulador.",
+    ],
+    stack: [".NET 10", ".NET MAUI", "C#", "Firebase Auth", "Firestore", "App Check", "xUnit", "Vitest"],
+    metricas: { lineas: 28570, commits: 287, periodo: "oct 2026" },
+    destacados: [
+      "Aislamiento por gimnasio garantizado por las reglas de Firestore, cubiertas por tests contra el emulador.",
+      "Solo entra quien fue dado de alta: invitación con código de 8 caracteres para vincular otro email o \"Ocultar mi email\" de Apple.",
+      "Un alumno puede pertenecer a varios gimnasios sin que ninguno vea los datos del otro.",
+      "Registro de entrenamientos sin señal, que se sincronizan solos al volver la conexión.",
+      "Notificaciones de rutina nueva y de cuota por vencer con revisión en segundo plano, dimensionadas para la cuota gratuita de Firestore.",
+      "Lógica separada de MAUI en una librería net10.0, con 584 tests xUnit.",
+    ],
+    links: { demo: "https://gymup.sebastiangomez.com.ar" },
+    imagenes: [],
+    anonimo: false,
+    destacado: false,
+  },
+  {
     slug: "presupuestador",
     titulo: "Presupuestador",
     anio: "2026",
@@ -162,30 +187,6 @@ const fichas: Proyecto[] = [
     links: {},
     imagenes: [],
     anonimo: true,
-    destacado: false,
-  },
-  {
-    slug: "gymapp",
-    titulo: "GymApp",
-    anio: "2026",
-    resumen:
-      "Cimiento de arquitectura para un SaaS multi-tenant de gimnasios: modelo de datos, autenticación y aislamiento por tenant, verificados por tests.",
-    descripcion: [
-      "Base de una plataforma donde cada gimnasio administra sus alumnos de forma aislada. El trabajo hecho es la capa que más caro sale corregir después: el modelo multi-tenant, los roles y las garantías de aislamiento.",
-      "Se presenta como lo que es: la interfaz de usuario está pendiente. Lo que está terminado y testeado es la arquitectura.",
-    ],
-    stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "NextAuth", "Vitest"],
-    metricas: { lineas: 652, commits: 20, periodo: "ago 2026" },
-    destacados: [
-      "Multi-tenancy de esquema compartido donde el identificador de tenant nunca viene del cliente: se deriva siempre de la sesión.",
-      "Tipo branded que hace que el compilador impida pasar un identificador fuera de scope a una consulta.",
-      "Control de acceso por tres roles con guards explícitos.",
-      "Login federado restringido a usuarios dados de alta previamente, evitando autoasignación de cuentas.",
-      "Mitigación de timing side-channel en el login por credenciales.",
-    ],
-    links: {},
-    imagenes: [],
-    anonimo: false,
     destacado: false,
   },
   {

@@ -46,7 +46,7 @@ const fichas: Proyecto[] = [
       "Instalador con actualizaciones automáticas por diferencias (Velopack), sin permisos de administrador.",
       "Licencias firmadas con Ed25519 desde un Cloudflare Worker, atadas a la cuenta de Google y válidas sin conexión hasta 30 días.",
     ],
-    links: { demo: "https://sebastiangomez.com.ar/presupuestador/", repo: "https://github.com/SbaGomez/PresupuestadorApp" },
+    links: { demo: "https://sebastiangomez.com.ar/presupuestador/" },
     imagenes: [
       "/proyectos/presupuestador-listado.webp",
       "/proyectos/presupuestador-editor.webp",
@@ -60,6 +60,31 @@ const fichas: Proyecto[] = [
     },
     anonimo: false,
     destacado: true,
+  },
+  {
+    slug: "generador-qr",
+    titulo: "Generador QR",
+    anio: "2026",
+    resumen:
+      "Aplicación de escritorio para crear y verificar códigos QR estáticos: llevan el destino final adentro, sin acortadores ni plataformas intermedias, y no vencen nunca.",
+    descripcion: [
+      "Crea QR de página web, WhatsApp, Wi-Fi, texto, email, llamada, SMS, contacto (vCard) y ubicación elegida sobre un mapa, con vista previa en vivo, colores propios y exportación a PNG o SVG.",
+      "También verifica cualquier QR, propio o ajeno: se abre, arrastra o pega la imagen y la app avisa si el código va directo al destino o pasa por un acortador o una plataforma de QR dinámicos que puede dejar de funcionar.",
+    ],
+    stack: ["C#", ".NET 10", "WPF", "MVVM", "QRCoder", "ZXing.Net", "WebView2", "Leaflet", "xUnit"],
+    metricas: { lineas: 3232, commits: 2, periodo: "nov 2026" },
+    destacados: [
+      "QR 100% estáticos: el contenido final va codificado en el propio código, sin depender de ningún servidor.",
+      "Verificador que detecta acortadores, plataformas de QR dinámicos y redirecciones con ?url=, y lee varios QR por imagen, invertidos o transparentes.",
+      "PNG RGBA real a 300 dpi, de 512 a 4096 px, con fondo transparente que funciona en CorelDRAW, Illustrator, Photoshop y Canva; y SVG vectorial para imprenta.",
+      "Aviso de contraste insuficiente entre el color del QR y el fondo, para que un celular lo pueda leer.",
+      "Selector de ubicación con WebView2, Leaflet y OpenStreetMap: arranca donde está el usuario, se toca, se arrastra el pin o se busca la dirección.",
+      "Un solo .exe autocontenido, sin instalar .NET, y 52 tests xUnit que incluyen ida y vuelta generar → leer.",
+    ],
+    links: { repo: "https://github.com/SbaGomez/GeneradorQR" },
+    imagenes: ["/proyectos/generadorqr-generador.webp", "/proyectos/generadorqr-verificador.webp"],
+    anonimo: false,
+    destacado: false,
   },
   {
     slug: "ecosistema-roleplay",

@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
 import { ExternalLink } from "lucide-react";
 import TechTag from "@/components/ui/TechTag";
+import { GithubIcon } from "@/components/ui/BrandIcons";
 import type { Proyecto } from "@/data/tipos";
 
 // El año gigante del fondo se pinta segun de cuando es el proyecto: es lo
@@ -73,7 +74,7 @@ export default function ProyectoCard({
           boton solo ocupando la fila sin nada que ajustar aca. La condicion no
           es de adorno: el contenedor tiene borde propio, y sin ella una tarjeta
           sin ninguna de las dos acciones dibujaria una franja vacia. */}
-      {(onAbrir || proyecto.links.demo) && (
+      {(onAbrir || proyecto.links.demo || proyecto.links.repo) && (
         <div className="sg-card-actions">
           {onAbrir && (
             <button type="button" onClick={onAbrir} className="sg-card-action">
@@ -89,6 +90,17 @@ export default function ProyectoCard({
             >
               <ExternalLink size={14} aria-hidden="true" />
               Ver online
+            </a>
+          )}
+          {proyecto.links.repo && (
+            <a
+              href={proyecto.links.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sg-card-action"
+            >
+              <GithubIcon size={14} />
+              GitHub
             </a>
           )}
         </div>

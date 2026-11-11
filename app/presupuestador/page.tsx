@@ -11,6 +11,7 @@ import {
   RefreshCw,
   KeyRound,
   Mail,
+  ExternalLink,
 } from "lucide-react";
 import GlassCard from "@/components/ui/GlassCard";
 import CapturasSlider, { type VideoSlide } from "@/components/presupuestador/CapturasSlider";
@@ -114,6 +115,15 @@ export default function Presupuestador() {
             <a href={DESCARGA} className="sg-button">
               <Download size={18} aria-hidden="true" />
               Descargar para Windows
+            </a>
+            <a
+              href="https://presupuestador.sebastiangomez.com.ar/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sg-button-outline"
+            >
+              <ExternalLink size={18} aria-hidden="true" />
+              Sitio de la app
             </a>
             <Link href="/presupuestador/privacidad/" className="sg-button-outline">
               Política de privacidad

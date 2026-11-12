@@ -87,6 +87,31 @@ const fichas: Proyecto[] = [
     destacado: false,
   },
   {
+    slug: "linealizador-svg",
+    titulo: "Linealizador SVG",
+    anio: "2026",
+    resumen:
+      "Aplicación de escritorio que prepara diseños de CorelDRAW para Bambu Studio: convierte las curvas en segmentos rectos y reconstruye un SVG limpio en el que los huecos se respetan.",
+    descripcion: [
+      "Un SVG exportado de CorelDRAW trae curvas Bézier, grupos anidados, clases CSS y transformaciones, y al importarlo en Bambu Studio aparecen partes rellenas que tendrían que estar huecas o contornos deformados. La app rearma el archivo con trazados de segmentos rectos en coordenadas absolutas, cada uno con su color y su regla de relleno, sin cambiar las medidas.",
+      "Muestra una vista previa con los rellenos, avisa de lo que no se va a imprimir y convierte de a uno o una carpeta entera, siempre en una copia _BAMBU.svg que nunca pisa el original.",
+    ],
+    stack: ["C#", ".NET 10", "WPF", "MVVM", "CommunityToolkit.Mvvm", "xUnit"],
+    metricas: { lineas: 2230, commits: 2, periodo: "nov 2026" },
+    destacados: [
+      "Linealiza Bézier cúbicas y cuadráticas (también las suaves S y T) y arcos elípticos, con precisión elegible y reconversión automática al cambiarla.",
+      "Aplica translate, scale, rotate, skew y matrix de los grupos, resuelve los <use> y convierte rectángulos, círculos, elipses y polígonos nativos.",
+      "Cuatro reglas de relleno, incluido el perfil validado con el logo de GymUP, portado a C# desde la versión web y comparado contra ella con cientos de trazados.",
+      "Avisos de textos sin convertir a curvas, imágenes, formas con solo contorno y recortes (PowerClip o máscaras).",
+      "Conversión en lote de carpetas enteras con resumen de éxitos, avisos y errores: un archivo roto no corta el resto.",
+      "Un solo .exe autocontenido que funciona sin internet, y 47 tests xUnit de curvas, arcos, formas, estilos, rellenos, avisos y lotes.",
+    ],
+    links: { repo: "https://github.com/SbaGomez/LinealizadorSVG" },
+    imagenes: ["/proyectos/linealizadorsvg-conversion.webp", "/proyectos/linealizadorsvg-lote.webp"],
+    anonimo: false,
+    destacado: false,
+  },
+  {
     slug: "ecosistema-roleplay",
     titulo: "Ecosistema de servidor de roleplay",
     anio: "2026",

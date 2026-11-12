@@ -4,8 +4,8 @@ import { tecnologias } from "@/data/tecnologias";
 import { experiencias } from "@/data/experiencia";
 
 describe("proyectos", () => {
-  it("tiene ocho fichas", () => {
-    expect(proyectos).toHaveLength(9);
+  it("tiene diez fichas", () => {
+    expect(proyectos).toHaveLength(10);
   });
 
   it("no repite slugs", () => {
